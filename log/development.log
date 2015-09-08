@@ -191,3 +191,18 @@ ActionView::Template::Error (undefined method `simple_form_for' for #<#<Class:0x
   Rendered /Users/SamDavis/.rvm/gems/ruby-2.1.1/gems/web-console-2.2.1/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
   Rendered /Users/SamDavis/.rvm/gems/ruby-2.1.1/gems/web-console-2.2.1/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
   Rendered /Users/SamDavis/.rvm/gems/ruby-2.1.1/gems/web-console-2.2.1/lib/web_console/templates/index.html.erb (47.8ms)
+
+
+Started GET "/" for ::1 at 2015-09-08 09:55:28 -0400
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by UsersController#welcome as HTML
+Completed 401 Unauthorized in 22ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for ::1 at 2015-09-08 09:55:28 -0400
+Processing by SessionsController#new as HTML
+  Rendered devise/sessions/new.html.haml within layouts/login (58.6ms)
+Completed 200 OK in 780ms (Views: 760.5ms | ActiveRecord: 4.6ms)
+
+
+Started GET "/assets/theme/fontawesome/fonts/fontawesome-webfont.woff?v=4.1.0" for ::1 at 2015-09-08 09:55:29 -0400
