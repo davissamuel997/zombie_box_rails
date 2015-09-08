@@ -1,0 +1,52 @@
+I"§(function() {
+  TrackMyTrends.controller('SessionsController', [
+    '$scope', 'SessionsService', '$http', '$location', '$state', '$stateParams', function($scope, SessionsService, $http, $location, $state, $stateParams) {
+      var currentState, init;
+      init = function() {};
+      currentState = function() {
+        return $state.current.name;
+      };
+      $scope.loginControl = {};
+      $scope.requestControl = {
+        sign_out: function() {
+          return SessionsService.signOut.query({}, function(responseData) {
+            return window.location = '/users/sign_in';
+          });
+        }
+      };
+      $scope.signUpControl = {
+        activeOrganizations: [],
+        getActiveOrganizations: function() {
+          if (this.organizations && this.organizations.length === 0) {
+            return SessionsService.getActiveOrganizations.query({}, function(responseData) {
+              return $scope.signUpControl.activeOrganizations = responseData.activeOrganizations;
+            });
+          }
+        }
+      };
+      $scope.viewControl = {
+        selectedView: 'login',
+        changeView: function(view) {
+          if (view && view.length > 0) {
+            this.selectedView = view;
+            return this.prepareView();
+          }
+        },
+        prepareView: function() {
+          if (this.selectedView === 'sign_up') {
+            return $scope.signUpControl.getActiveOrganizations();
+          }
+        }
+      };
+      init();
+      if (currentState() === 'sign_in') {
+        console.log("inside the sign in route");
+      }
+      if (currentState() === 'sign_out') {
+        return console.log("inside the sign out route");
+      }
+    }
+  ]);
+
+}).call(this);
+:ET

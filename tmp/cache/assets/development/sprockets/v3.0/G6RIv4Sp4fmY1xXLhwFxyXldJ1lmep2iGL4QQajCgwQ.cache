@@ -1,0 +1,34 @@
+I"ó(function() {
+  $(function() {
+    var alert_div;
+    alert_div = $("#alert_notification");
+    if (alert_div[0]) {
+      console.log(alert_div[0].innerHTML);
+      return $.gritter.add({
+        title: "<i class=\"fa fa-warning\"></i> Notice",
+        text: alert_div[0].innerHTML,
+        sticky: false,
+        time: "",
+        class_name: "gritter-notice"
+      });
+    }
+  });
+
+  window.gritterAdd = function(title) {
+    if ($.gritter) {
+      return $.gritter.add({
+        title: title,
+        sticky: false,
+        time: 10001,
+        class_name: "gritter-regular",
+        before_open: function() {
+          if ($(".gritter-item-wrapper").length === 1) {
+            return false;
+          }
+        }
+      });
+    }
+  };
+
+}).call(this);
+:ET

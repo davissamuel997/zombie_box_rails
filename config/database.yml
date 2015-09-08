@@ -1,0 +1,31 @@
+development:
+  adapter: postgresql
+  encoding: utf8
+  reconnect: false
+  database: zombie_box_dev
+  pool: 500
+  host: localhost
+  username: postgres
+  password: password
+  password: password
+
+test:
+    adapter: postgresql
+    encoding: utf8
+    reconnect: false
+    database: zombie_box_test
+    pool: 5
+    host: localhost
+    username: postgres
+    password: password
+
+production:
+    adapter: postgresql
+    encoding: utf8
+    reconnect: false
+    database: ddidu2dnk54vdj
+    pool: 200 
+    host: ec2-54-235-162-144.compute-1.amazonaws.com
+    port: 5432
+    username: dgypftfdwonwkj
+    password: vwALuVuX4bze8reHAMNnIWr_vE
