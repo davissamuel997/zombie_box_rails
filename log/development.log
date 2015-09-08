@@ -212,3 +212,118 @@ Started GET "/users/sign_in" for ::1 at 2015-09-08 10:25:51 -0400
 Processing by SessionsController#new as HTML
   Rendered devise/sessions/new.html.haml within layouts/login (5.1ms)
 Completed 200 OK in 243ms (Views: 241.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for ::1 at 2015-09-08 10:29:59 -0400
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"sOJG6O1wRPU4+eQumKIOFXlQlPRrXLpswR+n/a7NlFyWtBBHFu5cR3FQTi60ZR1MgNym+ugTDnhGJ2RP/XyQRw==", "user"=>{"email"=>"davissamuel@knights.ucf.edu", "password"=>"[FILTERED]"}, "commit"=>""}
+  [1m[35mUser Load (27.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."email" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["email", "davissamuel@knights.ucf.edu"]]
+  [1m[36m (0.8ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (5.0ms)[0m  UPDATE "users" SET "last_sign_in_at" = $1, "current_sign_in_at" = $2, "last_sign_in_ip" = $3, "current_sign_in_ip" = $4, "sign_in_count" = $5, "updated_at" = $6 WHERE "users"."id" = $7  [["last_sign_in_at", "2015-09-08 14:30:00.104419"], ["current_sign_in_at", "2015-09-08 14:30:00.104419"], ["last_sign_in_ip", "::1/128"], ["current_sign_in_ip", "::1/128"], ["sign_in_count", 1], ["updated_at", "2015-09-08 14:30:00.106837"], ["id", 1]]
+  [1m[36m (2.5ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 213ms (ActiveRecord: 40.3ms)
+
+
+Started GET "/" for ::1 at 2015-09-08 10:30:00 -0400
+Processing by UsersController#welcome as HTML
+  [1m[35mUser Load (0.6ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  Rendered users/welcome.html.haml within layouts/application (2.1ms)
+Completed 200 OK in 773ms (Views: 769.5ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/" for ::1 at 2015-09-08 10:37:19 -0400
+Processing by UsersController#welcome as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  Rendered users/welcome.html.haml within layouts/application (0.1ms)
+Completed 500 Internal Server Error in 110ms (ActiveRecord: 0.6ms)
+
+ActionView::Template::Error (undefined local variable or method `log_out_path' for #<#<Class:0x000001092ac560>:0x00000105265088>):
+    122:               %a{"data-toggle-state" => "aside-user", :href => "#"}
+    123:                 %em.fa.fa-user
+    124:             %li
+    125:               %a.main-link{:href => log_out_path, :tabindex => "-1"}
+    126:                 %i.fa.fa-power-off.fa-lg
+    127:                 Log out
+    128:             / END User avatar toggle
+  app/views/layouts/application.html.haml:125:in `_app_views_layouts_application_html_haml__3054102861380525693_2191035680'
+
+
+  Rendered /Users/SamDavis/.rvm/gems/ruby-2.1.1/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_source.erb (8.3ms)
+  Rendered /Users/SamDavis/.rvm/gems/ruby-2.1.1/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.2ms)
+  Rendered /Users/SamDavis/.rvm/gems/ruby-2.1.1/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.3ms)
+  Rendered /Users/SamDavis/.rvm/gems/ruby-2.1.1/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (33.3ms)
+  Rendered /Users/SamDavis/.rvm/gems/ruby-2.1.1/gems/web-console-2.2.1/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /Users/SamDavis/.rvm/gems/ruby-2.1.1/gems/web-console-2.2.1/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/SamDavis/.rvm/gems/ruby-2.1.1/gems/web-console-2.2.1/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/SamDavis/.rvm/gems/ruby-2.1.1/gems/web-console-2.2.1/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.6ms)
+  Rendered /Users/SamDavis/.rvm/gems/ruby-2.1.1/gems/web-console-2.2.1/lib/web_console/templates/console.js.erb within layouts/javascript (23.3ms)
+  Rendered /Users/SamDavis/.rvm/gems/ruby-2.1.1/gems/web-console-2.2.1/lib/web_console/templates/main.js.erb within layouts/javascript (0.2ms)
+  Rendered /Users/SamDavis/.rvm/gems/ruby-2.1.1/gems/web-console-2.2.1/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/SamDavis/.rvm/gems/ruby-2.1.1/gems/web-console-2.2.1/lib/web_console/templates/index.html.erb (50.4ms)
+
+
+Started GET "/" for ::1 at 2015-09-08 10:37:52 -0400
+Processing by UsersController#welcome as HTML
+  [1m[35mUser Load (0.6ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  Rendered users/welcome.html.haml within layouts/application (0.1ms)
+Completed 200 OK in 256ms (Views: 253.3ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/assets/theme/fontawesome/fonts/fontawesome-webfont.woff?v=4.1.0" for ::1 at 2015-09-08 10:37:52 -0400
+
+
+Started GET "/" for ::1 at 2015-09-08 10:38:24 -0400
+Processing by UsersController#welcome as HTML
+  [1m[36mUser Load (0.9ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  Rendered users/welcome.html.haml within layouts/application (0.1ms)
+Completed 200 OK in 205ms (Views: 201.5ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/" for ::1 at 2015-09-08 10:38:29 -0400
+Processing by UsersController#welcome as HTML
+  [1m[35mUser Load (0.6ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  Rendered users/welcome.html.haml within layouts/application (0.1ms)
+Completed 200 OK in 208ms (Views: 205.4ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/" for ::1 at 2015-09-08 10:39:10 -0400
+Processing by UsersController#welcome as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  Rendered users/welcome.html.haml within layouts/application (0.1ms)
+Completed 200 OK in 227ms (Views: 222.8ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/" for ::1 at 2015-09-08 10:39:13 -0400
+Processing by UsersController#welcome as HTML
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  Rendered users/welcome.html.haml within layouts/application (0.1ms)
+Completed 200 OK in 167ms (Views: 163.9ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/" for ::1 at 2015-09-08 10:41:15 -0400
+Processing by UsersController#welcome as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  Rendered users/welcome.html.haml within layouts/application (0.1ms)
+Completed 200 OK in 258ms (Views: 254.3ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/users/sign_out" for ::1 at 2015-09-08 10:41:20 -0400
+Processing by SessionsController#destroy as HTML
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.4ms)[0m  COMMIT
+Redirected to http://localhost:3000/
+Completed 302 Found in 14ms (ActiveRecord: 1.1ms)
+
+
+Started GET "/" for ::1 at 2015-09-08 10:41:20 -0400
+Processing by UsersController#welcome as HTML
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for ::1 at 2015-09-08 10:41:20 -0400
+Processing by SessionsController#new as HTML
+  Rendered devise/sessions/new.html.haml within layouts/login (57.8ms)
+Completed 200 OK in 216ms (Views: 214.6ms | ActiveRecord: 0.0ms)

@@ -122,8 +122,9 @@
               %a{"data-toggle-state" => "aside-user", :href => "#"}
                 %em.fa.fa-user
             %li
-              %a{'ng-controller' => 'SessionsController', :href => '', 'ng-click' => 'requestControl.sign_out()'}
-                Sign Out
+              %a.main-link{:href => '/users/sign_out', :tabindex => "-1"}
+                %i.fa.fa-power-off.fa-lg
+                Log out
             / END User avatar toggle
           / END Left navbar
           / START Right Navbar

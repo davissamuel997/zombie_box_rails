@@ -1,0 +1,12 @@
+D, [2015-09-08T10:34:42.090601 #14704] DEBUG -- :   [1m[36mUser Load (31.6ms)[0m  [1mSELECT  "users".* FROM "users"  ORDER BY "users"."id" ASC LIMIT 1[0m
+D, [2015-09-08T10:34:59.222976 #14704] DEBUG -- :   [1m[35m (30.5ms)[0m  BEGIN
+D, [2015-09-08T10:34:59.326269 #14704] DEBUG -- :   [1m[36mSQL (30.6ms)[0m  [1mUPDATE "users" SET "encrypted_password" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["encrypted_password", "$2a$10$CCOOhvGbQvwia3Z9Ba0.Ae.890UU6pKocMzGSzEniHKGQfd59cSti"], ["updated_at", "2015-09-08 14:34:59.225478"], ["id", 1]]
+D, [2015-09-08T10:34:59.359794 #14704] DEBUG -- :   [1m[35m (31.9ms)[0m  COMMIT
+D, [2015-09-08T10:35:08.131744 #14704] DEBUG -- :   [1m[36mUser Load (30.8ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 2]]
+D, [2015-09-08T10:35:26.128313 #14704] DEBUG -- :   [1m[35m (32.6ms)[0m  BEGIN
+D, [2015-09-08T10:35:26.162576 #14704] DEBUG -- :   [1m[36mSQL (30.8ms)[0m  [1mUPDATE "users" SET "encrypted_password" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["encrypted_password", "$2a$10$UVagOj9Ya.3tYG5C8ISzruOPWjekFn4VjllqWUVaGMCjtBiPX3rSq"], ["updated_at", "2015-09-08 14:35:26.129927"], ["id", 2]]
+D, [2015-09-08T10:35:26.195618 #14704] DEBUG -- :   [1m[35m (31.2ms)[0m  COMMIT
+D, [2015-09-08T10:35:30.582694 #14704] DEBUG -- :   [1m[36mUser Load (38.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 3]]
+D, [2015-09-08T10:35:35.200398 #14704] DEBUG -- :   [1m[35m (32.5ms)[0m  BEGIN
+D, [2015-09-08T10:35:35.235396 #14704] DEBUG -- :   [1m[36mSQL (31.3ms)[0m  [1mUPDATE "users" SET "encrypted_password" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["encrypted_password", "$2a$10$c6YVx5D19aJ5oF0PB.5YzuvONIekVHrEundoD1S0Ioi3wWoB2CLJK"], ["updated_at", "2015-09-08 14:35:35.202028"], ["id", 3]]
+D, [2015-09-08T10:35:35.268978 #14704] DEBUG -- :   [1m[35m (31.7ms)[0m  COMMIT
