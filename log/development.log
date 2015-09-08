@@ -206,3 +206,9 @@ Completed 200 OK in 780ms (Views: 760.5ms | ActiveRecord: 4.6ms)
 
 
 Started GET "/assets/theme/fontawesome/fonts/fontawesome-webfont.woff?v=4.1.0" for ::1 at 2015-09-08 09:55:29 -0400
+
+
+Started GET "/users/sign_in" for ::1 at 2015-09-08 10:25:51 -0400
+Processing by SessionsController#new as HTML
+  Rendered devise/sessions/new.html.haml within layouts/login (5.1ms)
+Completed 200 OK in 243ms (Views: 241.2ms | ActiveRecord: 0.0ms)
