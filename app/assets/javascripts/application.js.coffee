@@ -1,5 +1,4 @@
-#= require ng-rails-csrf
-#= require angularjs/rails/resource
+
 
 $ ->
   alert_div = $("#alert_notification")
