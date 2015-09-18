@@ -20,9 +20,9 @@
       %nav.navbar.navbar-default.navbar-top.navbar-fixed-top{:role => "navigation"}
         / START navbar header
         .navbar-header
-          %a.navbar-brand{:href => "index.html"}
+          %a.navbar-brand{:href => "/"}
             .brand-logo
-            .brand-logo-collapsed
+            ZombieBox
         / END navbar header
         / START Nav wrapper
         .nav-wrapper
@@ -217,189 +217,10 @@
             / START Menu
             %li.nav-heading Main navigation
             %li.active
-              %a.no-submenu{"data-toggle" => "", :href => "index.html", :title => "Dashboard"}
+              %a.no-submenu{"data-toggle" => "", :href => "/", :title => "Dashboard"}
                 %em.fa.fa-dot-circle-o
-                .label.label-primary.pull-right 10
                 %span.item-text Dashboard
-            %li
-              %a.no-submenu{"data-toggle" => "", :href => "widgets.html", :title => "Widgets"}
-                %em.fa.fa-cube
-                %span.item-text Widgets
-            %li
-              %a.has-submenu{"data-toggle" => "collapse-next", :href => "#", :title => "Elements"}
-                %em.fa.fa-flask
-                %span.item-text Elements
-              / START SubMenu item
-              %ul.nav.collapse
-                %li
-                  %a.no-submenu{"data-toggle" => "", :href => "button.html", :title => "Buttons"}
-                    %span.item-text Buttons
-                %li
-                  %a.no-submenu{"data-toggle" => "", :href => "notifications.html", :title => "Notifications"}
-                    %span.item-text Notifications
-                %li
-                  %a.no-submenu{"data-toggle" => "", :href => "spinners.html", :title => "Spinners"}
-                    %span.item-text Spinners
-                %li
-                  %a.no-submenu{"data-toggle" => "", :href => "animations.html", :title => "Animations"}
-                    %span.item-text Animations
-                %li
-                  %a.no-submenu{"data-toggle" => "", :href => "dropdown-animations.html", :title => "Dropdown"}
-                    %span.item-text Dropdown
-                %li
-                  %a.no-submenu{"data-toggle" => "", :href => "panels.html", :title => "Panels"}
-                    %span.item-text Panels
-                %li
-                  %a.no-submenu{"data-toggle" => "", :href => "portlets.html", :title => "Portlets"}
-                    %span.item-text Portlets
-                %li
-                  %a.no-submenu{"data-toggle" => "", :href => "maps.html", :title => "Maps"}
-                    %span.item-text Maps
-                %li
-                  %a.no-submenu{"data-toggle" => "", :href => "grid.html", :title => "Grid"}
-                    %span.item-text Grid
-                %li
-                  %a.no-submenu{"data-toggle" => "", :href => "grid-masonry.html", :title => "Grid Masonry"}
-                    %span.item-text Grid Masonry
-                %li
-                  %a.no-submenu{"data-toggle" => "", :href => "typo.html", :title => "Typography"}
-                    %span.item-text Typography
-                %li
-                  %a.no-submenu{"data-toggle" => "", :href => "icons.html", :title => "Icons"}
-                    .label.label-primary.pull-right +400
-                    %span.item-text Icons
-              / END SubMenu item
-            %li
-              %a.has-submenu{"data-toggle" => "collapse-next", :href => "#", :title => "Forms"}
-                %em.fa.fa-edit
-                %span.item-text Forms
-              / START SubMenu item
-              %ul.nav.collapse
-                %li
-                  %a.no-submenu{"data-toggle" => "", :href => "form-standard.html", :title => "Standard"}
-                    %span.item-text Standard
-                %li
-                  %a.no-submenu{"data-toggle" => "", :href => "form-extended.html", :title => "Extended"}
-                    %span.item-text Extended
-                %li
-                  %a.no-submenu{"data-toggle" => "", :href => "form-validation.html", :title => "Validation"}
-                    %span.item-text Validation
-                %li
-                  %a.no-submenu{"data-toggle" => "", :href => "form-wizard.html", :title => "Wizard"}
-                    %span.item-text Wizard
-              / END SubMenu item
-            %li
-              %a.has-submenu{"data-toggle" => "collapse-next", :href => "#", :title => "Charts"}
-                %em.fa.fa-bar-chart-o
-                %span.item-text Charts
-              / START SubMenu item
-              %ul.nav.collapse
-                %li
-                  %a.no-submenu{"data-toggle" => "", :href => "chart-flot.html", :title => "Flot"}
-                    %span.item-text Flot
-                %li
-                  %a.no-submenu{"data-toggle" => "", :href => "chart-radial.html", :title => "Radial"}
-                    %span.item-text Radial
-              / END SubMenu item
-            %li
-              %a.has-submenu{"data-toggle" => "collapse-next", :href => "#", :title => "Tables"}
-                %em.fa.fa-table
-                %span.item-text Tables
-              / START SubMenu item
-              %ul.nav.collapse
-                %li
-                  %a.no-submenu{"data-toggle" => "", :href => "table-standard.html", :title => "Standard"}
-                    %span.item-text Standard
-                %li
-                  %a.no-submenu{"data-toggle" => "", :href => "table-extended.html", :title => "Extended"}
-                    %span.item-text Extended
-                %li
-                  %a.no-submenu{"data-toggle" => "", :href => "table-datatable.html", :title => "DataTables"}
-                    %span.item-text DataTables
-              / END SubMenu item
-            %li.nav-heading More elements
-            %li
-              %a.has-submenu{"data-toggle" => "collapse-next", :href => "#", :title => "Pages"}
-                %em.fa.fa-file-text-o
-                %span.item-text Pages
-              / START SubMenu item
-              %ul.nav.collapse
-                %li
-                  %a.no-submenu{"data-toggle" => "", :href => "pages/login.html", :title => "Login"}
-                    %span.item-text Login
-                %li
-                  %a.no-submenu{"data-toggle" => "", :href => "pages/signup.html", :title => "Sign up"}
-                    %span.item-text Sign up
-                %li
-                  %a.no-submenu{"data-toggle" => "", :href => "pages/recover.html", :title => "Recover Password"}
-                    %span.item-text Recover Password
-                %li
-                  %a.no-submenu{"data-toggle" => "", :href => "pages/lock.html", :title => "Lock"}
-                    %span.item-text Lock
-                %li
-                  %a.no-submenu{"data-toggle" => "", :href => "template.html", :title => "Starter Template"}
-                    %span.item-text Starter Template
-              / END SubMenu item
-            %li
-              %a.has-submenu{"data-toggle" => "collapse-next", :href => "#", :title => "Extras"}
-                %em.fa.fa-plus
-                %span.item-text Extras
-              / START SubMenu item
-              %ul.nav.collapse
-                %li
-                  %a.no-submenu{"data-toggle" => "", :href => "mailbox.html", :title => "Mailbox"}
-                    %span.item-text Mailbox
-                %li
-                  %a.no-submenu{"data-toggle" => "", :href => "timeline.html", :title => "Timeline"}
-                    %span.item-text Timeline
-                %li
-                  %a.no-submenu{"data-toggle" => "", :href => "calendar.html", :title => "Calendar"}
-                    %span.item-text Calendar
-                %li
-                  %a.no-submenu{"data-toggle" => "", :href => "invoice.html", :title => "Invoice"}
-                    %span.item-text Invoice
-                %li
-                  %a.no-submenu{"data-toggle" => "", :href => "search.html", :title => "Search"}
-                    %span.item-text Search
-              / END SubMenu item
-            / START Theme color options
-            %li
-              %a.has-submenu{"data-toggle" => "collapse-next", :href => "#", :title => "Color options"}
-                .label.label-purple.pull-right 4
-                %em.fa.fa-tint
-                %span.item-text Colors
-              / START SubMenu item
-              %ul.nav.collapse
-                %li
-                  %a.no-submenu{"data-toggle" => "load-css", "data-uri" => "app/css/beadmin-theme-a.css", :href => "#", :title => "Option 1"}
-                    %span.item-text Alternative 1
-                %li
-                  %a.no-submenu{"data-toggle" => "load-css", "data-uri" => "app/css/beadmin-theme-b.css", :href => "#", :title => "Option 2"}
-                    %span.item-text Alternative 2
-                %li
-                  %a.no-submenu{"data-toggle" => "load-css", "data-uri" => "app/css/beadmin-theme-c.css", :href => "#", :title => "Option 3"}
-                    %span.item-text Alternative 3
-                %li
-                  %a.no-submenu{"data-toggle" => "load-css", "data-uri" => "app/css/beadmin-theme-d.css", :href => "#", :title => "Option 4"}
-                    %span.item-text Alternative 4
-              / END SubMenu item
-            / END Theme color options
-            %li
-              %ul.nav-labels
-                %li.nav-heading Categories
-                %li.nav-labels-item
-                  %span.circle.circle-lg.circle-success
-                  %a{:href => "#"} Green
-                %li.nav-labels-item
-                  %span.circle.circle-lg.circle-danger
-                  %a{:href => "#"} Red
-                %li.nav-labels-item
-                  %span.circle.circle-lg.circle-info
-                  %a{:href => "#"} Skyblue
-                %li.nav-labels-item
-                  %span.circle.circle-lg.circle-warning
-                  %a{:href => "#"} Yellow
-            / END Menu
+
         / END Sidebar (left)
 
       / End aside
