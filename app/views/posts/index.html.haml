@@ -1,1 +1,39 @@
-%h3 hello world
+%section
+  / START Page content
+  .content-wrapper
+    %h3
+      .pull-right.text-center>
+        .text-sm.mb-sm 500 ratings
+        .inlinesparkline{"data-bar-color" => "#cfdbe2", "data-bar-spacing" => "2", "data-bar-width" => "3", "data-height" => "18"} 2,3,4,7,5,7,8,9,5,7,8,4,7
+      Latest Posts
+      %small See what's new!
+    .row
+      / START dashboard main content
+      %section.col-md-12
+        / START chart
+        .row
+          .panel.panel-default
+            .panel-heading
+              .panel-title News feed
+            / START list group
+            .list-group
+              / START list group item
+              .list-group-item
+                .media
+                  .pull-left
+                    %span.fa-stack.fa-lg
+                      %em.fa.fa-circle.fa-stack-2x.text-purple
+                      %em.fa.fa-cloud-upload.fa-stack-1x.fa-inverse.text-white
+                  .media-body.clearfix
+                    .media-heading.text-purple.m0 NEW FILE
+                    %small.text-muted.pull-right 15 minutes ago
+                    %p.m0
+                      %small
+                        A new uploaded file
+                        %a{:href => "#"} Bootstrap.xls
+                        is now on the cloud
+
+            .panel-footer.clearfix
+              %a.pull-left{:href => "#"}
+                %small Load more
+
