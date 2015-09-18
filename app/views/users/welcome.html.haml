@@ -1,2 +1,274 @@
-%h4 hello world
-%h3 hola world
+%section
+  / START Page content
+  .content-wrapper
+    %h3
+      .pull-right.text-center>
+        .text-sm.mb-sm 500 ratings
+        .inlinesparkline{"data-bar-color" => "#cfdbe2", "data-bar-spacing" => "2", "data-bar-width" => "3", "data-height" => "18"} 2,3,4,7,5,7,8,9,5,7,8,4,7
+      Dashboard
+      %small Hi, User. Welcome back!
+    .row
+      / START dashboard main content
+      %section.col-md-7
+        / START chart
+        .row
+          .col-lg-12
+            / START widget
+            .panel.widget.bg-inverse
+              .row
+                .col-sm-2.text-right
+                  .row
+                    .col-sm-12.col-xs-4
+                      .ph
+                        %p.h3.mb0 11200
+                        %p.m0.text-muted Visits
+                    .col-sm-12.col-xs-4
+                      .ph
+                        %p.h3.mb0 2000
+                        %p.m0.text-muted Likes
+                    .col-sm-12.col-xs-4
+                      .ph
+                        %p.h3.mb0 3500
+                        %p.text-muted Subscriptions
+                .col-sm-10.bg-primary
+                  .p-lg
+                    .h5.mt0 Latest stadistics
+                    / Line chart
+                    .inlinesparkline.sparkline{"data-fill-color" => "", "data-height" => "100", "data-highlight-line-color" => "#fff", "data-line-color" => "#dddddd", "data-line-width" => "2", "data-resize" => "true", "data-spot-color" => "#bbbbbb", "data-spot-radius" => "3", "data-type" => "line", "data-width" => "100%"}
+                      / 1,5,3,6,5,11,2,4,5,7,9,6,4
+                    / Bar chart
+                    .text-center
+                      .inlinesparkline.inline{"data-bar-color" => "#fff", "data-bar-spacing" => "6", "data-bar-width" => "8", "data-height" => "60"} 1,5,3,6,5,8,2,4,5,7,9,6,4,3,6,5,9,2
+            / END widget
+        / END chart
+        .row
+          .col-md-4
+            / START widget
+            .panel.widget{"data-delay" => "100", "data-offset" => "0", "data-play" => "fadeInLeft", "data-toggle" => "play-animation"}
+              .panel-body.bg-primary
+                .row.row-table.row-flush
+                  .col-xs-8
+                    %p.mb0 New connections
+                    %h3.m0 150
+                  .col-xs-4.text-right
+                    %em.fa.fa-share-alt.fa-2x
+              .panel-body
+                / Bar chart
+                .text-center
+                  .inlinesparkline.inline{"data-bar-color" => "primary", "data-bar-spacing" => "6", "data-bar-width" => "6", "data-height" => "30"} 5,3,4,6,5,9,4,4,10,5,9,6,4
+          .col-md-4
+            / START widget
+            .panel.widget{"data-delay" => "100", "data-offset" => "0", "data-play" => "fadeInDown", "data-toggle" => "play-animation"}
+              .panel-body.bg-success
+                .row.row-table.row-flush
+                  .col-xs-8
+                    %p.mb0 Uploads
+                    %h3.m0 540
+                  .col-xs-4.text-right
+                    %em.fa.fa-cloud-upload.fa-2x
+              .panel-body
+                / Bar chart
+                .text-center
+                  .inlinesparkline.inline{"data-bar-color" => "success", "data-bar-spacing" => "6", "data-bar-width" => "6", "data-height" => "30"} 10,30,40,70,50,90,70,50,90,40,40,60,40
+          .col-md-4
+            / START widget
+            .panel.widget{"data-delay" => "100", "data-offset" => "0", "data-play" => "fadeInRight", "data-toggle" => "play-animation"}
+              .panel-body.bg-danger
+                .row.row-table.row-flush
+                  .col-xs-8
+                    %p.mb0 Ratings received
+                    %h3.m0 7000
+                  .col-xs-4.text-right
+                    %em.fa.fa-star.fa-2x
+              .panel-body
+                / Bar chart
+                .text-center
+                  .inlinesparkline.inline{"data-bar-color" => "danger", "data-bar-spacing" => "6", "data-bar-width" => "6", "data-height" => "30"} 2,7,5,9,4,2,7,5,7,5,9,6,4
+        / START messages and activity
+        .row
+          .col-md-6
+            .panel.panel-default
+              .panel-heading
+                .pull-right.label.label-danger 5
+                .pull-right.label.label-success 12
+                .panel-title Messages
+              / START list group
+              .list-group
+                / START list group item
+                %a.list-group-item{:href => "#"}
+                  .media
+                    .pull-left
+                      %img.media-object.img-circle.thumb48{:alt => "Image", :src => ""}
+                    .media-body.clearfix
+                      %small.pull-right 2h
+                      %strong.media-heading.text-primary
+                        %span.circle.circle-success.circle-lg.text-left>
+                        Jean Daniels
+                      %p.mb-sm
+                        %small Cras sit amet nibh libero, in gravida nulla. Nulla...
+                / END list group item
+                / START list group item
+                %a.list-group-item{:href => "#"}
+                  .media
+                    .pull-left
+                      %img.media-object.img-circle.thumb48{:alt => "Image", :src => ""}
+                    .media-body.clearfix
+                      %small.pull-right 3h
+                      %strong.media-heading.text-primary
+                        %span.circle.circle-success.circle-lg.text-left>
+                        Alexis Wright
+                      %p.mb-sm
+                        %small Cras sit amet nibh libero, in gravida nulla. Nulla facilisi.
+                / END list group item
+                / START list group item
+                %a.list-group-item{:href => "#"}
+                  .media
+                    .pull-left
+                      %img.media-object.img-circle.thumb48{:alt => "Image", :src => ""}
+                    .media-body.clearfix
+                      %small.pull-right 4h
+                      %strong.media-heading.text-primary
+                        %span.circle.circle-danger.circle-lg.text-left>
+                        Lance Simpson
+                      %p.mb-sm
+                        %small Cras sit amet nibh libero, in gravida nulla. Nulla...
+                / END list group item
+                / START list group item
+                %a.list-group-item{:href => "#"}
+                  .media
+                    .pull-left
+                      %img.media-object.img-circle.thumb48{:alt => "Image", :src => ""}
+                    .media-body.clearfix
+                      %small.pull-right 4h
+                      %strong.media-heading.text-primary
+                        %span.circle.circle-danger.circle-lg.text-left>
+                        Krin Price
+                      %p.mb-sm
+                        %small Vestibulum pretium aliquam scelerisque.
+                / END list group item
+                / START list group item
+                %a.list-group-item{:href => "#"}
+                  .media
+                    .pull-left
+                      %img.media-object.img-circle.thumb48{:alt => "Image", :src => ""}
+                    .media-body.clearfix
+                      %small.pull-right 4h
+                      %strong.media-heading.text-primary
+                        %span.circle.circle-lg.text-left>
+                        Johnny Gilbert
+                      %p.mb-sm
+                        %small Sed egestas, augue vitae blandit imperdiet, justo neque tincidunt sapien...
+                / END list group item
+              / END list group
+              / START panel footer
+              .panel-footer.clearfix
+                .input-group
+                  %input.form-control.input-sm{:placeholder => "Search message ..", :type => "text"}
+                    %span.input-group-btn
+                      %button.btn.btn-default.btn-sm{:type => "submit"}
+                        %i.fa.fa-search
+              / END panel-footer
+          .col-md-6
+            .panel.panel-default
+              .panel-heading
+                .panel-title News feed
+              / START list group
+              .list-group
+                / START list group item
+                .list-group-item
+                  .media
+                    .pull-left
+                      %span.fa-stack.fa-lg
+                        %em.fa.fa-circle.fa-stack-2x.text-purple
+                        %em.fa.fa-cloud-upload.fa-stack-1x.fa-inverse.text-white
+                    .media-body.clearfix
+                      .media-heading.text-purple.m0 NEW FILE
+                      %small.text-muted.pull-right 15 minutes ago
+                      %p.m0
+                        %small
+                          A new uploaded file
+                          %a{:href => "#"} Bootstrap.xls
+                          is now on the cloud
+                / END list group item
+                / START list group item
+                .list-group-item
+                  .media
+                    .pull-left
+                      %span.fa-stack.fa-lg
+                        %em.fa.fa-circle.fa-stack-2x.text-info
+                        %em.fa.fa-file-text-o.fa-stack-1x.fa-inverse.text-white
+                    .media-body.clearfix
+                      .media-heading.text-info.m0 NEW DOCUMENT
+                      %small.text-muted.pull-right 2 hours ago
+                      %p.m0
+                        %small
+                          New document
+                          %a{:href => "#"} Bootstrap.doc
+                          created
+                / END list group item
+                / START list group item
+                .list-group-item
+                  .media
+                    .pull-left
+                      %span.fa-stack.fa-lg
+                        %em.fa.fa-circle.fa-stack-2x.text-danger
+                        %em.fa.fa-exclamation.fa-stack-1x.fa-inverse.text-white
+                    .media-body.clearfix
+                      .media-heading.text-danger.m0 IMPORTANT MESSAGE
+                      %small.text-muted.pull-right 5 hours ago
+                      %p.m0
+                        %small
+                          Todd Walker sent you an important messsage.
+                          %a{:href => "#"} Open
+                / END list group item
+                / START list group item
+                .list-group-item
+                  .media
+                    .pull-left
+                      %span.fa-stack.fa-lg
+                        %em.fa.fa-circle.fa-stack-2x.text-success
+                        %em.fa.fa-clock-o.fa-stack-1x.fa-inverse.text-white
+                    .media-body.clearfix
+                      .media-heading.text-success.m0 NEW MEETING
+                      %small.text-muted.pull-right 15 hours ago
+                      %p.m0
+                        %small
+                          Roberta Lane added a new meeting.
+                          %em Hey Guys! Want to see there tomorrow. We have good new to share with you. Cheers!
+                / END list group item
+                / START list group item
+                .list-group-item
+                  .media
+                    .pull-left
+                      %span.fa-stack.fa-lg
+                        %em.fa.fa-circle.fa-stack-2x.text-warning
+                        %em.fa.fa-envelope-o.fa-stack-1x.fa-inverse.text-white
+                    .media-body.clearfix
+                      .media-heading.text-warning.m0 ANOTHER MESSAGE
+                      %small.text-muted.pull-right last week
+                      %p.m0
+                        %small Estela Soccer sent you a messsage. Quisque viverra faucibus neque, quis elementum velit vulputate et.
+                / END list group item
+              / END list group
+              / START panel footer
+              .panel-footer.clearfix
+                %a.pull-left{:href => "#"}
+                  %small Load more
+              / END panel-footer
+        / END messages and activity
+      / END dashboard main content
+      / START dashboard sidebar
+      %aside.col-md-5
+        / START widget
+        .panel.widget
+          .panel-body.bg-success.text-center
+            .row.row-table.row-flush
+              .col-xs-8
+                %p.mb0 Lastest Posts
+                %h3 540
+              .col-xs-4.text-right
+                %em.fa.fa-cloud-upload.fa-2x
+          .panel-body
+            A Post
+
+
