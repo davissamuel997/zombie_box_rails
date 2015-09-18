@@ -264,11 +264,42 @@
           .panel-body.bg-success.text-center
             .row.row-table.row-flush
               .col-xs-8
-                %p.mb0 Lastest Posts
+                %p.mb0 News Feed
                 %h3 540
               .col-xs-4.text-right
                 %em.fa.fa-cloud-upload.fa-2x
           .panel-body
-            A Post
+            .list-group
+              / START list group item
+              .list-group-item
+                .media
+                  .pull-left
+                    %span.fa-stack.fa-lg
+                      %em.fa.fa-circle.fa-stack-2x.text-purple
+                      %em.fa.fa-cloud-upload.fa-stack-1x.fa-inverse.text-white
+                  .media-body.clearfix
+                    .media-heading.text-purple.m0 NEW FILE
+                    %small.text-muted.pull-right 15 minutes ago
+                    %p.m0
+                      %small
+                        A new uploaded file
+                        %a{:href => "#"} Bootstrap.xls
+                        is now on the cloud
+              / END list group item
+              / START list group item
+              .list-group-item
+                .media
+                  .pull-left
+                    %span.fa-stack.fa-lg
+                      %em.fa.fa-circle.fa-stack-2x.text-info
+                      %em.fa.fa-file-text-o.fa-stack-1x.fa-inverse.text-white
+                  .media-body.clearfix
+                    .media-heading.text-info.m0 NEW DOCUMENT
+                    %small.text-muted.pull-right 2 hours ago
+                    %p.m0
+                      %small
+                        New document
+                        %a{:href => "#"} Bootstrap.doc
+                        created
 
 
