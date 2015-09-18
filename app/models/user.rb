@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
 
   before_save :set_full_name
 
+  has_many :posts
+
   def set_full_name
     self.full_name = "#{self.first_name} #{self.last_name}"
   end
