@@ -9,12 +9,30 @@
       %small See what's new!
     .row
       / START dashboard main content
-      %section.col-md-12
+      %section.col-md-8
         / START chart
         .row
           .panel.panel-default
             .panel-heading
               .panel-title News feed
+            .list-group
+              .list-group-item
+                .media
+                  %p.m0.media-body.clearfix{:style => 'padding-left: 45px;'}
+                    %small Tells us what's new
+                  .pull-left
+                    %span.fa-stack.fa-lg
+                      %em.fa.fa-circle.fa-stack-2x.text-purple
+                      %em.fa.fa-pencil-square-o.fa-stack-1x.fa-inverse.text-white
+                  .media-body.clearfix
+                    %p
+                      %input.form-control.input-sm{:placeholder => "Enter title.."}
+                    %p
+                      %textarea.form-control.input-sm{:placeholder => "Enter text.."}
+                    %p
+                      .form-actions
+                        %button.btn.btn-xs.btn-success.pull-right Post
+
             / START list group
             .list-group
               / START list group item
