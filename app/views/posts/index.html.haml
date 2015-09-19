@@ -57,7 +57,11 @@
               %a.pull-left{:href => "#"}
                 %em.fa.fa-thumbs-o-up
                 %small Like
-              %a.pull-left{:href => '', :style => 'margin-left: 15px;'}
-                %em.fa.fa-comment-o
-                %small Comment
+              #accordian
+                %a.pull-left.collapsed{:style => 'margin-left: 15px;', "data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#collapseOne"}
+                  %em.fa.fa-comment-o
+                  %small Comment
+            #collapseOne.panel-collapse.collapse{:style => "height: 0px;"}
+              .panel-footer.clearfix
+                Hello world
 
