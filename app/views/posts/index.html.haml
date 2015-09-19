@@ -33,6 +33,8 @@
                       .form-actions
                         %button.btn.btn-xs.btn-success.pull-right Post
 
+        .row
+          .panel.panel-default
             / START list group
             .list-group
               / START list group item
@@ -53,5 +55,9 @@
 
             .panel-footer.clearfix
               %a.pull-left{:href => "#"}
-                %small Load more
+                %em.fa.fa-thumbs-o-up
+                %small Like
+              %a.pull-left{:href => '', :style => 'margin-left: 15px;'}
+                %em.fa.fa-comment-o
+                %small Comment
 
