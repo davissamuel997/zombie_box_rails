@@ -4,8 +4,7 @@ zombieBox.controller 'PostsController', ['$scope', '$http', 'PostsService', '$lo
 ############## Initial Page Load / Reset #######################
 
   init = ->
-    console.log("In the posts init")
-    debugger
+    $scope.requestControl.getPosts()
 
 ################################################################
 ############## Other Initializers ##############################
@@ -15,6 +14,14 @@ zombieBox.controller 'PostsController', ['$scope', '$http', 'PostsService', '$lo
 ################# Request Control ##############################
 
   $scope.requestControl = {
+
+  	posts: []
+
+  	getPosts: ->
+  		PostsService.getPosts.query({}, (responseData) -> 
+  			if responseData.errors == false
+  				debugger
+  		)
 
   }
 

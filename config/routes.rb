@@ -22,6 +22,8 @@ Rails.application.routes.draw do
   resources :users
   resources :posts
 
+  get 'get_posts' => 'posts#get_posts'
+
   root :to => 'users#welcome'
 
 end

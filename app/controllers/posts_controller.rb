@@ -5,7 +5,12 @@ class PostsController < ApplicationController
   respond_to :json, :html
 
   def index
-  	@posts = Post.all.page(params[:page])
+  end
+
+  def get_posts
+  	response = Post.get_posts(params)
+
+  	respond_with response
   end
 
   def post_params
