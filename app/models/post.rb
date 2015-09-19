@@ -7,7 +7,7 @@ class Post < ActiveRecord::Base
     data = {:errors => false}
 
     page_num = (options[:page] || 1).to_i
-    per_page = 12
+    per_page = 10
 
     posts = Post.all.page(page_num).per(per_page).order('created_at DESC')
 

@@ -15,12 +15,15 @@ zombieBox.controller 'PostsController', ['$scope', '$http', 'PostsService', '$lo
 
   $scope.requestControl = {
 
+  	pagination: null
+
   	posts: []
 
   	getPosts: ->
   		PostsService.getPosts.query({}, (responseData) -> 
   			if responseData.errors == false
-  				debugger
+  				$scope.requestControl.posts = responseData.posts
+  				$scope.requestControl.pagination = responseData.pagination
   		)
 
   }
