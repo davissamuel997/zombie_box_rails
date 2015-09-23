@@ -29,6 +29,10 @@ zombieBox.controller 'PostsController', ['$scope', '$http', 'PostsService', '$lo
 
     posts: []
 
+    changePage: (page_number) ->
+      this.current_page = page_number
+      this.getPosts()
+
     createPost: ->
       if this.post_params
         PostsService.createPost.query({ post_params: this.post_params }, (responseData) -> 
