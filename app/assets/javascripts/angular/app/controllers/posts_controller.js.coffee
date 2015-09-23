@@ -15,6 +15,8 @@ zombieBox.controller 'PostsController', ['$scope', '$http', 'PostsService', '$lo
 
   $scope.requestControl = {
 
+    current_page: 1
+
     pagination: null
 
     post_params: {
@@ -30,7 +32,12 @@ zombieBox.controller 'PostsController', ['$scope', '$http', 'PostsService', '$lo
     createPost: ->
       if this.post_params
         PostsService.createPost.query({ post_params: this.post_params }, (responseData) -> 
-          debugger
+          if responseData.errors == false
+            $scope.requestControl.resetPostParams()
+
+            $scope.requestControl.current_page = 1
+            $scope.requestControl.posts = responseData.data.posts
+            $scope.requestControl.pagination = responseData.data.pagination
         )
 
   	getPosts: ->
@@ -39,6 +46,10 @@ zombieBox.controller 'PostsController', ['$scope', '$http', 'PostsService', '$lo
   				$scope.requestControl.posts = responseData.posts
   				$scope.requestControl.pagination = responseData.pagination
   		)
+
+    resetPostParams: ->
+      this.post_params.text = null
+      this.post_params.title = null
 
   }
 
