@@ -15,7 +15,7 @@ zombieBox.controller 'PostsController', ['$scope', '$http', 'PostsService', '$lo
 
   $scope.requestControl = {
 
-  	pagination: null
+    pagination: null
 
     post_params: {
 
@@ -25,11 +25,11 @@ zombieBox.controller 'PostsController', ['$scope', '$http', 'PostsService', '$lo
 
     }
 
-  	posts: []
+    posts: []
 
     createPost: ->
-      if post_params
-        PostsService.createPost.query({ post_params: post_params }, (responseData) -> 
+      if this.post_params
+        PostsService.createPost.query({ post_params: this.post_params }, (responseData) -> 
           debugger
         )
 

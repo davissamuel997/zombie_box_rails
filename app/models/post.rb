@@ -3,6 +3,14 @@ class Post < ActiveRecord::Base
   belongs_to :user
   has_many :comments, as: :commentable
 
+  after_create :set_post_date
+
+  def set_post_date
+    self.post_date = self.created_at.present? ? self.created_at : Time.now
+
+    self.save
+  end
+
   def self.get_posts(options = {})
     data = {:errors => false}
 
@@ -31,13 +39,15 @@ class Post < ActiveRecord::Base
     if options[:post_params].present? && options[:user_id].present? && options[:user_id].to_i > 0
       user = User.find(options[:user_id])
 
-      post_params[:user_id] = options[:user_id]
-      post_params[:post_date] = Date.today
+      options[:post_params][:user_id] = options[:user_id]
 
-      post = Post.new(post_params.permit(:user_id, :post_date, :title, :text))
+      post = Post.new(options[:post_params].permit(:user_id, :post_date, :title, :text))
 
-      p post
-      p 'hello world'
+      if post.save
+        data[:data] = Post.get_posts
+      else
+        data[:errors] = true
+      end
     else
       data[:errors] = true
     end

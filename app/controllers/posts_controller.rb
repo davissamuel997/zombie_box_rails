@@ -14,6 +14,8 @@ class PostsController < ApplicationController
   end
 
   def create_post
+    params[:user_id] = current_user.id
+
     response = Post.create_post(params)
 
     render :json => response
