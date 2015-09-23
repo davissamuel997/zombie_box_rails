@@ -17,7 +17,21 @@ zombieBox.controller 'PostsController', ['$scope', '$http', 'PostsService', '$lo
 
   	pagination: null
 
+    post_params: {
+
+      text: null
+
+      title: null
+
+    }
+
   	posts: []
+
+    createPost: ->
+      if post_params
+        PostsService.createPost.query({ post_params: post_params }, (responseData) -> 
+          debugger
+        )
 
   	getPosts: ->
   		PostsService.getPosts.query({}, (responseData) -> 

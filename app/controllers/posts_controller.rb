@@ -13,6 +13,12 @@ class PostsController < ApplicationController
   	respond_with response
   end
 
+  def create_post
+    response = Post.create_post(params)
+
+    render :json => response
+  end
+
   def post_params
     params.require(:post).permit(:title, :post_date, :user_id, :text)
   end

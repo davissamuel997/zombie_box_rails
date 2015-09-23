@@ -25,6 +25,26 @@ class Post < ActiveRecord::Base
     data
   end
 
+  def self.create_post(options = {})
+    data = {:errors => false}
+
+    if options[:post_params].present? && options[:user_id].present? && options[:user_id].to_i > 0
+      user = User.find(options[:user_id])
+
+      post_params[:user_id] = options[:user_id]
+      post_params[:post_date] = Date.today
+
+      post = Post.new(post_params.permit(:user_id, :post_date, :title, :text))
+
+      p post
+      p 'hello world'
+    else
+      data[:errors] = true
+    end
+
+    data
+  end
+
   # This paginates all of the data for the response of the js.
   def self.pagination_data element_count, current_page, results_per_page
     page  = current_page.to_i

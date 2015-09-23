@@ -26,12 +26,12 @@
                       %em.fa.fa-pencil-square-o.fa-stack-1x.fa-inverse.text-white
                   .media-body.clearfix
                     %p
-                      %input.form-control.input-sm{:placeholder => "Enter title.."}
+                      %input.form-control.input-sm{:placeholder => "Enter title..", 'ng-model' => 'requestControl.post_params.title'}
                     %p
-                      %textarea.form-control.input-sm{:placeholder => "Enter text.."}
+                      %textarea.form-control.input-sm{:placeholder => "Enter text..", 'ng-model' => 'requestControl.post_params.text'}
                     %p
                       .form-actions
-                        %button.btn.btn-xs.btn-success.pull-right Post
+                        %button.btn.btn-xs.btn-success.pull-right{'ng-click' => 'requestControl.createPost()'} Post
 
         .row
           .panel.panel-default

@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   resources :posts
 
   get 'get_posts' => 'posts#get_posts'
+  post 'create_post' => 'posts#create_post'
 
   root :to => 'users#welcome'
 
