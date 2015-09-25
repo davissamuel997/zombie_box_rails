@@ -61,5 +61,8 @@
                   %small Comment
             #collapse.panel-collapse.collapse{:style => "height: 0px;", :id => "{{post.post_id}}"}
               .panel-footer.clearfix
-                Hello world
+                %form
+                  .form-group
+                    %p
+                      %input.form-control.input-sm{:placeholder => "Enter a comment...", 'ng-model' => 'post.newComment', 'ng-keypress' => 'requestControl.eventKeypress($event, $index)'}
 
