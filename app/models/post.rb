@@ -38,7 +38,7 @@ class Post < ActiveRecord::Base
         text:        post.text,
         user:        post.user,
         post_time:   post.get_post_time,
-        comments:    post.comments.map{ |comment| {
+        comments:    post.comments.order('created_at ASC').map{ |comment| {
             comment_id: comment.id,
             user:       comment.user,
             text:       comment.text,
