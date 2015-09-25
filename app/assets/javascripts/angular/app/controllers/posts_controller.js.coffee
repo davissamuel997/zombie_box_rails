@@ -31,13 +31,20 @@ zombieBox.controller 'PostsController', ['$scope', '$http', 'PostsService', '$lo
 
     returnKeyValue: 13 # charCode for pressing enter
 
+    scopedPostIndex: null
+
     changePage: (page_number) ->
       this.current_page = page_number
       this.getPosts()
 
-    createComment: (post) ->
+    createPostComment: (post) ->
       if post.newComment && post.newComment.length > 0 && post.post_id && post.post_id > 0
-        debugger
+        PostsService.createPostComment.query({ post_id: post.post_id, comment_text: post.newComment }, (responseData) ->
+          if responseData.errors == false
+            debugger
+
+            $scope.requestControl.posts[$scope.requestControl.scopedPostIndex].comments = responseData.comments       
+        )
 
     createPost: ->
       if this.post_params
@@ -53,7 +60,9 @@ zombieBox.controller 'PostsController', ['$scope', '$http', 'PostsService', '$lo
     eventKeypress: ($event, postIndex) ->
       # If the key pressed was enter
       if $event.charCode == this.returnKeyValue
-        this.createComment($scope.requestControl.posts[postIndex])
+        this.scopedPostIndex = postIndex
+
+        this.createPostComment($scope.requestControl.posts[this.scopedPostIndex])
 
     getPosts: ->
       PostsService.getPosts.query({}, (responseData) -> 

@@ -61,6 +61,20 @@
                   %small Comment
             #collapse.panel-collapse.collapse{:style => "height: 0px;", :id => "{{post.post_id}}"}
               .panel-footer.clearfix
+                .row{'ng-repeat' => 'comment in post.comments'}
+                  .list-group
+                    .list-group-item
+                      .media
+                        .pull-left
+                          %span.fa-stack.fa-lg
+                            %em.fa.fa-circle.fa-stack-2x.text-purple
+                            %em.fa.fa-cloud-upload.fa-stack-1x.fa-inverse.text-white
+                        .media-body.clearfix
+                          %p.m0
+                            %small
+                              {{comment.text}}                       
+                          / .media-heading.text-purple.m0 {{comment.text}}
+                          %small.text-muted.pull-right {{comment.post_time}}
                 %form
                   .form-group
                     %p

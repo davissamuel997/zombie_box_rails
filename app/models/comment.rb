@@ -22,4 +22,14 @@ class Comment < ActiveRecord::Base
     post_time
   end
 
+  def get_user
+  	if self.user_id.present? && self.user_id > 0
+  		user = User.find(self.user_id)
+  	else
+  		user = nil
+  	end
+
+  	user
+  end
+
 end

@@ -40,7 +40,7 @@ class Post < ActiveRecord::Base
         post_time:   post.get_post_time,
         comments:    post.comments.order('created_at ASC').map{ |comment| {
             comment_id: comment.id,
-            user:       comment.user,
+            user:       comment.get_user,
             text:       comment.text,
             post_date:  comment.post_date,
             post_time:  comment.get_post_time
@@ -85,7 +85,14 @@ class Post < ActiveRecord::Base
       new_comment = post.comments.new(user_id: options[:user_id], text: options[:comment_text])
 
       if new_comment.save
-        data[:data] = Post.get_posts
+        data[:comments] = post.comments.order('created_at ASC').map{ |comment| {
+            comment_id: comment.id,
+            user:       comment.get_user,
+            text:       comment.text,
+            post_date:  comment.post_date,
+            post_time:  comment.get_post_time
+          } 
+        }
       else
         data[:errors] = true
       end
