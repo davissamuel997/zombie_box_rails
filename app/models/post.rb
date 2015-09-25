@@ -1,3 +1,5 @@
+include ActionView::Helpers::DateHelper
+
 class Post < ActiveRecord::Base
 
   belongs_to :user
@@ -24,13 +26,24 @@ class Post < ActiveRecord::Base
         title:       post.title,
         post_date:   post.post_date.present? ? post.post_date.strftime('%m/%d/%Y') : nil,
         text:        post.text,
-        user:        post.user
+        user:        post.user,
+        post_time:   post.get_post_time
       }
     }
     
     data[:pagination] = Post.pagination_data Post.all.count, page_num, per_page
 
     data
+  end
+
+  def get_post_time
+    if self.created_at > Time.now.beginning_of_day
+      post_time = "#{time_ago_in_words(self.created_at)} ago"
+    else
+      post_time = self.created_at.strftime("%b %d, %Y")
+    end
+
+    post_time
   end
 
   def self.create_post(options = {})
