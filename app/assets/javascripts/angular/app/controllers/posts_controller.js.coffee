@@ -44,12 +44,12 @@ zombieBox.controller 'PostsController', ['$scope', '$http', 'PostsService', '$lo
             $scope.requestControl.pagination = responseData.data.pagination
         )
 
-  	getPosts: ->
-  		PostsService.getPosts.query({}, (responseData) -> 
-  			if responseData.errors == false
-  				$scope.requestControl.posts = responseData.posts
-  				$scope.requestControl.pagination = responseData.pagination
-  		)
+    getPosts: ->
+      PostsService.getPosts.query({}, (responseData) -> 
+        if responseData.errors == false
+          $scope.requestControl.posts = responseData.posts
+          $scope.requestControl.pagination = responseData.pagination
+      )
 
     resetPostParams: ->
       this.post_params.text = null

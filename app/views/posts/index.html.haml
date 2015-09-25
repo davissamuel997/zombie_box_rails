@@ -33,7 +33,7 @@
                       .form-actions
                         %button.btn.btn-xs.btn-success.pull-right{'ng-click' => 'requestControl.createPost()'} Post
 
-        .row
+        .row{'ng-repeat' => 'post in requestControl.posts'}
           .panel.panel-default
             / START list group
             .list-group
@@ -45,23 +45,21 @@
                       %em.fa.fa-circle.fa-stack-2x.text-purple
                       %em.fa.fa-cloud-upload.fa-stack-1x.fa-inverse.text-white
                   .media-body.clearfix
-                    .media-heading.text-purple.m0 NEW FILE
+                    .media-heading.text-purple.m0 {{post.title}}
                     %small.text-muted.pull-right 15 minutes ago
                     %p.m0
                       %small
-                        A new uploaded file
-                        %a{:href => "#"} Bootstrap.xls
-                        is now on the cloud
+                        {{post.text}}
 
             .panel-footer.clearfix
               %a.pull-left{:href => "#"}
                 %em.fa.fa-thumbs-o-up
                 %small Like
               #accordian
-                %a.pull-left.collapsed{:style => 'margin-left: 15px;', "data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#collapseOne"}
+                %a.pull-left.collapsed{:style => 'margin-left: 15px;', "data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#collapse_{{post.post_id}}"}
                   %em.fa.fa-comment-o
                   %small Comment
-            #collapseOne.panel-collapse.collapse{:style => "height: 0px;"}
+            #collapse.panel-collapse.collapse{:style => "height: 0px;", :id => "{{post.post_id}}"}
               .panel-footer.clearfix
                 Hello world
 
