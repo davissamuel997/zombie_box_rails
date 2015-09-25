@@ -13,6 +13,16 @@ class Post < ActiveRecord::Base
     self.save
   end
 
+  def get_post_time
+    if self.created_at > Time.now.beginning_of_day
+      post_time = "#{time_ago_in_words(self.created_at)} ago"
+    else
+      post_time = self.created_at.strftime("%b %d, %Y")
+    end
+
+    post_time
+  end
+
   def self.get_posts(options = {})
     data = {:errors => false}
 
@@ -27,23 +37,21 @@ class Post < ActiveRecord::Base
         post_date:   post.post_date.present? ? post.post_date.strftime('%m/%d/%Y') : nil,
         text:        post.text,
         user:        post.user,
-        post_time:   post.get_post_time
+        post_time:   post.get_post_time,
+        comments:    post.comments.map{ |comment| {
+            comment_id: comment.id,
+            user:       comment.user,
+            text:       comment.text,
+            post_date:  comment.post_date,
+            post_time:  comment.get_post_time
+          } 
+        }
       }
     }
     
     data[:pagination] = Post.pagination_data Post.all.count, page_num, per_page
 
     data
-  end
-
-  def get_post_time
-    if self.created_at > Time.now.beginning_of_day
-      post_time = "#{time_ago_in_words(self.created_at)} ago"
-    else
-      post_time = self.created_at.strftime("%b %d, %Y")
-    end
-
-    post_time
   end
 
   def self.create_post(options = {})
@@ -57,6 +65,26 @@ class Post < ActiveRecord::Base
       post = Post.new(options[:post_params].permit(:user_id, :post_date, :title, :text))
 
       if post.save
+        data[:data] = Post.get_posts
+      else
+        data[:errors] = true
+      end
+    else
+      data[:errors] = true
+    end
+
+    data
+  end
+
+  def self.create_post_comment(options = {})
+    data = {:errors => false}
+
+    if options[:post_id].present? && options[:post_id].to_i > 0 && options[:comment_text].present? && options[:comment_text].size > 0 && options[:user_id].present? && options[:user_id].to_i > 0
+      post = Post.find(options[:post_id])
+
+      new_comment = post.comments.new(user_id: options[:user_id], text: options[:comment_text])
+
+      if new_comment.save
         data[:data] = Post.get_posts
       else
         data[:errors] = true
