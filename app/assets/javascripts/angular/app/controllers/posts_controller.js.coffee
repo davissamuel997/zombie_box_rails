@@ -41,9 +41,9 @@ zombieBox.controller 'PostsController', ['$scope', '$http', 'PostsService', '$lo
       if post.newComment && post.newComment.length > 0 && post.post_id && post.post_id > 0
         PostsService.createPostComment.query({ post_id: post.post_id, comment_text: post.newComment }, (responseData) ->
           if responseData.errors == false
-            debugger
+            $scope.requestControl.posts[$scope.requestControl.scopedPostIndex].comments = responseData.comments
 
-            $scope.requestControl.posts[$scope.requestControl.scopedPostIndex].comments = responseData.comments       
+            $scope.requestControl.scopedPostIndex = null      
         )
 
     createPost: ->
