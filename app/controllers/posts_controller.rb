@@ -8,6 +8,8 @@ class PostsController < ApplicationController
   end
 
   def get_posts
+    params[:current_user_id] = current_user.id
+
   	response = Post.get_posts(params)
 
   	respond_with response

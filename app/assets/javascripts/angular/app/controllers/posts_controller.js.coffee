@@ -37,6 +37,9 @@ zombieBox.controller 'PostsController', ['$scope', '$http', 'PostsService', '$lo
       this.current_page = page_number
       this.getPosts()
 
+    checkLikeLinkColor: (boolean) ->
+      if boolean && boolean == true then return null else return 'make-black'
+
     createPostComment: (post) ->
       if post.newComment && post.newComment.length > 0 && post.post_id && post.post_id > 0
         PostsService.createPostComment.query({ post_id: post.post_id, comment_text: post.newComment }, (responseData) ->

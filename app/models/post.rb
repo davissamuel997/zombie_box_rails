@@ -38,6 +38,18 @@ class Post < ActiveRecord::Base
     like_text
   end
 
+  def user_like_post(user_id = nil)
+    if user_id.present? && user_id.to_i > 0
+      like_ids = self.likes.map(&:id)
+
+      is_included = like_ids.include? user_id
+    else
+      is_included = false
+    end
+
+    is_included
+  end
+
   def self.get_posts(options = {})
     data = {:errors => false}
 
@@ -62,7 +74,8 @@ class Post < ActiveRecord::Base
           } 
         },
         like_count: post.likes.count,
-        like_text:  post.get_like_text
+        like_text:  post.get_like_text,
+        user_likes_post: post.user_like_post(options[:current_user_id])
       }
     }
     

@@ -52,10 +52,10 @@
                         {{post.text}}
               .list-group-item{'ng-if' => 'post.like_count > 0'}
                 %p
-                  %small{} 1 Like
+                  %small {{post.like_text}}
 
             .panel-footer.clearfix
-              %a.pull-left{:href => "#"}
+              %a.pull-left{:href => "#", 'ng-class' => 'requestControl.checkLikeLinkColor(post.user_likes_post)'}
                 %em.fa.fa-thumbs-o-up
                 %small Like
               #accordian
