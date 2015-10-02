@@ -58,7 +58,7 @@
               %a.pull-left.make-black{:href => "#", 'ng-if' => 'post.user_likes_post === false', 'ng-click' => 'requestControl.likePost($index)'}
                 %em.fa.fa-thumbs-o-up
                 %small Like
-              %a.pull-left{:href => "#", 'ng-if' => 'post.user_likes_post === true', 'ng-click' => 'requestControl.likePost(post.post_id)'}
+              %a.pull-left{:href => "#", 'ng-if' => 'post.user_likes_post === true', 'ng-click' => 'requestControl.unLikePost($index)'}
                 %em.fa.fa-thumbs-o-up
                 %small Like      
               #accordian

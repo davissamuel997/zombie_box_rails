@@ -50,6 +50,28 @@ class Post < ActiveRecord::Base
     is_included
   end
 
+  def make_object(user_id = nil)
+    {
+      post_id:     self.id,
+      title:       self.title,
+      post_date:   self.post_date.present? ? self.post_date.strftime('%m/%d/%Y') : nil,
+      text:        self.text,
+      user:        self.user,
+      post_time:   self.get_post_time,
+      comments:    self.comments.order('created_at ASC').map{ |comment| {
+          comment_id: comment.id,
+          user:       comment.get_user,
+          text:       comment.text,
+          post_date:  comment.post_date,
+          post_time:  comment.get_post_time
+        } 
+      },
+      like_count: self.likes.count,
+      like_text:  self.get_like_text,
+      user_likes_post: self.user_like_post(user_id)
+    }
+  end
+
   def self.get_posts(options = {})
     data = {:errors => false}
 
@@ -58,26 +80,7 @@ class Post < ActiveRecord::Base
 
     posts = Post.all.page(page_num).per(per_page).order('created_at DESC')
 
-    data[:posts] = posts.map { |post| {
-        post_id:     post.id,
-        title:       post.title,
-        post_date:   post.post_date.present? ? post.post_date.strftime('%m/%d/%Y') : nil,
-        text:        post.text,
-        user:        post.user,
-        post_time:   post.get_post_time,
-        comments:    post.comments.order('created_at ASC').map{ |comment| {
-            comment_id: comment.id,
-            user:       comment.get_user,
-            text:       comment.text,
-            post_date:  comment.post_date,
-            post_time:  comment.get_post_time
-          } 
-        },
-        like_count: post.likes.count,
-        like_text:  post.get_like_text,
-        user_likes_post: post.user_like_post(options[:current_user_id])
-      }
-    }
+    data[:posts] = posts.map { |post| post.make_object(options[:user_id]) }
     
     data[:pagination] = Post.pagination_data Post.all.count, page_num, per_page
 
@@ -142,30 +145,32 @@ class Post < ActiveRecord::Base
       like = post.likes.new(user_id: options[:user_id])
 
       if like.save
-        data[:post] = {
-          post_id:     post.id,
-          title:       post.title,
-          post_date:   post.post_date.present? ? post.post_date.strftime('%m/%d/%Y') : nil,
-          text:        post.text,
-          user:        post.user,
-          post_time:   post.get_post_time,
-          comments:    post.comments.order('created_at ASC').map{ |comment| {
-              comment_id: comment.id,
-              user:       comment.get_user,
-              text:       comment.text,
-              post_date:  comment.post_date,
-              post_time:  comment.get_post_time
-            } 
-          },
-          like_count: post.likes.count,
-          like_text:  post.get_like_text,
-          user_likes_post: post.user_like_post(options[:user_id])
-        }
+        data[:post] = post.make_object(options[:user_id])
       else
         data[:errors] = true
       end
     else
       data[:errors] = true
+    end
+
+    data
+  end
+
+  def self.unlike_post(options = {})
+    data = {:errors => false}
+
+    if options[:user_id].present? && options[:user_id].to_i > 0 && options[:post_id].present? && options[:post_id].to_i > 0
+      post = Post.find(options[:post_id])
+
+      like = post.likes.where(user_id: options[:user_id]).first
+
+      if like.present? && like.is_a?(Like) && like.destroy
+        data[:post] = post.make_object(options[:user_id])
+      else
+        data[:errors] = true
+      end
+    else
+      data[:errors] = false
     end
 
     data

@@ -8,7 +8,7 @@ class PostsController < ApplicationController
   end
 
   def get_posts
-    params[:current_user_id] = current_user.id
+    params[:user_id] = current_user.id
 
   	response = Post.get_posts(params)
 
@@ -35,6 +35,14 @@ class PostsController < ApplicationController
     params[:user_id] = current_user.id
 
     response = Post.like_post(params)
+
+    respond_with response
+  end
+
+  def unlike_post
+    params[:user_id] = current_user.id
+
+    response = Post.unlike_post(params)
 
     respond_with response
   end

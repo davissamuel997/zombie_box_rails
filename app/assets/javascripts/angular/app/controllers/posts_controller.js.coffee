@@ -91,6 +91,18 @@ zombieBox.controller 'PostsController', ['$scope', '$http', 'PostsService', '$lo
       this.post_params.text = null
       this.post_params.title = null
 
+    unLikePost: (postIndex) ->
+      this.scopedPostIndex = postIndex
+
+      post = this.posts[this.scopedPostIndex]
+
+      if post.post_id && post.post_id > 0
+        PostsService.unLikePost.query({ post_id: post.post_id }, (responseData) ->
+          if responseData.errors == false
+            $scope.requestControl.posts[$scope.requestControl.scopedPostIndex] = responseData.post
+
+            $scope.requestControl.scopedPostIndex = null
+        )
   }
 
 ################################################################

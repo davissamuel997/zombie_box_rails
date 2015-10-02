@@ -7,4 +7,6 @@ zombieBox.factory 'PostsService', ['$resource', '$q', '$http', ($resource, $q, $
   getPosts: $resource "/get_posts.json", {}, query: { method: 'GET', isArray: false }
 
   likePost: $resource "/like_post.json", {}, query: { method: 'GET', isArray: false }
+
+  unLikePost: $resource "/unlike_post.json", {}, query: { method: 'GET', isArray: false }
 ]
