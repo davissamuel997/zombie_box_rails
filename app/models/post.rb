@@ -40,7 +40,7 @@ class Post < ActiveRecord::Base
 
   def user_like_post(user_id = nil)
     if user_id.present? && user_id.to_i > 0
-      like_ids = self.likes.map(&:id)
+      like_ids = self.likes.map(&:user_id)
 
       is_included = like_ids.include? user_id
     else
