@@ -50,6 +50,9 @@
                     %p.m0
                       %small
                         {{post.text}}
+              .list-group-item{'ng-if' => 'post.like_count > 0'}
+                %p
+                  %small{} 1 Like
 
             .panel-footer.clearfix
               %a.pull-left{:href => "#"}

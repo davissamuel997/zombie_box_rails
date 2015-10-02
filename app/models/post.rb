@@ -24,6 +24,20 @@ class Post < ActiveRecord::Base
     post_time
   end
 
+  def get_like_text
+    likes = self.likes
+
+    if likes.present? && likes.count > 0
+      like_text = "#{likes.count} like"
+
+      like_text += "s" if likes.count > 1
+    else
+      like_text = nil
+    end
+
+    like_text
+  end
+
   def self.get_posts(options = {})
     data = {:errors => false}
 
@@ -46,7 +60,9 @@ class Post < ActiveRecord::Base
             post_date:  comment.post_date,
             post_time:  comment.get_post_time
           } 
-        }
+        },
+        like_count: post.likes.count,
+        like_text:  post.get_like_text
       }
     }
     
