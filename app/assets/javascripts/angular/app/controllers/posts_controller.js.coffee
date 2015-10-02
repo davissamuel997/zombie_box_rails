@@ -74,6 +74,19 @@ zombieBox.controller 'PostsController', ['$scope', '$http', 'PostsService', '$lo
           $scope.requestControl.pagination = responseData.pagination
       )
 
+    likePost: (postIndex) ->
+      this.scopedPostIndex = postIndex
+
+      post = this.posts[this.scopedPostIndex]
+
+      if post.post_id && post.post_id > 0
+        PostsService.likePost.query({ post_id: post.post_id }, (responseData) ->
+          if responseData.errors == false
+            $scope.requestControl.posts[$scope.requestControl.scopedPostIndex] = responseData.post
+
+            $scope.requestControl.scopedPostIndex = null
+        )
+
     resetPostParams: ->
       this.post_params.text = null
       this.post_params.title = null

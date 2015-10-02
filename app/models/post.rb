@@ -133,6 +133,44 @@ class Post < ActiveRecord::Base
     data
   end
 
+  def self.like_post(options = {})
+    data = {:errors => false}
+
+    if options[:user_id].present? && options[:user_id].to_i > 0 && options[:post_id].present? && options[:post_id].to_i > 0
+      post = Post.find(options[:post_id])
+
+      like = post.likes.new(user_id: options[:user_id])
+
+      if like.save
+        data[:post] = {
+          post_id:     post.id,
+          title:       post.title,
+          post_date:   post.post_date.present? ? post.post_date.strftime('%m/%d/%Y') : nil,
+          text:        post.text,
+          user:        post.user,
+          post_time:   post.get_post_time,
+          comments:    post.comments.order('created_at ASC').map{ |comment| {
+              comment_id: comment.id,
+              user:       comment.get_user,
+              text:       comment.text,
+              post_date:  comment.post_date,
+              post_time:  comment.get_post_time
+            } 
+          },
+          like_count: post.likes.count,
+          like_text:  post.get_like_text,
+          user_likes_post: post.user_like_post(options[:user_id])
+        }
+      else
+        data[:errors] = true
+      end
+    else
+      data[:errors] = true
+    end
+
+    data
+  end
+
   # This paginates all of the data for the response of the js.
   def self.pagination_data element_count, current_page, results_per_page
     page  = current_page.to_i

@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   get 'get_posts' => 'posts#get_posts'
   post 'create_post' => 'posts#create_post'
   post 'create_post_comment' => 'posts#create_post_comment'
+  get 'like_post' => 'posts#like_post'
 
   root :to => 'users#welcome'
 

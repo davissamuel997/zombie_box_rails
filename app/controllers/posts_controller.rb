@@ -31,6 +31,14 @@ class PostsController < ApplicationController
     render :json => response
   end
 
+  def like_post
+    params[:user_id] = current_user.id
+
+    response = Post.like_post(params)
+
+    respond_with response
+  end
+
   def post_params
     params.require(:post).permit(:title, :post_date, :user_id, :text)
   end
