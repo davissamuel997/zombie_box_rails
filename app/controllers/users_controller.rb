@@ -7,6 +7,12 @@ class UsersController < ApplicationController
   def welcome
   end
 
+  def get_user_stats
+  	response = User.get_user_stats(params)
+
+  	render :json => response
+  end
+
   def update_user_stats
   	response = User.update_user_stats(params)
 

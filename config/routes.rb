@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   get 'like_post' => 'posts#like_post'
   get 'unlike_post' => 'posts#unlike_post'
 
+  get 'get_user_stats' => 'users#get_user_stats'
   post 'update_user_stats' => 'users#update_user_stats'
 
   root :to => 'users#welcome'
