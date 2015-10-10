@@ -17,7 +17,8 @@ Rails.application.routes.draw do
     post "create-registration" => "devise/registrations#create", :as => :user_registration
   end
 
-  devise_for :users, controllers: { sessions: "sessions" }
+  devise_for :users, controllers: { sessions: "sessions",
+                                    registrations: "registrations" }
 
   resources :users
   resources :posts
