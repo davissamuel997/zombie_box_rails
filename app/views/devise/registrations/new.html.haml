@@ -1,0 +1,29 @@
+.row.row-table.page-wrapper
+  .col-lg-3.col-md-6.col-sm-8.col-xs-12.align-middle
+    .panel.panel-dark.panel-flat{"data-offset" => "0", "data-play" => "fadeIn", "data-toggle" => "play-animation"}
+      .panel-heading.text-center.mb-lg
+        %p.text-center.mt-lg
+          %strong SIGNUP TO GET INSTANT ACCESS.
+      .panel-body
+        = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+          .form-group.has-feedback
+            %label.text-muted{:for => "signupInputEmail1"} Email
+            = f.input_field :email, :required => true, :class => 'form-control', :placeholder => 'Enter email'
+            %span.fa.fa-envelope.form-control-feedback.text-muted
+          .form-group.has-feedback
+            %label.text-muted{:for => "signupInputPassword1"} Password
+            = f.input_field :password, :require => true, :class => 'form-control', :placeholder => 'Password'
+            %span.fa.fa-lock.form-control-feedback.text-muted
+          .form-group.has-feedback
+            %label.text-muted{:for => "signupInputRePassword1"} Retype Password
+            = f.input_field :password_confirmation, :require => true, :class => 'form-control', :placeholder => 'Retype Password'
+            %span.fa.fa-lock.form-control-feedback.text-muted
+          .clearfix
+            .checkbox.c-checkbox.pull-left.mt0
+              %label
+                %input{:type => "checkbox", :value => ""}
+                  %span.fa.fa-check>
+                  I agree with the
+                  %a{:href => "#"} terms
+          %button.btn.btn-block.btn-primary{:type => "submit"} Register
+
