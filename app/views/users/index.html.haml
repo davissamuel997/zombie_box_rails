@@ -1,0 +1,116 @@
+%section
+  / START Page content
+  .content-wrapper
+    %h3
+      Users
+    .row
+      / START dashboard main content
+      %section.col-md-12
+        / START chart
+        .row
+          .content
+            .col-md-12
+              .panel
+                .panel-heading
+                  .panel.panel-info
+                    .panel-heading
+                      %h5
+                        %i.icon-magnifier.make-black
+                        %strong.make-black Search Users
+
+                    .panel-body
+                      %form
+                        %table.table
+                          %thead
+                            %th.text-center{:style => 'width: 200px;'}
+                              %strong First Name
+                            %th.text-center
+                              %strong Last Name
+                            %th.text-center
+                          %tbody
+                            %tr
+                              %td{:style => 'width: 200px;'}
+                                %select.form-control.input-sm{:chosen => '','ng-options' => 'organization.id as organization.name for organization in requestControl.organizations', 'ng-model' => 'requestControl.params.organization_id'}
+                                  %option
+                              %td{:style => 'width: 200px;'}
+                                %select.form-control.input-sm{:chosen => '','ng-options' => 'organization.id as organization.name for organization in requestControl.organizations', 'ng-model' => 'requestControl.params.organization_id'}
+                                  %option
+                              %td
+                                .pull-right
+                                  .input-group-btn
+                                    %button.btn.btn-sm.btn-default{'ng-click' => 'requestControl.resetSearchParams()'} Reset
+                                    %button.btn.btn-sm.btn-success{'ng-click' => 'requestControl.getPhoneNumberReportData()'} Search
+
+              .panel
+                .panel-heading
+                  %h4.panel-title
+                    %span.badge.badge-info Stats: {{requestControl.dateRange}}
+                .panel-body
+                  .viewcode-example
+                    .table-responsive
+                      %div{'ng-if' => 'requestControl.phoneNumbers.length > 0 && loaderControl.isLoading === false'}
+                        %table.table.table-striped.table-bordered.table-hover
+                          %thead
+                            %tr
+                              %th.text-center
+                                %strong Number Name
+                              %th.text-center
+                                %strong Campaign Name
+                              %th.text-center
+                                %strong Phone Number
+                              %th.text-center
+                                %strong Redirect Number
+                              %th.text-center
+                                %strong Call Count
+                              %th.text-center
+
+                          %tbody
+                            %tr{'ng-repeat' => 'phone_number in requestControl.phoneNumbers'}
+                              %td.text-center
+                                %button.btn.btn-link.make-black
+                                  {{phone_number.name}}
+                              %td.text-center
+                                %button.btn.btn-link.make-black
+                                  {{phone_number.campaign_name}}
+                              %td.text-center
+                                %button.btn.btn-link.make-black
+                                  {{phone_number.phone_number}}
+                              %td.text-center
+                                %button.btn.btn-link.make-black
+                                  {{phone_number.redirect_number}}
+                              %td.text-center
+                                %button.btn.btn-link.make-black
+                                  {{phone_number.call_count}}
+                              %td.text-center
+                                %button.btn.btn-link{type: "button", 'data-toggle' => 'modal', href: "#phone-number-calls", 'ng-if' => 'phone_number.call_count > 0', 'ng-click' => 'requestControl.setCallsModal(phone_number)'}
+                                  View Calls
+                                %button.btn.btn-link.make-black{'ng-if' => 'phone_number.call_count === 0'}
+                                  View Calls
+
+                        .span
+                          .pull-right
+                            .pagination-wrapper
+                              %ul.pagination
+                                %li{ 'ng-repeat' => 'page in requestControl.pagination.relevant_pages', 'ng-class' => "{active: page == requestControl.current_page}" }
+                                  %a.btn{ 'ng-show' => '$first && requestControl.current_page != page', 'ng-click' => "requestControl.changePage(page)" } &lt;&lt;
+
+                                  %a.btn.disabled{ 'ng-show' => '$index > 0 && (page - requestControl.pagination.relevant_pages[$index-1]) > 1' } ...
+
+                                  %a.btn{ 'ng-click' => "requestControl.changePage(page)" }
+                                    {{ page }}
+                                  %a.btn{ 'ng-show' => '$last && requestControl.current_page!=page', 'ng-click' => "requestControl.changePage(page)" } &gt;&gt;
+
+                      %div{'ng-if' => 'requestControl.phoneNumbers.length === 0 && loaderControl.isLoading === false'}
+                        %h4 Currently, there are no phone numbers based on the parameters. Please refine your search.
+
+                      %div{'ng-if' => 'loaderControl.isLoading === true'}
+                        .loader-css
+                          .load-container.load8
+                            .loader
+                              Loading...
+                          %h5 Fetching Phone Numbers...
+
+                    %a.btn-view-code{:href => "javascript:;", :style => "display: none;"}
+                      %i.fa.fa-code
+
+
