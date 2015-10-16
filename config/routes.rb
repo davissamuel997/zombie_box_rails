@@ -32,6 +32,9 @@ Rails.application.routes.draw do
   get 'get_user_stats' => 'users#get_user_stats'
   post 'update_user_stats' => 'users#update_user_stats'
 
+  get 'get_current_user' => 'users#get_current_user'
+  post 'update_user' => 'users#update_user'
+
   root :to => 'users#welcome'
 
 end

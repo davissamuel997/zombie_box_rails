@@ -40,4 +40,20 @@ class User < ActiveRecord::Base
 
     data
   end
+
+  def self.update_user(options = {})
+    data = {:errors => false}
+
+    if options[:user_id].present? && options[:user_id].to_i > 0 && options[:user_params].present?
+      user = User.find options[:user_id]
+
+      unless user.update(options[:user_params].permit(:first_name, :last_name, :email, :phone_number))
+        data[:errors] = true
+      end
+    else
+      data[:errors] = true
+    end
+
+    data
+  end  
 end

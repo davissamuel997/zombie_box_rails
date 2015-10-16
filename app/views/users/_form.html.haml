@@ -15,31 +15,31 @@
                   .control-group
                     %label.control-label.make-red First Name
                     .controls.form-group
-                      %input.form-control.input-sm
+                      %input.form-control.input-sm{'ng-model' => 'requestControl.params.first_name', :type => 'text', :placeholder => 'Ex: John'}
 
                 %p
                   .control-group
                     %label.control-label.make-red Last Name
                     .controls.form-group
-                      %input.form-control.input-sm{'ng-model' => 'requestControl.params.area_code', :type => 'text', :placeholder => 'Ex: 319'}
+                      %input.form-control.input-sm{'ng-model' => 'requestControl.params.last_name', :type => 'text', :placeholder => 'Ex: James'}
 
                 %p
                   .control-group
                     %label.control-label.make-red Email
                     .controls.form-group
-                      %input.form-control.input-sm{'ng-model' => 'requestControl.params.redirect_number', :type => 'text', :placeholder => 'Ex: 4625556666'}
+                      %input.form-control.input-sm{'ng-model' => 'requestControl.params.email', :type => 'text', :placeholder => 'Ex: john@example.com'}
 
                 %p
                   .control-group
                     %label.control-label Phone Number
                     .controls.form-group
-                      %input.form-control.input-sm{'ng-model' => 'requestControl.params.name', :type => 'text', :placeholder => 'Ex: Marketing Team'}
+                      %input.form-control.input-sm{'ng-model' => 'requestControl.params.phone_number', :type => 'text', :placeholder => 'Ex: 3192136789'}
 
               .form-actions
                 %p
                   .btn-group.no-margin{style: "float: right;"}
                     %button.btn.btn-sm.btn-default{"ng-click" => "requestControl.cancel()"} Cancel
-                    %button.btn.btn-sm.btn-success{"ng-click" => "requestControl.updatePhoneNumber()"} Update Profile
+                    %button.btn.btn-sm.btn-success{"ng-click" => "requestControl.updateUser()"} Update Profile
 
             %div{'ng-if' => 'loaderControl.isLoading === true'}
               .loader-css
