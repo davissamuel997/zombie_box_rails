@@ -35,6 +35,8 @@ Rails.application.routes.draw do
   get 'get_current_user' => 'users#get_current_user'
   post 'update_user' => 'users#update_user'
 
+  get 'get_users' => 'users#get_users'
+
   root :to => 'users#welcome'
 
 end

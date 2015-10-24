@@ -56,4 +56,12 @@ class User < ActiveRecord::Base
 
     data
   end  
+
+  def self.get_users(options = {})
+    data = {:errors => false}
+
+    data[:users] = User.all.order('email ASC NULLS LAST')
+
+    data
+  end
 end

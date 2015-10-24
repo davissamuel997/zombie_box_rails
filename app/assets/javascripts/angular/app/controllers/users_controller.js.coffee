@@ -4,7 +4,7 @@ zombieBox.controller 'UsersController', ['$scope', '$http', 'UsersService', '$lo
 ############## Initial Page Load / Reset #######################
 
   init = ->
-    debugger
+    $scope.requestControl.getUsers()
 
 ################################################################
 ############## Other Initializers ##############################
@@ -14,6 +14,14 @@ zombieBox.controller 'UsersController', ['$scope', '$http', 'UsersService', '$lo
 ################# Request Control ##############################
 
   $scope.requestControl = {
+
+  	users: []
+
+  	getUsers: ->
+  		UsersService.getUsers.query({}, (responseData) ->
+  			if responseData.errors == false
+  				$scope.requestControl.users = responseData.users
+  		)
 
   }
 

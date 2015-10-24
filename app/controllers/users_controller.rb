@@ -43,6 +43,12 @@ class UsersController < ApplicationController
     render :json => response
   end
 
+  def get_users
+    response = User.get_users(params)
+
+    respond_with response
+  end
+
   def user_params
     params.require(:user).permit(:first_name, :last_name, :email, :phone_number)
   end
