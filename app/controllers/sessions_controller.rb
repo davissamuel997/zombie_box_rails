@@ -28,6 +28,10 @@ class SessionsController < Devise::SessionsController
     end
   end
 
+  def forgot_password
+    p 'hello world'
+  end
+
   protected
   def auth_options
     { :scope => resource_name, :recall => "#{controller_path}#new" }

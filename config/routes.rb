@@ -15,6 +15,8 @@ Rails.application.routes.draw do
     get "edit-registration" => "devise/registrations#edit", :as => :edit_user_registration
     get "cancel-registration" => "devise/registrations#cancel", :as => :cancel_user_registration
     post "create-registration" => "devise/registrations#create", :as => :user_registration
+ 
+    get "users/forgot_password" => "sessions#forgot_password"
   end
 
   devise_for :users, controllers: { sessions: "sessions",
