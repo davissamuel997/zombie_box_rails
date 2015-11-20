@@ -37,8 +37,8 @@
               .panel-body.bg-success
                 .row.row-table.row-flush
                   .col-xs-8
-                    %p.mb0 Time Played
-                    %h3.m0 540
+                    %p.mb0 Total Points
+                    %h3.m0 {{requestControl.user.total_points}}
                   .col-xs-4.text-right
                     %em.fa.fa-clock-o.fa-2x
               .panel-body
@@ -51,8 +51,8 @@
               .panel-body.bg-danger
                 .row.row-table.row-flush
                   .col-xs-8
-                    %p.mb0 Headshots
-                    %h3.m0 7000
+                    %p.mb0 Total Kills
+                    %h3.m0 {{requestControl.user.total_kills}}
                   .col-xs-4.text-right
                     %em.fa.fa-bullseye.fa-2x
               .panel-body
