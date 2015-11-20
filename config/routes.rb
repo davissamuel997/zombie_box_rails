@@ -24,6 +24,8 @@ Rails.application.routes.draw do
 
   resources :users
   resources :posts
+  resources :events
+  resources :event_types
 
   get 'get_posts' => 'posts#get_posts'
   post 'create_post' => 'posts#create_post'

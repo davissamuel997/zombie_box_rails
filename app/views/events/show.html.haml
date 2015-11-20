@@ -1,0 +1,157 @@
+%section
+  .content-wrapper
+    %h3
+      Event Details
+
+    .panel.panel-default
+      .panel-heading
+        %h4
+          %strong
+            = @event.name
+        .entry-share-icons
+          %a{:href => "#", :title => "Twitter"}
+            %i.fa.fa-twitter
+          %a{:href => "#", :title => "Facebook"}
+            %i.fa.fa-facebook
+          %a{:href => "#", :title => "GooglePlus"}
+            %i.fa.fa-google-plus
+          %a{:href => "#", :title => "Pinterest"}
+            %i.fa.fa-pinterest
+          %a{:href => "#", :title => "LinkedIn"}
+            %i.fa.fa-linkedin
+      .panel-body
+        %table.table.table-striped.table-bordered.table-hover
+          %thead
+            %tr
+              %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"}
+                %strong RSO
+              %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"}
+                %strong Date
+              %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"}
+                %strong Start Time
+              %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"}
+                %strong End Time
+
+          %tbody
+            %tr
+              %td.text-center
+                %button.btn.btn-link.make-black
+                  = @event.organization.try(:name)
+              %td.text-center
+                %button.btn.btn-link.make-black
+                  - if @event.date.present?
+                    = @event.date.strftime('%Y-%m-%d')
+              %td.text-center
+                %button.btn.btn-link.make-black
+                  = @event.start_time.strftime('%I:%M %p')
+              %td.text-center
+                %button.btn.btn-link.make-black
+                  = @event.end_time
+
+        %br
+
+        %table.table.table-striped.table-bordered.table-hover
+          %thead
+            %tr
+              %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"}
+                %strong Address
+              %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"}
+                %strong City
+              %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"}
+                %strong State
+              %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"}
+                %strong Postal Code
+              / %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"}
+
+          %tbody
+            %tr
+              %td.text-center
+                %button.btn.btn-link.make-black
+                  = @event.address
+              %td.text-center
+                %button.btn.btn-link.make-black
+                  = @event.city
+              %td.text-center
+                %button.btn.btn-link.make-black
+                  = @event.state
+              %td.text-center
+                %button.btn.btn-link.make-black
+                  = @event.postal_code
+              / %td.text-center
+              /   %button.btn.btn-link{type: "button", 'data-toggle' => 'modal', href: "#view_map"}
+              /     View Map
+
+        %br
+        %p
+          = @event.description
+
+        %br
+
+        #map
+
+        %br
+        %br
+
+        %article.hentry.post
+          %fieldset
+            %legend.section
+              %h5
+                %i.icon-lock{'ng-if' => '!requestControl.currentUser'}
+                %i.icon-pencil{'ng-if' => 'requestControl.currentUser'}
+                %strong{'ng-if' => '!requestControl.currentUser'}
+                  You must be logged in to post a comment.
+
+            / = @event.comments.each do |c|
+            /   .comment.clearfix
+            /     .comment-des{:style => 'background-color: #f9f9f9;'}
+            /       .arrow-comment
+            /       .comment-by
+            /         %p.author
+            /           %strong
+            /             - user = c.get_user
+            /             = user.try(:full_name)
+            /         %p.date 
+            /           = c.post_date.strftime("%B %d, %Y")
+            /       %p
+            /         = c.text
+
+          .comment-des{:style => 'background-color: #f9f9f9;'}
+            .arrow-comment
+            %form
+              .control-group
+                %textarea.form-control{:placeholder => "Enter comment..", 'ng-model' => 'requestControl.newComment', :rows => 4}
+              %br
+              .form-actions
+                %p
+                  / .btn-group.no-margin{style: "float: right;"}
+                  %button.btn.btn-sm.btn-success{'ng-click' => 'requestControl.postComment()'} Post Comment
+        
+  .modal.fade{id: "view_map", style: "display: none;"}
+    .modal-dialog
+      .modal-content
+        .modal-header.badge-info
+          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
+
+          %h5
+            %strong Viewing Map
+
+        .modal-body
+
+        .modal-footer
+          %button.btn.btn.btn-sm.btn-default{"aria-hidden" => "true", "data-dismiss" => "modal"} Close
+
+= javascript_include_tag "https://maps.googleapis.com/maps/api/js"
+
+:javascript
+  function initialize() {
+    var mapCanvas = document.getElementById('map');
+    var mapOptions = {
+      center: new google.maps.LatLng(44.5403, -78.5463),
+      zoom: 8,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+    var map = new google.maps.Map(mapCanvas, mapOptions)
+  }
+
+  google.maps.event.addDomListener(window, 'load', initialize);
+              

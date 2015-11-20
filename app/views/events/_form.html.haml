@@ -1,0 +1,109 @@
+.row{'ng-controller' => 'EventsNewEditController'}
+  .content
+    .col-md-12
+      .panel
+        .panel-body
+          .viewcode-example
+            %form
+              %section.widget
+                %fieldset
+                  %legend.section
+                    %h5
+                      %i.icon-info-sign
+                      %strong General
+
+                  .col-sm-6
+                    .row
+                      .panel-heading
+                        %h5
+                          %label.label-control Organization
+                          %select.form-control{'ng-options' => 'organization.organization_id as organization.name for organization in requestControl.organizations', 'ng-model' => 'requestControl.params.organization_id', :chosen => '', 'ng-change' => 'requestControl.getEventDropdowns()'}
+                            %option
+
+                    .row
+                      .panel-heading
+                        %h5
+                          %label.label-control Event Status
+                          %select.form-control{'ng-options' => 'event_status.event_status_id as event_status.name for event_status in requestControl.eventStatuses', 'ng-model' => 'requestControl.params.event_status_id', :chosen => '', 'ng-disabled' => 'requestControl.eventStatuses.length === 0'}
+                            %option
+
+                    .row
+                      .panel-heading
+                        %h5
+                          %label.label-control Event Type
+                          %select.form-control{'ng-options' => 'event_type.event_type_id as event_type.name for event_type in requestControl.eventTypes', 'ng-model' => 'requestControl.params.event_type_id', :chosen => '', 'ng-disabled' => 'requestControl.eventTypes.length === 0'}
+                            %option
+
+                    .row
+                      .panel-heading
+                        %h5
+                          %label.label-control Description
+                          %textarea.form-control{:placeholder => "Input here...", :rows => 7, 'ng-model' => 'requestControl.params.description'}
+
+                  .col-sm-6
+                    .row
+                      .panel-heading
+                        %h5
+                          %label.label-control Name
+                          %input.form-control.input-sm{'ng-model' => 'requestControl.params.name', :placeholder => "Ex: Hackathon"}
+
+                    .row
+                      .panel-heading
+                        %h5
+                          %label.label-control Start Time
+                          %input.form-control.input-sm{'ng-model' => 'requestControl.params.start_time', :placeholder => "Ex: 10 AM"}
+
+                    .row
+                      .panel-heading
+                        %h5
+                          %label.label-control End Time
+                          %input.form-control.input-sm{'ng-model' => 'requestControl.params.end_time', :placeholder => "Ex: 7 PM"}
+
+                    .row
+                      .panel-heading
+                        %h5
+                          %label.label-control Date
+                          %input.form-control.input-sm{"close-text" => "Close", "date-disabled" => "disabled(date, mode)", "datepicker-options" => "datepicker.dateOptions", "datepicker-popup" => "{{datepicker.format}}", "is-open" => "datepicker.opened", "min" => "datepicker.minDate", 'show-weeks' => 'false', "ng-model" => "requestControl.params.date", :type => "text", :placeholder => "Select a date.."}
+
+            %br
+
+            %form
+              %section.widget
+                %fieldset
+                  %legend.section
+                    %h5
+                      %i.icon-info-sign
+                      %strong Address
+
+                  .col-sm-6
+                    .row
+                      .panel-heading
+                        %h5
+                          %label.label-control Address
+                          %input.form-control.input-sm{'ng-model' => 'requestControl.params.address'}
+
+                    .row
+                      .panel-heading
+                        %h5
+                          %label.label-control Postal Code
+                          %input.form-control.input-sm{'ng-model' => 'requestControl.params.postal_code'}
+
+                  .col-sm-6
+                    .row
+                      .panel-heading
+                        %h5
+                          %label.label-control City
+                          %input.form-control.input-sm{'ng-model' => 'requestControl.params.city', :placeholder => "Ex: Orlando"}
+
+                    .row
+                      .panel-heading
+                        %h5
+                          %label.label-control State
+                          %select.form-control{'ng-options' => 'state for state in requestControl.states', 'ng-model' => 'requestControl.params.state', :chosen => '', 'ng-disabled' => 'requestControl.states.length === 0'}
+                            %option
+
+              .form-actions
+                .btn-input-group.pull-right
+                  %button.btn.btn-sm.btn-default{'ng-click' => 'requestControl.cancel()'} Cancel
+                  %button.btn.btn-sm.btn-success{'ng-click' => 'requestControl.createEvent()'} Save Event
+

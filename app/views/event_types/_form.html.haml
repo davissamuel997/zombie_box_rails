@@ -1,0 +1,28 @@
+.row
+  .content
+    .col-md-12
+      .panel
+        .panel-body
+          .viewcode-example
+            = simple_form_for @event_type do |f|
+              %fieldset
+                %legend.section
+                  %h5
+                    %i.icon-note
+                    %strong General
+                    %strong.pull-right.make-red * Required
+                .control-group
+                  %p
+                    = f.input :university_id, :as => :hidden, :input_html => { :value => @university_id }
+                  %p
+                    = f.input :name, :label => "Name", :input_html => { :class => 'form-control input-sm' }
+
+                  %p
+                    = f.input :description, :label => "Description", :as => :text, :input_html => { :class => 'form-control input-sm', :rows => 5}
+
+              .form-actions
+                %p
+                  .btn-group.no-margin{style: "float: right;"}
+                    = link_to "Cancel", event_types_path, :class => "btn btn-sm btn-default"
+
+                    = f.submit "Save Event Type", :class => "btn btn-sm btn-success"
