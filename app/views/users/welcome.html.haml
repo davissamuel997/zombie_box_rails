@@ -169,92 +169,126 @@
                         %i.fa.fa-search
               / END panel-footer
           .col-md-6
-            .panel.panel-default
+            .panel.panel-default{'ng-repeat' => 'event in requestControl.events'}
               .panel-heading
-                .panel-title News feed
-              / START list group
+                .panel-title {{event.name}}
               .list-group
-                / START list group item
                 .list-group-item
                   .media
                     .pull-left
                       %span.fa-stack.fa-lg
                         %em.fa.fa-circle.fa-stack-2x.text-purple
-                        %em.fa.fa-cloud-upload.fa-stack-1x.fa-inverse.text-white
+                        %em.fa.fa-pencil-square-o.fa-stack-1x.fa-inverse.text-white
                     .media-body.clearfix
-                      .media-heading.text-purple.m0 NEW FILE
-                      %small.text-muted.pull-right 15 minutes ago
-                      %p.m0
-                        %small
-                          A new uploaded file
-                          %a{:href => "#"} Bootstrap.xls
-                          is now on the cloud
-                / END list group item
-                / START list group item
-                .list-group-item
-                  .media
-                    .pull-left
-                      %span.fa-stack.fa-lg
-                        %em.fa.fa-circle.fa-stack-2x.text-info
-                        %em.fa.fa-file-text-o.fa-stack-1x.fa-inverse.text-white
-                    .media-body.clearfix
-                      .media-heading.text-info.m0 NEW DOCUMENT
-                      %small.text-muted.pull-right 2 hours ago
-                      %p.m0
-                        %small
-                          New document
-                          %a{:href => "#"} Bootstrap.doc
-                          created
-                / END list group item
-                / START list group item
-                .list-group-item
-                  .media
-                    .pull-left
-                      %span.fa-stack.fa-lg
-                        %em.fa.fa-circle.fa-stack-2x.text-danger
-                        %em.fa.fa-exclamation.fa-stack-1x.fa-inverse.text-white
-                    .media-body.clearfix
-                      .media-heading.text-danger.m0 IMPORTANT MESSAGE
-                      %small.text-muted.pull-right 5 hours ago
-                      %p.m0
-                        %small
-                          Todd Walker sent you an important messsage.
-                          %a{:href => "#"} Open
-                / END list group item
-                / START list group item
-                .list-group-item
-                  .media
-                    .pull-left
-                      %span.fa-stack.fa-lg
-                        %em.fa.fa-circle.fa-stack-2x.text-success
-                        %em.fa.fa-clock-o.fa-stack-1x.fa-inverse.text-white
-                    .media-body.clearfix
-                      .media-heading.text-success.m0 NEW MEETING
-                      %small.text-muted.pull-right 15 hours ago
-                      %p.m0
-                        %small
-                          Roberta Lane added a new meeting.
-                          %em Hey Guys! Want to see there tomorrow. We have good new to share with you. Cheers!
-                / END list group item
-                / START list group item
-                .list-group-item
-                  .media
-                    .pull-left
-                      %span.fa-stack.fa-lg
-                        %em.fa.fa-circle.fa-stack-2x.text-warning
-                        %em.fa.fa-envelope-o.fa-stack-1x.fa-inverse.text-white
-                    .media-body.clearfix
-                      .media-heading.text-warning.m0 ANOTHER MESSAGE
-                      %small.text-muted.pull-right last week
-                      %p.m0
-                        %small Estela Soccer sent you a messsage. Quisque viverra faucibus neque, quis elementum velit vulputate et.
-                / END list group item
-              / END list group
-              / START panel footer
+                      %table.table.table-striped.table-bordered.table-hover
+                        %thead
+                          %tr
+                            %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"}
+                              %strong RSO
+                            %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"}
+                              %strong Date
+                            %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"}
+                              %strong Start Time
+                            %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"}
+                              %strong End Time
+                            %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"}
+                              %strong Location
+                            %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"}
+                              %strong Description
+                            %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"}
+
+                        %tbody
+                          %tr
+                            %td.text-center
+                              %button.btn.btn-link.make-black
+                                {{event.organization_name}}
+                            %td.text-center
+                              %button.btn.btn-link.make-black
+                                {{event.date}}
+                            %td.text-center
+                              %button.btn.btn-link.make-black
+                                {{event.start_time}}
+                            %td.text-center
+                              %button.btn.btn-link.make-black
+                                {{event.end_time}}
+                            %td.text-center
+                              %button.btn.btn-link.make-black
+                                {{event.city}}
+                            %td.text-center
+                              %button.btn.btn-link.make-black
+                                {{ event.description | limitTo: 20 }}{{event.description.length > 20 ? '...' : ''}}
+                            %td.text-center
+                              %a.btn.btn-xs.btn-success{'ng-href' => "/events/{{event.event_id}}"} Details
+
+
               .panel-footer.clearfix
-                %a.pull-left{:href => "#"}
-                  %small Load more
-              / END panel-footer
+                #accordian
+                  %a.pull-left.collapsed{:style => 'margin-left: 15px;', "data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#collapse_{{event.event_id}}"}
+                    %em.fa.fa-comment-o
+                    %small{'ng-if' => 'event.comments.length === 0'} Comment
+                    %small{'ng-if' => 'event.comments.length > 0'} Comment ({{event.comments.length}})
+              #collapse.panel-collapse.collapse{:style => "height: 0px;", :id => "{{event.event_id}}"}
+                .panel-footer.clearfix
+                  .list-group
+                    .list-group-item{'ng-repeat' => 'comment in event.comments'}
+                      .media
+                        .pull-left
+                          %span.fa-stack.fa-lg
+                            %em.fa.fa-circle.fa-stack-2x.text-purple
+                            %em.fa.fa-cloud-upload.fa-stack-1x.fa-inverse.text-white
+                        .media-body.clearfix
+                          %p.m0
+                            %button.btn.btn-xs{'ng-if' => 'comment.rating !== 1', 'ng-click' => 'comment.rating = 1'} 1
+                            %button.btn.btn-xs.btn-danger{'ng-if' => 'comment.rating === 1'} 1
+
+                            %button.btn.btn-xs{'ng-if' => 'comment.rating !== 2', 'ng-click' => 'comment.rating = 2'} 2
+                            %button.btn.btn-xs.btn-danger{'ng-if' => 'comment.rating === 2'} 2
+
+                            %button.btn.btn-xs{'ng-if' => 'comment.rating !== 3', 'ng-click' => 'comment.rating = 3'} 3
+                            %button.btn.btn-xs.btn-danger{'ng-if' => 'comment.rating === 3'} 3
+
+                            %button.btn.btn-xs{'ng-if' => 'comment.rating !== 4', 'ng-click' => 'comment.rating = 4'} 4
+                            %button.btn.btn-xs.btn-danger{'ng-if' => 'comment.rating === 4'} 4
+
+                            %button.btn.btn-xs{'ng-if' => 'comment.rating !== 5', 'ng-click' => 'comment.rating = 5'} 5
+                            %button.btn.btn-xs.btn-danger{'ng-if' => 'comment.rating === 5'} 5
+                            %a.btn-link.pull-right
+                              %i.fa.fa-angle-up
+                          %br
+                          %p by {{comment.user.full_name}} on {{comment.post_date}}
+                          %p.m0
+                            %small
+                              {{comment.text}}                       
+                          / .media-heading.text-purple.m0 {{comment.text}}
+                          %small.text-muted.pull-right {{comment.post_time}}
+
+                  %form
+                    .form-group
+                      %p
+                        %label.label-control Rating
+                        %br
+                        %button.btn.btn-xs{'ng-if' => 'requestControl.rating !== 1', 'ng-click' => 'requestControl.rating = 1'} 1
+                        %button.btn.btn-xs.btn-danger{'ng-if' => 'requestControl.rating === 1'} 1
+
+                        %button.btn.btn-xs{'ng-if' => 'requestControl.rating !== 2', 'ng-click' => 'requestControl.rating = 2'} 2
+                        %button.btn.btn-xs.btn-danger{'ng-if' => 'requestControl.rating === 2'} 2
+
+                        %button.btn.btn-xs{'ng-if' => 'requestControl.rating !== 3', 'ng-click' => 'requestControl.rating = 3'} 3
+                        %button.btn.btn-xs.btn-danger{'ng-if' => 'requestControl.rating === 3'} 3
+
+                        %button.btn.btn-xs{'ng-if' => 'requestControl.rating !== 4', 'ng-click' => 'requestControl.rating = 4'} 4
+                        %button.btn.btn-xs.btn-danger{'ng-if' => 'requestControl.rating === 4'} 4
+
+                        %button.btn.btn-xs{'ng-if' => 'requestControl.rating !== 5', 'ng-click' => 'requestControl.rating = 5'} 5
+                        %button.btn.btn-xs.btn-danger{'ng-if' => 'requestControl.rating === 5'} 5
+
+                      %br
+                      %p
+                        %input.form-control.input-sm{:placeholder => "Enter a comment...", 'ng-model' => 'requestControl.newComment'}
+                    .form-actions
+                      .pull-right
+                        %button.btn.btn-xs.btn-success{'ng-click' => 'requestControl.createEventComment($index)'} Submit
+
         / END messages and activity
       / END dashboard main content
       / START dashboard sidebar

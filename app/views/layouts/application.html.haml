@@ -222,6 +222,10 @@
                 %span.item-text Dashboard
             - if current_user.present? && current_user.has_role?(:super_admin)
               %li
+                %a.no-submenu{"data-toggle" => "", :href => "/events", :title => "Event"}
+                  %em.fa.fa-file-text-o
+                  %span.item-text Events
+              %li
                 %a.no-submenu{"data-toggle" => "", :href => "/event_types", :title => "Event Type"}
                   %em.fa.fa-file-text-o
                   %span.item-text Event Types

@@ -1,4 +1,4 @@
-collegeEvent.factory 'EventsService', ['$resource', '$q', '$http', ($resource, $q, $http) ->
+zombieBox.factory 'EventsService', ['$resource', '$q', '$http', ($resource, $q, $http) ->
 
   createEvent: $resource "/create_event.json", {}, query: { method: 'GET', isArray: false }
 

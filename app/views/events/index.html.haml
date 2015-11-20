@@ -1,0 +1,67 @@
+%section{'ng-controller' => "EventsController"}
+  / START Page content
+  .content-wrapper
+    %h3
+      Events
+      .pull-right
+        %a.btn.btn-sm.btn-info{:href => "/events/new"} New Event
+    .row
+      / START dashboard main content
+      %section.col-md-12
+        / START chart
+        .row
+          .content
+            .col-md-12
+              .panel
+                .panel-body
+                  .viewcode-example
+                    .table-responsive
+                      %div{'ng-if' => 'requestControl.events.length > 0 && loaderControl.isLoading === false'}
+                        %table.table.table-striped.table-bordered.table-hover
+                          %thead
+                            %tr
+                              %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"}
+                                %strong Name
+                              %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"}
+                                %strong Description
+                              %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"}
+
+                          %tbody
+                            %tr{'ng-repeat' => 'event in requestControl.events'}
+                              %td.text-center
+                                %button.btn.btn-link.make-black
+                                  {{event.name}}
+                              %td.text-center
+                                %button.btn.btn-link.make-black
+                                  {{event.description}}
+                              %td.text-center
+                                %a.btn.btn-xs.btn-warning{'ng-href' => "/events/{{event.event_id}}/edit"} Edit
+
+                        .span
+                          .pull-right
+                            .pagination-wrapper
+                              %ul.pagination
+                                %li{ 'ng-repeat' => 'page in requestControl.pagination.relevant_pages', 'ng-class' => "{active: page == requestControl.current_page}" }
+                                  %a.btn{ 'ng-show' => '$first && requestControl.current_page != page', 'ng-click' => "requestControl.changePage(page)" } &lt;&lt;
+
+                                  %a.btn.disabled{ 'ng-show' => '$index > 0 && (page - requestControl.pagination.relevant_pages[$index-1]) > 1' } ...
+
+                                  %a.btn{ 'ng-click' => "requestControl.changePage(page)" }
+                                    {{ page }}
+                                  %a.btn{ 'ng-show' => '$last && requestControl.current_page!=page', 'ng-click' => "requestControl.changePage(page)" } &gt;&gt;
+
+                      %div{'ng-if' => 'requestControl.events.length === 0 && loaderControl.isLoading === false'}
+                        %a{:href => "/event_types/new"}
+                          %h4 Currently, there are no events.
+
+                      %div{'ng-if' => 'loaderControl.isLoading === true'}
+                        .loader-css
+                          .load-container.load8
+                            .loader
+                              Loading...
+                          %h5 Fetching Events...
+
+                    %a.btn-view-code{:href => "javascript:;", :style => "display: none;"}
+                      %i.fa.fa-code
+
+

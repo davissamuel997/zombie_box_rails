@@ -1,4 +1,4 @@
-collegeEvent.controller 'EventTypesController', ['$scope', '$http', 'EventTypesService', '$location', '$pusher', '$sce', ($scope, $http, EventTypesService, $location, $pusher, $sce) ->
+zombieBox.controller 'EventTypesController', ['$scope', '$http', 'EventTypesService', '$location', '$pusher', '$sce', ($scope, $http, EventTypesService, $location, $pusher, $sce) ->
 
 ################################################################
 ############## Initial Page Load / Reset #######################

@@ -1,4 +1,4 @@
-aclass EventTypesController < ApplicationController
+class EventTypesController < ApplicationController
 
   respond_to :json, :html
 
