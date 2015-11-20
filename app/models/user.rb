@@ -179,6 +179,64 @@ class User < ActiveRecord::Base
     data
   end
 
+  # Example - options[:user_params] = user = { user_id: 1, total_points: 104, total_kills: 299, weapons: [{ weapon_id: 30, kill_count: 15, damage: 65, ammo: 99 }, { weapon_id: 32, kill_count: 15, damage: 100 }], skins: [{ skin_id: 64, kill_count: 345 }, { skin_id: 72, kill_count: 425 }] }
+  def self.update_all_user_details(options = {})
+    data = {:errors => false}
+
+    user_params = options[:user_params]
+
+    if user_params.present? && user_params["user_id"].present? && user_params["user_id"].to_i > 0
+      user = User.find(user_params["user_id"])
+
+      if user.present? && user.is_a?(User)
+        total_points = user_params["total_points"].present? ? user_params["total_points"] : user.try(:total_points)
+        total_kills  = user_params["total_kills"].present? ? user_params["total_kills"] : user.try(:total_kills)
+
+        if user.update(total_points: total_points, total_kills: total_kills)
+        
+          user_params["weapons"].each do |weapon_hash|
+            if weapon_hash["weapon_id"].present? && weapon_hash["weapon_id"].to_i > 0
+              weapon = Weapon.find(weapon_hash["weapon_id"])
+
+              kill_count = weapon_hash["kill_count"].present? && weapon_hash["kill_count"].to_i > 0 ? weapon_hash["kill_count"].to_i : weapon.try(:kill_count)
+              damage = weapon_hash["damage"].present? && weapon_hash["damage"].to_i > 0 ? weapon_hash["damage"].to_i : weapon_hash.try(:damage)
+              ammo = weapon_hash["ammo"].present? && weapon_hash["ammo"].to_i > 0 ? weapon_hash["ammo"].to_i : weapon_hash.try(:ammo)
+
+              unless weapon.present? && weapon.is_a?(Weapon) && weapon.update(kill_count: kill_count, damage: damage,
+                                                                              ammo: ammo)
+                data[:errors] = true
+              end
+            end
+          end
+
+          user_params["skins"].each do |skin_hash|
+            if skin_hash["skin_id"].present? && skin_hash["skin_id"].to_i > 0
+              skin = Skin.find(skin_hash["skin_id"])
+
+              kill_count = skin_hash["kill_count"].present? && skin_hash["kill_count"].to_i > 0 ? skin_hash["kill_count"].to_i : skin.try(:kill_count)
+
+              unless skin.present? && skin.is_a?(Skin) && skin.update!(kill_count: kill_count)
+                data[:errors] = true
+              end
+            end
+          end
+
+          if data[:errors] == false
+            data[:user] = user.get_params
+          end
+        else
+          data[:errors] = true
+        end
+      else
+        data[:errors] = true
+      end
+    else
+      data[:errors] = true
+    end
+
+    data
+  end
+
   # This paginates all of the data for the response of the js.
   def self.pagination_data element_count, current_page, results_per_page
     page  = current_page.to_i

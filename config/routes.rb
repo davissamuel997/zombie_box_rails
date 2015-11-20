@@ -70,6 +70,7 @@ Rails.application.routes.draw do
   post 'safe_destroy' => 'messages#safe_destroy', as: 'message_safe_destroy'
 
   get 'verify_user_login' => 'users#verify_user_login'
+  post 'update_all_user_details' => 'users#update_all_user_details'
 
   root :to => 'users#welcome'
 

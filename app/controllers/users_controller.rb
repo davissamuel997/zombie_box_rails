@@ -75,8 +75,14 @@ class UsersController < ApplicationController
     render :json => response
   end
 
+  def update_all_user_details
+    response = User.update_all_user_details(params)
+
+    render :json => response
+  end
+
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :phone_number, :role_ids)
+    params.require(:user).permit(:first_name, :last_name, :email, :phone_number, :role_ids, :total_points, :total_kills)
   end
 
   def set_user
