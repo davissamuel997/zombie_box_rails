@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151120153815) do
+ActiveRecord::Schema.define(version: 20151120191155) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -170,6 +170,8 @@ ActiveRecord::Schema.define(version: 20151120153815) do
     t.string   "last_name"
     t.string   "full_name"
     t.string   "phone_number"
+    t.integer  "total_points"
+    t.integer  "total_kills"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -181,6 +183,20 @@ ActiveRecord::Schema.define(version: 20151120153815) do
   end
 
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
+
+  create_table "weapons", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "damage"
+    t.integer  "ammo"
+    t.integer  "user_id"
+    t.integer  "kill_count"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "weaponable_id"
+    t.string   "weaponable_type"
+  end
+
+  add_index "weapons", ["user_id"], name: "index_weapons_on_user_id", using: :btree
 
   add_foreign_key "mailboxer_conversation_opt_outs", "mailboxer_conversations", column: "conversation_id", name: "mb_opt_outs_on_conversations_id"
   add_foreign_key "mailboxer_notifications", "mailboxer_conversations", column: "conversation_id", name: "notifications_on_conversation_id"
