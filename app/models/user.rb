@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   acts_as_messageable 
 
   before_save :set_full_name
+  after_create :set_up_weapons
 
   has_many :posts
   has_many :likes
@@ -17,6 +18,20 @@ class User < ActiveRecord::Base
 
   def set_full_name
     self.full_name = "#{self.first_name} #{self.last_name}"
+  end
+
+  def set_up_weapons
+    self.weapons.create(name: "Gun", damage: 50,
+                        ammo: 50, kill_count: 0)
+
+    self.weapons.create(name: "Shotgun", damage: 75,
+                        ammo: 30, kill_count: 0)
+
+    self.weapons.create(name: "Knife", damage: 100,
+                        kill_count: 0)
+
+    self.weapons.create(name: "Crowbar", damage: 50,
+                        kill_count: 0)
   end
 
   def self.get_user_stats(options = {})
@@ -179,7 +194,9 @@ class User < ActiveRecord::Base
       email:        email,
       phone_number: phone_number,
       friends:      friends.map{ |friend| friend.get_params },
-      is_friend:    current_user.present? && current_user.is_a?(User) ? current_user.friends.any?{ |friend| friend.user_id == id } : nil
+      is_friend:    current_user.present? && current_user.is_a?(User) ? current_user.friends.any?{ |friend| friend.user_id == id } : nil,
+      total_kills:  total_kills,
+      weapons:      weapons.order('name ASC').map{ |weapon| weapon.get_params }
     }
   end
 end
