@@ -69,8 +69,6 @@ Rails.application.routes.draw do
   get 'get_messages' => 'messages#get_messages'
   post 'safe_destroy' => 'messages#safe_destroy', as: 'message_safe_destroy'
 
-  get 'test_route' => 'users#test_route'
-
   root :to => 'users#welcome'
 
 end
