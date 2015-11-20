@@ -270,4 +270,22 @@
     = javascript_include_tag 'angular/app/angular_import.js'
     = javascript_include_tag "application"
 
+    :javascript
+      $(function () {
+          $("#event_start_date").datepicker({
+              changeMonth: true,
+              dateFormat: "yy-mm-dd",
+              onClose: function (selectedDate) {
+                  $("#to").datepicker("option", "minDate", selectedDate);
+              }
+          });
+          $("#event_end_date").datepicker({
+              changeMonth: true,
+              dateFormat: "yy-mm-dd",
+              onClose: function (selectedDate) {
+                  $("#from").datepicker("option", "maxDate", selectedDate);
+              }
+          });
+      });
+
 

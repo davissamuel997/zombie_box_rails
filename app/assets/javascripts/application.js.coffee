@@ -1,4 +1,4 @@
-
+#= require bootstrap-datepicker
 
 $ ->
   alert_div = $("#alert_notification")

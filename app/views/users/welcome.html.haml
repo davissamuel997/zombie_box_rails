@@ -86,7 +86,7 @@
                   .inlinesparkline.inline{"data-bar-color" => "danger", "data-bar-spacing" => "6", "data-bar-width" => "6", "data-height" => "30"} 2,7,5,9,4,2,7,5,7,5,9,6,4
         / START messages and activity
         .row
-          .col-md-6
+          .col-md-4
             .panel.panel-default
               .panel-heading
                 .pull-right.label.label-danger 5
@@ -168,10 +168,8 @@
                       %button.btn.btn-default.btn-sm{:type => "submit"}
                         %i.fa.fa-search
               / END panel-footer
-          .col-md-6
+          .col-md-8{'ng-controller' => "EventsController"}
             .panel.panel-default{'ng-repeat' => 'event in requestControl.events'}
-              .panel-heading
-                .panel-title {{event.name}}
               .list-group
                 .list-group-item
                   .media
@@ -180,46 +178,13 @@
                         %em.fa.fa-circle.fa-stack-2x.text-purple
                         %em.fa.fa-pencil-square-o.fa-stack-1x.fa-inverse.text-white
                     .media-body.clearfix
-                      %table.table.table-striped.table-bordered.table-hover
-                        %thead
-                          %tr
-                            %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"}
-                              %strong RSO
-                            %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"}
-                              %strong Date
-                            %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"}
-                              %strong Start Time
-                            %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"}
-                              %strong End Time
-                            %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"}
-                              %strong Location
-                            %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"}
-                              %strong Description
-                            %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"}
-
-                        %tbody
-                          %tr
-                            %td.text-center
-                              %button.btn.btn-link.make-black
-                                {{event.organization_name}}
-                            %td.text-center
-                              %button.btn.btn-link.make-black
-                                {{event.date}}
-                            %td.text-center
-                              %button.btn.btn-link.make-black
-                                {{event.start_time}}
-                            %td.text-center
-                              %button.btn.btn-link.make-black
-                                {{event.end_time}}
-                            %td.text-center
-                              %button.btn.btn-link.make-black
-                                {{event.city}}
-                            %td.text-center
-                              %button.btn.btn-link.make-black
-                                {{ event.description | limitTo: 20 }}{{event.description.length > 20 ? '...' : ''}}
-                            %td.text-center
-                              %a.btn.btn-xs.btn-success{'ng-href' => "/events/{{event.event_id}}"} Details
-
+                      .media-heading.text-purple.m0 {{event.name}}
+                      %br
+                      %small.text-muted.pull-right {{event.start_time}} on {{event.start_date}} until {{event.end_time}} on {{event.end_date}}
+                      %br
+                      %p.m0
+                        %small
+                          {{event.description}}                      
 
               .panel-footer.clearfix
                 #accordian
@@ -237,24 +202,6 @@
                             %em.fa.fa-circle.fa-stack-2x.text-purple
                             %em.fa.fa-cloud-upload.fa-stack-1x.fa-inverse.text-white
                         .media-body.clearfix
-                          %p.m0
-                            %button.btn.btn-xs{'ng-if' => 'comment.rating !== 1', 'ng-click' => 'comment.rating = 1'} 1
-                            %button.btn.btn-xs.btn-danger{'ng-if' => 'comment.rating === 1'} 1
-
-                            %button.btn.btn-xs{'ng-if' => 'comment.rating !== 2', 'ng-click' => 'comment.rating = 2'} 2
-                            %button.btn.btn-xs.btn-danger{'ng-if' => 'comment.rating === 2'} 2
-
-                            %button.btn.btn-xs{'ng-if' => 'comment.rating !== 3', 'ng-click' => 'comment.rating = 3'} 3
-                            %button.btn.btn-xs.btn-danger{'ng-if' => 'comment.rating === 3'} 3
-
-                            %button.btn.btn-xs{'ng-if' => 'comment.rating !== 4', 'ng-click' => 'comment.rating = 4'} 4
-                            %button.btn.btn-xs.btn-danger{'ng-if' => 'comment.rating === 4'} 4
-
-                            %button.btn.btn-xs{'ng-if' => 'comment.rating !== 5', 'ng-click' => 'comment.rating = 5'} 5
-                            %button.btn.btn-xs.btn-danger{'ng-if' => 'comment.rating === 5'} 5
-                            %a.btn-link.pull-right
-                              %i.fa.fa-angle-up
-                          %br
                           %p by {{comment.user.full_name}} on {{comment.post_date}}
                           %p.m0
                             %small
@@ -264,25 +211,6 @@
 
                   %form
                     .form-group
-                      %p
-                        %label.label-control Rating
-                        %br
-                        %button.btn.btn-xs{'ng-if' => 'requestControl.rating !== 1', 'ng-click' => 'requestControl.rating = 1'} 1
-                        %button.btn.btn-xs.btn-danger{'ng-if' => 'requestControl.rating === 1'} 1
-
-                        %button.btn.btn-xs{'ng-if' => 'requestControl.rating !== 2', 'ng-click' => 'requestControl.rating = 2'} 2
-                        %button.btn.btn-xs.btn-danger{'ng-if' => 'requestControl.rating === 2'} 2
-
-                        %button.btn.btn-xs{'ng-if' => 'requestControl.rating !== 3', 'ng-click' => 'requestControl.rating = 3'} 3
-                        %button.btn.btn-xs.btn-danger{'ng-if' => 'requestControl.rating === 3'} 3
-
-                        %button.btn.btn-xs{'ng-if' => 'requestControl.rating !== 4', 'ng-click' => 'requestControl.rating = 4'} 4
-                        %button.btn.btn-xs.btn-danger{'ng-if' => 'requestControl.rating === 4'} 4
-
-                        %button.btn.btn-xs{'ng-if' => 'requestControl.rating !== 5', 'ng-click' => 'requestControl.rating = 5'} 5
-                        %button.btn.btn-xs.btn-danger{'ng-if' => 'requestControl.rating === 5'} 5
-
-                      %br
                       %p
                         %input.form-control.input-sm{:placeholder => "Enter a comment...", 'ng-model' => 'requestControl.newComment'}
                     .form-actions

@@ -10,10 +10,8 @@ class Event < ActiveRecord::Base
   	user = options[:current_user]
 
   	if user.present? && user.is_a?(User)
-      organization_ids = user.organizations.map(&:id)
-      event_status_id = EventStatus.where(name: "Public").first.try(:id)
-
-  		data[:events] = Event.where("university_id = ? OR organization_id IN (?) OR event_status_id = ?", user.university_id, organization_ids, event_status_id).order('date DESC').map{ |event| event.get_params }
+      # Need to adjust query
+  		data[:events] = Event.all.order('start_date DESC').map{ |event| event.get_params }
   	else
   		data[:errors] = true
   	end
@@ -77,8 +75,7 @@ class Event < ActiveRecord::Base
     if options[:event_id].present? && options[:event_id].to_i > 0 && options[:comment_text].present? && options[:comment_text].size > 0 && options[:user_id].present? && options[:user_id].to_i > 0
       event = Event.find(options[:event_id])
 
-      new_comment = event.comments.new(user_id: options[:user_id], text: options[:comment_text],
-                                       rating:  options[:rating])
+      new_comment = event.comments.new(user_id: options[:user_id], text: options[:comment_text])
 
       if new_comment.save
         data[:comments] = event.comments.order('created_at ASC').map{ |comment| comment.get_params }
@@ -94,15 +91,16 @@ class Event < ActiveRecord::Base
 
 	def get_params
 		{
-			event_id:          id,
-			name:              name,
-			event_type_id:     event_type_id,
-      event_type_name:   event_type.try(:name),
-			description:       description,
-			start_time:        start_time.present? ? start_time.strftime('%I:%M %p') : nil,
-			date:              date.present? ? date.strftime('%Y-%m-%d') : nil,
-      end_time:          end_time,
-      comments:          self.comments.order('created_at ASC').map{ |comment| comment.get_params } 
+			event_id:        id,
+			name:            name,
+			event_type_id:   event_type_id,
+      event_type_name: event_type.try(:name),
+			description:     description,
+			start_time:      start_time.present? ? start_time.strftime('%I:%M %p') : nil,
+      end_time:        end_time.present? ? end_time.strftime('%I:%M %p') : nil,
+      start_date:      start_date.present? ? start_date.strftime('%m/%d/%Y') : nil,
+      end_date:        end_date.present? ? end_date.strftime('%m/%d/%Y') : nil,
+      comments:        self.comments.order('created_at ASC').map{ |comment| comment.get_params } 
 		}
 	end
 

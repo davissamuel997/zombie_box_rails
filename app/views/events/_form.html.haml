@@ -19,6 +19,18 @@
                     = f.association :event_type, :label => "Event Type", :input_html => { :class => 'form-control input-sm chosen-select' }
 
                   %p
+                    = f.input :start_time, :label => "Start Time", :as => :string, :input_html => { :class => 'form-control input-sm' }
+
+                  %p
+                    = f.input :start_date, as: :string, :label => "Start Date", input_html: {:name => "event[start_date]", :id => 'event_start_date'}, input_html: { :class => "form-control input-sm" }
+
+                  %p
+                    = f.input :end_time, :label => "End Time", :as => :string, :input_html => { :class => 'form-control input-sm' }
+
+                  %p
+                    = f.input :end_date, as: :string, :label => "End Date", input_html: {:name => "event[end_date]", :id => 'event_end_date'}, input_html: { :class => "form-control input-sm" }              
+
+                  %p
                     = f.input :description, :label => "Description", :as => :text, :input_html => { :class => 'form-control input-sm', :rows => 5}
 
               .form-actions

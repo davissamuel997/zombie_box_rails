@@ -51,7 +51,7 @@
                                   %a.btn{ 'ng-show' => '$last && requestControl.current_page!=page', 'ng-click' => "requestControl.changePage(page)" } &gt;&gt;
 
                       %div{'ng-if' => 'requestControl.events.length === 0 && loaderControl.isLoading === false'}
-                        %a{:href => "/event_types/new"}
+                        %a{:href => "/events/new"}
                           %h4 Currently, there are no events.
 
                       %div{'ng-if' => 'loaderControl.isLoading === true'}

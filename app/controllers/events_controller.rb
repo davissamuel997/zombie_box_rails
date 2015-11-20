@@ -28,7 +28,7 @@ class EventsController < ApplicationController
 	end
 
 	def update
-		if @event.present? && @event.is_a?(Organization) && @event.update(event_params)
+		if @event.present? && @event.is_a?(Event) && @event.update(event_params)
 			redirect_to events_path
 		else
 			render :edit
@@ -71,7 +71,7 @@ class EventsController < ApplicationController
 	end
 
   def event_params
-    params.require(:event).permit(:name, :event_type_id, :start_time, :end_time, :date)
+    params.require(:event).permit(:name, :description, :event_type_id, :start_time, :end_time, :start_date, :end_date)
   end
 
   def set_event

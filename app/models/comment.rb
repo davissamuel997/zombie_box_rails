@@ -32,4 +32,14 @@ class Comment < ActiveRecord::Base
   	user
   end
 
+  def get_params
+    {
+      comment_id: id,
+      user:       get_user,
+      text:       text,
+      post_date:  post_date.strftime("%B %d, %Y"),
+      post_time:  get_post_time
+    }
+  end
+
 end
