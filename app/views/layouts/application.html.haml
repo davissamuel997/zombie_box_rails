@@ -210,8 +210,8 @@
               / Status when collapsed
             / Name and Role
             .user-block-info
-              %span.user-block-name.item-text Welcome User
-              %span.user-block-role UX-Dev
+              %span.user-block-name.item-text Welcome
+              %span.user-block-role= current_user.try(:full_name)
           / END user info
           %ul.nav
             / START Menu
