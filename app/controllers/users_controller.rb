@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  skip_before_filter :authenticate_user!, only: [:get_user_stats, :verify_user_login]
+  skip_before_filter :authenticate_user!, only: [:get_user_stats]
 
   before_filter :set_user, :only => [:show, :edit, :update]
 
