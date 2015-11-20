@@ -1,0 +1,41 @@
+.padding-xs.clearfix
+  .panel.panel-default.table-responsive
+    .panel-heading
+      %h4 Confirmation Report
+  .padding-md.clearfix
+    .panel.panel-default.table-responsive
+      %table.table.table-hover.table-striped
+        %thead
+          %tr
+            %td Recipient(s)
+            %td Subject
+            %td Body
+            %td Date Sent
+            %td Time
+        %tbody
+          - if @messages.present? && @messages.count > 0
+            - @messages.each do |message|
+              %tr{type: "button", "data-toggle" => "modal", href: "#message_confirmation_#{message.id}", class: "message", id: "#{message.id}"}
+                - recipients = get_message_recipients(message)
+                - if recipients.length > 50
+                  %td= "To: #{recipients.first(50)}..."
+                - else
+                  %td= "To: #{recipients} "
+                %td= message.subject.first(25)
+                %td= message.body.first(25)
+                %td= message.created_at.strftime('%Y-%m-%d')
+                %td= message.created_at.strftime('%I:%M %p')
+  - if @user && @messages.present? && @messages.length > 0
+    - @messages.each do |message|
+      .modal.fade{id: "message_confirmation_#{message.id}", style: "display: none;"}
+        .modal-lg
+          .modal-content
+            .modal-header
+              %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
+              %h4 #{message.subject}
+            .modal-body.body-scrollable
+              %p
+                = render 'original_message_with_confirmations', locals: { message: message }
+
+            .modal-footer
+              %button.btn.btn.btn-sm{"aria-hidden" => "true", "data-dismiss" => "modal"} Close 

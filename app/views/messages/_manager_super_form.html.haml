@@ -1,0 +1,41 @@
+= simple_form_for :message, url: :messages do |f|
+  .span.col-md-7
+    %p
+    .form-inputs
+      %p
+        = f.label "Recipient(s)" 
+      %p
+        = select_tag "recipients", options_for_select(@recipients), :multiple => true, :data => { :placeholder => " " }, :class => 'form-control input-sm chosen-select'
+    .form-inputs        
+      %p
+        = f.label "Subject:"
+        = f.text_field :subject, label: "Subject:", :class => 'form-control input-sm'
+      %p
+        = f.label "Body:"
+        = f.text_area :body, as: :text, label: "Body:", :class => 'form-control input-sm', :style => "height: 200px;"
+      %p
+    .form-actions
+      %p
+        = f.submit "Send Message", class: 'btn btn-success btn-sm'
+  .span.col-md-5
+    %p
+    .form-inputs
+      %br
+        = f.label "Add All"
+      %p
+        = check_box_tag "add_all", 1, false, { :class => 'form-control input-sm add_box' }
+      %br
+      %br
+        = f.label "Add All Agents"
+      %p
+        = check_box_tag "add_all_agents", 2, false, { :class => 'form-control input-sm add_box' }
+      %br
+      %br
+        = f.label "Add All Managers"
+      %p
+        = check_box_tag "add_all_managers", 3, false, { :class => 'form-control input-sm add_box' }
+      %br
+      %br
+        = f.label "Would you like the Recipient(s) to confirm reading your message?"
+      %p
+        = check_box_tag "confirm_message", true, false, { :class => 'form-control input-sm' }

@@ -1,0 +1,26 @@
+.padding-xs.clearfix
+  .panel.panel-default.table-responsive
+    .panel-heading
+    .padding-md.clearfix
+      .span{:style => "float: left;"}
+        = link_to 'New Message', new_message_path, :class => 'btn btn-default'
+      %br
+      %br
+      .padding-md.clearfix
+        .panel.panel-default.table-responsive
+          %table.table.table-hover.table-striped
+            - if @message
+              %thead
+                %tr
+                  %td= @message.subject
+                  %td
+                  %td
+                  %td
+                  %td
+                %tr
+                  %td
+                  %td
+                  %td
+                  %td  
+                  %td                                         
+              %tbody

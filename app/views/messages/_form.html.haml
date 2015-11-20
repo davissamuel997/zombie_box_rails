@@ -1,0 +1,10 @@
+.padding-md.clearfix
+  .panel.panel-default
+    .panel-body.no-padding
+      - if current_user
+        - if current_user.has_role?(:super_admin) || current_user.has_role?(:manager)
+          = render 'manager_super_form'
+        - elsif current_user.has_role?(:agent)
+          = render 'agent_form'
+        - else
+          = render

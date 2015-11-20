@@ -1,0 +1,79 @@
+.padding-md.clearfix
+  .panel.panel-default.table-responsive
+    %table.table.table-hover.table-striped
+      %thead
+        %tr
+          %td Trash?
+          %td Read?
+          %td Confirmation?
+          - if @box != "outbox"
+            %td Sender
+          - else
+            %td Recipient(s)
+          %td Subject
+          %td Body
+          %td Date Sent
+          %td Time
+      %tbody
+        - if @messages.present? && @messages.count > 0
+          - i = 0
+          - @messages.each do |message|
+            %tr{class: "messages"}
+              %td= check_box_tag "move_to_trash", "#{message.id}", false, { :class => 'form-control input-sm move-to-trash' }
+              - if @box != "outbox"
+                - unless message && message.is_read?(@user)
+                  %td{class: "message", id: "#{message.id}"}
+                    %i.fa.fa-envelope
+                  - if !message.receipts.where(receiver_id: message.sender.id).first.is_read
+                    %td{class: "confirm", type: "button", "data-toggle" => "modal", href: "#confirm_#{message.id}", id: "#{message.id}"}
+                      %i.fa.fa-flag
+                  - else
+                    %td
+                - else
+                  %td
+                  %td   
+              - else
+                %td
+                %td           
+              - if message.sender.email == @user.email
+                - recipients = get_message_recipients(message)
+                - if recipients.length > 50
+                  %td{type: "button", "data-toggle" => "modal", href: "#message_#{message.id}", class: "message", id: "#{@box}"}= "To: #{recipients.first(50)}..."
+                - else
+                  %td{type: "button", "data-toggle" => "modal", href: "#message_#{message.id}", class: "message", id: "#{@box}"}= "To: #{recipients} "
+              - else
+                %td{type: "button", "data-toggle" => "modal", href: "#message_#{message.id}", class: "message", id: "#{@box}"}= "From: #{get_message_sender(message).first(25)}"
+              %td{type: "button", "data-toggle" => "modal", href: "#message_#{message.id}", class: "message", id: "#{@box}"}= message.subject.first(25)
+              %td{type: "button", "data-toggle" => "modal", href: "#message_#{message.id}", class: "message", id: "#{@box}"}= message.body.first(25)
+              %td{type: "button", "data-toggle" => "modal", href: "#message_#{message.id}", class: "message", id: "#{@box}"}= message.created_at.strftime('%Y-%m-%d')
+              %td{type: "button", "data-toggle" => "modal", href: "#message_#{message.id}", class: "message", id: "#{@box}"}= message.created_at.strftime('%I:%M %p')
+            - break if i > 8
+            - i += 1
+  - if @messages.present? && @messages.length > 0
+    .modal-footer.clearfix
+      = paginate @messages  
+
+- if @user && @messages.present? && @messages.length > 0
+  - @messages.each do |message|
+    .modal.fade{id: "message_#{message.id}", style: "display: none;"}
+      .modal-lg
+        .modal-content
+          .modal-header
+            %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
+            %h4 #{message.conversation.subject}
+          .modal-body.body-scrollable
+            %p
+              = render 'message_conversation', :locals => { conversation: message.conversation, user: @user }
+          .modal-footer
+            %button.btn.btn.btn-sm{"aria-hidden" => "true", "data-dismiss" => "modal"} Close 
+  - if @box == 'inbox' || @box == "trash"
+    - @messages.each do |message|
+      - if !message.receipts.where(receiver_id: message.sender.id).first.is_read
+        .modal.fade{id: "confirm_#{message.id}", style: "display: none;"} 
+          .modal-dialog
+            .modal-content
+              .modal-header
+                %h4 Message Confirmation
+              .modal-body
+                %p
+                  = render 'confirm_message', :locals => { message: message, box: @box }

@@ -52,6 +52,23 @@ Rails.application.routes.draw do
 
   get 'get_user_details' => 'users#get_user_details'
 
+  resources :messages, only: [:index, :show, :new, :create, :destroy] do
+    member do
+      post :reply
+      post :trash
+      post :untrash
+    end
+  end
+
+  get 'messages/all/agents' => 'messages#get_all_agents'
+  get 'messages/all/managers' => 'messages#get_all_managers'
+  get 'messages/:id/read' => 'messages#check_mark_as_read'
+  post 'messages/move_checked_to_trash' => 'messages#move_checked_to_trash', as: 'move_checked_to_trash'
+  get 'messages/:id/confirm_message' => 'messages#confirm_message'
+  get 'confirmation_report' => 'messages#confirmation_report', as: 'message_confirmation_report'
+  get 'get_messages' => 'messages#get_messages'
+  post 'safe_destroy' => 'messages#safe_destroy', as: 'message_safe_destroy'
+
   root :to => 'users#welcome'
 
 end

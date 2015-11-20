@@ -41,78 +41,24 @@
                 %em.fa.fa-envelope
               / START Dropdown menu
               %ul.dropdown-menu
-                %li.dropdown-menu-header Unread messages
-                %li.p-sm
-                  %input.form-control{:onfocus => "javascript:void(0);", :placeholder => "Find contacts..", :type => "text"}
-                %li
-                  .scroll-viewport
-                    / START list group
-                    .list-group.scroll-content
-                      / START list group item
-                      %a.list-group-item{:href => "#"}
-                        .media
-                          .pull-left
-                          .media-body.clearfix
-                            %small.pull-right 5m
-                            %strong.media-heading.text-primary
-                              %span.circle.circle-success.circle-md>
-                              Greg Lewis
-                            %p.mb-sm
-                              %small Nunc vel dui et leo sagittis fringilla.
-                      / END list group item
-                      / START list group item
-                      %a.list-group-item{:href => "#"}
-                        .media
-                          .pull-left
-                          .media-body.clearfix
-                            %small.pull-right 3h
-                            %strong.media-heading.text-primary
-                              %span.circle.circle-success.circle-md>
-                              Constance Cook
-                            %p.mb-sm
-                              %small Nunc vel dui et leo sagittis fringilla.
-                      / END list group item
-                      / START list group item
-                      %a.list-group-item{:href => "#"}
-                        .media
-                          .pull-left
-                          .media-body.clearfix
-                            %small.pull-right 3h
-                            %strong.media-heading.text-primary
-                              %span.circle.circle-danger.circle-md>
-                              Cody Barnes
-                            %p.mb-sm
-                              %small Nunc vel dui et leo sagittis fringilla.
-                      / END list group item
-                      / START list group item
-                      %a.list-group-item{:href => "#"}
-                        .media
-                          .pull-left
-                          .media-body.clearfix
-                            %small.pull-right 4h
-                            %strong.media-heading.text-primary
-                              %span.circle.circle-danger.circle-md>
-                              Gina Robinson
-                            %p.mb-sm
-                              %small Nunc vel dui et leo sagittis fringilla.
-                      / END list group item
-                      / START list group item
-                      %a.list-group-item{:href => "#"}
-                        .media
-                          .pull-left
-                          .media-body.clearfix
-                            %small.pull-right yesterday
-                            %strong.media-heading.text-primary
-                              %span.circle.circle-danger.circle-md>
-                              Violet Olson
-                            %p.mb-sm
-                              %small Nunc vel dui et leo sagittis fringilla.
-                      / END list group item
-                    / END list group
                 / START dropdown footer
                 %li.p
-                  %a.text-center{:href => "#"}
-                    %small.text-primary More messages
+                  %a.text-center{:href => messages_path}
+                    %i.fa.fa-inbox.fa-sm
+                    %small.text-primary Inbox
+                %li.p
+                  %a.text-center{:href => messages_path}
+                    %i.fa.fa-arrow-up.fa-sm
+                    %small.text-primary Outbox
+                %li.p
+                  %a.text-center{:href => messages_path}
+                    %i.fa.fa-trash-o.fa-sm
+                    %small.text-primary Trash
+                %li.p
+                  %a.text-center{:href => messages_path}
+                    %i.fa.fa-envelope.fa-sm
+                    %small.text-primary New Message
+                    
                 / END dropdown footer
               / END Dropdown menu
             / END Messages menu (dropdown-list)

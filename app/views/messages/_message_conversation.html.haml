@@ -1,0 +1,21 @@
+.padding-xs.clearfix
+  - if locals[:conversation]
+    - locals[:conversation].messages.each do |message|
+      .panel.panel-default
+        - if message.sender.id != locals[:user].id
+          .panel.panel-default.table-responsive
+            .panel-heading
+              %button.btn.btn-default.btn-sm{id: "#{message.id}", class: "message-reply"} Reply
+            .panel-body.hide
+              = form_tag(messages_path, :method => "get", :class => "message_reply_tag") do
+                %tr
+                  = text_area_tag :body, nil, { :class => 'form-control input-sm', :style => "height: 200px;" }
+                  %br
+                    %button.btn.btn.btn-sm.btn-success.message-reply-send{style: "float: right;", "aria-hidden" => "true", "data-dismiss" => "modal", id: "#{message.id}"} Send
+        %br
+        .panel.panel-default.table-responsive
+          .panel-heading
+            %h5 From: #{message.sender.first_name} #{message.sender.last_name}
+            %h5 - #{message.created_at.strftime('%Y-%m-%d')} #{message.created_at.strftime('%I:%M %p')}
+          .padding-md.clearfix
+            %h5= message.body

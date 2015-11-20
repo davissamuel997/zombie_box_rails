@@ -1,0 +1,6 @@
+.padding-xs.clearfix
+  - if locals[:message]
+    = form_tag(messages_path, :method => "get", :class => "confirm_message_tag") do
+      %tr
+        %h4 Please confirm that you have read this message. The sender will receive a receipt with the time and date that the message was confirmed.
+        %button.btn.btn.btn-sm.btn-success.confirm{style: "float: right;", "aria-hidden" => "true", "data-dismiss" => "modal", id: "#{locals[:message].id}"} Confirm 
