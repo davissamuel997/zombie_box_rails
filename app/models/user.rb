@@ -5,6 +5,9 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  include Mailboxer::Models::Messageable       
+  acts_as_messageable 
+
   before_save :set_full_name
 
   has_many :posts
@@ -84,6 +87,46 @@ class User < ActiveRecord::Base
     end
 
     data
+  end
+
+  def get_user_inbox_messages
+    notification_ids = Mailboxer::Receipt.find_by_sql("SELECT notification_id FROM mailboxer_receipts
+                                                       WHERE receiver_id = #{self.id}
+                                                         AND mailbox_type = 'inbox' 
+                                                         AND trashed = false"
+                                                      ).map(&:notification_id) 
+    messages_array = Mailboxer::Message.where(id: notification_ids)
+  end
+
+  def get_user_outbox_messages
+    notification_ids = Mailboxer::Receipt.find_by_sql("SELECT notification_id FROM mailboxer_receipts 
+                                                         WHERE receiver_id = #{self.id} 
+                                                           AND mailbox_type = 'sentbox' 
+                                                           AND trashed = false"
+                                                      ).map(&:notification_id) 
+    messages_array = Mailboxer::Message.where(id: notification_ids)   
+  end
+
+  def get_user_trash_messages
+    notification_ids = Mailboxer::Receipt.find_by_sql("SELECT notification_id FROM mailboxer_receipts 
+                                                         WHERE receiver_id = #{self.id} 
+                                                           AND trashed = 'true'"
+                                                      ).map(&:notification_id) 
+    messages_array = Mailboxer::Message.where(id: notification_ids) 
+  end
+
+  def self.get_recipient_list(current_user_id = nil)
+    friends = []
+
+    if current_user_id.present? && current_user_id > 0
+
+      user = User.find(current_user_id)
+
+      user.friends.where(is_pending: false).map{ |friend| friend.user }.sort_by{ |user| user.full_name }
+
+    end
+
+    friends
   end
 
   # This paginates all of the data for the response of the js.
