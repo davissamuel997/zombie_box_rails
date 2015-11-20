@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  # skip_before_filter :authenticate_user!, only: []
+  skip_before_filter :authenticate_user!, only: [:test_route]
 
   before_filter :set_user, :only => [:show, :edit, :update]
 
@@ -65,6 +65,12 @@ class UsersController < ApplicationController
     params[:user_id] = current_user.try(:id)
 
     response = User.get_user_details(params)
+
+    respond_with response
+  end
+
+  def test_route
+    response = {:hello => "World"}
 
     respond_with response
   end
