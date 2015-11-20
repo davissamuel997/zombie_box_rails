@@ -10,11 +10,13 @@ class User < ActiveRecord::Base
 
   before_save :set_full_name
   after_create :set_up_weapons
+  after_create :set_up_skins
 
   has_many :posts
   has_many :likes
   has_many :friends, as: :friendable
   has_many :weapons, as: :weaponable
+  has_many :skins, as: :skinable
 
   def set_full_name
     self.full_name = "#{self.first_name} #{self.last_name}"
@@ -32,6 +34,18 @@ class User < ActiveRecord::Base
 
     self.weapons.create(name: "Crowbar", damage: 50,
                         kill_count: 0)
+  end
+
+  def set_up_skins
+    self.skins.create(name: '00', kill_count: 0)
+    self.skins.create(name: '01', kill_count: 0)
+    self.skins.create(name: '02', kill_count: 0)
+    self.skins.create(name: '03', kill_count: 0)
+    self.skins.create(name: '04', kill_count: 0)
+    self.skins.create(name: '05', kill_count: 0)
+    self.skins.create(name: '06', kill_count: 0)
+    self.skins.create(name: '07', kill_count: 0)
+    self.skins.create(name: '08', kill_count: 0)
   end
 
   def self.get_user_stats(options = {})
@@ -196,7 +210,8 @@ class User < ActiveRecord::Base
       friends:      friends.map{ |friend| friend.get_params },
       is_friend:    current_user.present? && current_user.is_a?(User) ? current_user.friends.any?{ |friend| friend.user_id == id } : nil,
       total_kills:  total_kills,
-      weapons:      weapons.order('name ASC').map{ |weapon| weapon.get_params }
+      weapons:      weapons.order('name ASC').map{ |weapon| weapon.get_params },
+      skins:        skins.order('name ASC').map{ |skin| skin.get_params }
     }
   end
 end

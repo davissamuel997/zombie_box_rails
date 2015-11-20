@@ -6,17 +6,37 @@ namespace :weapon_fixup do
 
 	  	if u.weapons.count == 0
 		    u.weapons.create(name: "Gun", damage: 50,
-		                        ammo: 50, kill_count: 0)
+		                     ammo: 50, kill_count: 0)
 
 		    u.weapons.create(name: "Shotgun", damage: 75,
-		                        ammo: 30, kill_count: 0)
+		                     ammo: 30, kill_count: 0)
 
 		    u.weapons.create(name: "Knife", damage: 100,
-		                        kill_count: 0)
+		                     kill_count: 0)
 
 		    u.weapons.create(name: "Crowbar", damage: 50,
-		                        kill_count: 0)
+		                     kill_count: 0)
 	  	end
 	  end
   end
+end
+
+namespace :skin_fixup do
+	task create_skins: :environment do
+	  User.all.each do |u|
+	  	p 'Starting new user'
+
+	  	if u.skins.count == 0
+		    u.skins.create(name: '00', kill_count: 0)
+		    u.skins.create(name: '01', kill_count: 0)
+		    u.skins.create(name: '02', kill_count: 0)
+		    u.skins.create(name: '03', kill_count: 0)
+		    u.skins.create(name: '04', kill_count: 0)
+		    u.skins.create(name: '05', kill_count: 0)
+		    u.skins.create(name: '06', kill_count: 0)
+		    u.skins.create(name: '07', kill_count: 0)
+		    u.skins.create(name: '08', kill_count: 0)
+	  	end
+	  end
+	end
 end
