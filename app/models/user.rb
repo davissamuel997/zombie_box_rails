@@ -24,28 +24,30 @@ class User < ActiveRecord::Base
 
   def set_up_weapons
     self.weapons.create(name: "Gun", damage: 50,
-                        ammo: 50, kill_count: 0)
+                        ammo: 50, kill_count: 0,
+                        user_id: self.id)
 
     self.weapons.create(name: "Shotgun", damage: 75,
-                        ammo: 30, kill_count: 0)
+                        ammo: 30, kill_count: 0,
+                        user_id: self.id)
 
     self.weapons.create(name: "Knife", damage: 100,
-                        kill_count: 0)
+                        kill_count: 0, user_id: self.id)
 
     self.weapons.create(name: "Crowbar", damage: 50,
-                        kill_count: 0)
+                        kill_count: 0, user_id: self.id)
   end
 
   def set_up_skins
-    self.skins.create(name: '00', kill_count: 0)
-    self.skins.create(name: '01', kill_count: 0)
-    self.skins.create(name: '02', kill_count: 0)
-    self.skins.create(name: '03', kill_count: 0)
-    self.skins.create(name: '04', kill_count: 0)
-    self.skins.create(name: '05', kill_count: 0)
-    self.skins.create(name: '06', kill_count: 0)
-    self.skins.create(name: '07', kill_count: 0)
-    self.skins.create(name: '08', kill_count: 0)
+    self.skins.create(name: '00', kill_count: 0, user_id: self.id)
+    self.skins.create(name: '01', kill_count: 0, user_id: self.id)
+    self.skins.create(name: '02', kill_count: 0, user_id: self.id)
+    self.skins.create(name: '03', kill_count: 0, user_id: self.id)
+    self.skins.create(name: '04', kill_count: 0, user_id: self.id)
+    self.skins.create(name: '05', kill_count: 0, user_id: self.id)
+    self.skins.create(name: '06', kill_count: 0, user_id: self.id)
+    self.skins.create(name: '07', kill_count: 0, user_id: self.id)
+    self.skins.create(name: '08', kill_count: 0, user_id: self.id)
   end
 
   def self.get_user_stats(options = {})
