@@ -28,7 +28,7 @@ zombieBox.controller 'UsersEditController', ['$scope', '$http', 'UsersService', 
 
     updateUser: ->
       if this.params.user_id && this.params.user_id > 0
-        user_params = { first_name: this.params.first_name, last_name: this.params.last_name, email: this.params.email, phone_number: this.params.phone_number }
+        user_params = { first_name: this.params.first_name, last_name: this.params.last_name, email: this.params.email, phone_number: this.params.phone_number, roll_ids: this.params.role_ids }
 
         UsersService.updateUser.query({ user_params: this.params, user_id: this.params.user_id }, (responseData) ->
           if responseData.errors == false

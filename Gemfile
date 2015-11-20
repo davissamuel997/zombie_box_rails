@@ -48,6 +48,7 @@ gem 'angular_rails_csrf'
 gem 'simple_form'
 gem 'kaminari'
 gem 'mailboxer', github: 'lacco/mailboxer'
+gem 'rolify'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -4,47 +4,35 @@
       .panel
         .panel-body
           .viewcode-example
-            %form.simple-form{:novalidate => "novalidate"}
+            = simple_form_for @user do |f|
               %fieldset
                 %legend.section
                   %h5
                     %i.icon-note
                     %strong General
                     %strong.pull-right.make-red * Required
-                %p
-                  .control-group
-                    %label.control-label.make-red First Name
-                    .controls.form-group
-                      %input.form-control.input-sm{'ng-model' => 'requestControl.params.first_name', :type => 'text', :placeholder => 'Ex: John'}
+                .control-group
+                  %p
+                    = f.input :first_name, :label => "First Name", :input_html => { :class => 'form-control input-sm' }
 
-                %p
-                  .control-group
-                    %label.control-label.make-red Last Name
-                    .controls.form-group
-                      %input.form-control.input-sm{'ng-model' => 'requestControl.params.last_name', :type => 'text', :placeholder => 'Ex: James'}
+                  %p
+                    = f.input :last_name, :label => "Last Name", :input_html => { :class => 'form-control input-sm' }
 
-                %p
-                  .control-group
-                    %label.control-label.make-red Email
-                    .controls.form-group
-                      %input.form-control.input-sm{'ng-model' => 'requestControl.params.email', :type => 'text', :placeholder => 'Ex: john@example.com'}
+                  %p
+                    = f.input :email, :label => "Email", :input_html => { :class => 'form-control input-sm' }
 
-                %p
-                  .control-group
-                    %label.control-label Phone Number
-                    .controls.form-group
-                      %input.form-control.input-sm{'ng-model' => 'requestControl.params.phone_number', :type => 'text', :placeholder => 'Ex: 3192136789'}
+                  %p
+                    = f.input :phone_number, :label => "Phone Number", :input_html => { :class => 'form-control input-sm' }
+
+                  %p
+                    %label
+                      Select Role
+                      = f.association :roles, as: :select, label: false, collection: Role.get_assignable_roles, input_html: { :class => 'form-control input-sm chosen-select', multiple: false, prompt: true}
+
 
               .form-actions
                 %p
                   .btn-group.no-margin{style: "float: right;"}
-                    %button.btn.btn-sm.btn-default{"ng-click" => "requestControl.cancel()"} Cancel
-                    %button.btn.btn-sm.btn-success{"ng-click" => "requestControl.updateUser()"} Update Profile
+                    = link_to "Cancel", root_path, :class => "btn btn-sm btn-default"
 
-            %div{'ng-if' => 'loaderControl.isLoading === true'}
-              .loader-css
-                .load-container.load8
-                  .loader
-                    Loading...
-                %h5 Update Profile...
-
+                    = f.submit "Save User", :class => "btn btn-sm btn-success"
