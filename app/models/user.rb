@@ -65,7 +65,7 @@ class User < ActiveRecord::Base
     page_num = (options[:page] || 1).to_i
     per_page = 10
 
-    data[:users] = User.all.page(page_num).per(per_page).order('full_name ASC NULLS LAST').map{ |user| user.get_params }
+    data[:users] = User.all.page(page_num).per(per_page).order('full_name ASC NULLS LAST').map{ |user| user.get_params(options[:current_user]) }
 
     data[:pagination] = User.pagination_data User.all.count, page_num, per_page
 
@@ -108,7 +108,7 @@ class User < ActiveRecord::Base
     { total_items: element_count, pages: pages, relevant_pages: relevant_pages }
   end
 
-  def get_params
+  def get_params(current_user = nil)
     {
       user_id:      id,
       first_name:   first_name,
@@ -116,7 +116,8 @@ class User < ActiveRecord::Base
       full_name:    full_name,
       email:        email,
       phone_number: phone_number,
-      friends:      friends.map{ |friend| friend.get_params }
+      friends:      friends.map{ |friend| friend.get_params },
+      is_friend:    current_user.present? && current_user.is_a?(User) ? current_user.friends.any?{ |friend| friend.user_id == id } : nil
     }
   end
 end

@@ -69,8 +69,13 @@
                                 %button.btn.btn-link.make-black
                                   {{user.phone_number}}
                               %td.text-center
-                                %button.btn.btn-xs.btn-info
-                                  Details
+                                .btn-group
+                                  %button.btn.btn-xs.btn-info
+                                    Details
+                                  %button.btn.btn-xs.btn-success{'ng-if' => 'user.is_friend === false'}
+                                    Request Friend
+                                  %button.btn.btn-xs.btn-danger{'ng-if' => 'user.is_friend === true'}
+                                    Remove Friend
 
                         .span
                           .pull-right

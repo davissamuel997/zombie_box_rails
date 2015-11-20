@@ -54,6 +54,8 @@ class UsersController < ApplicationController
   end
 
   def get_users
+    params[:current_user] = current_user
+
     response = User.get_users(params)
 
     respond_with response
