@@ -14,4 +14,15 @@ class Friend < ActiveRecord::Base
 
   validates :user_id, uniqueness: { scope: [ :friendable_type, :friendable_id ] }
 
+  def get_params
+  	{
+  		friend_id:       id,
+  		user_id:         user_id,
+  		is_pending:      is_pending,
+  		friend_date:     friend_date,
+  		friendable_id:   friendable_id,
+  		friendable_type: friendable_type
+  	}
+  end
+
 end

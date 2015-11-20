@@ -15,7 +15,7 @@
       Dashboard
     .row
       / START dashboard main content
-      %section.col-md-7
+      %section.col-md-7{'ng-controller' => "CurrentUserController"}
         .row
           .col-md-4
             / START widget
@@ -24,7 +24,7 @@
                 .row.row-table.row-flush
                   .col-xs-8
                     %p.mb0 Friends
-                    %h3.m0 150
+                    %h3.m0 {{requestControl.user.friends.length}}
                   .col-xs-4.text-right
                     %em.fa.fa-users.fa-2x
               .panel-body

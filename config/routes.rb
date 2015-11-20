@@ -50,6 +50,8 @@ Rails.application.routes.draw do
   get 'create_event' => 'events#create_event'
   get 'create_event_comment' => 'events#create_event_comment'
 
+  get 'get_user_details' => 'users#get_user_details'
+
   root :to => 'users#welcome'
 
 end

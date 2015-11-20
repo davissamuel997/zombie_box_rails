@@ -59,6 +59,14 @@ class UsersController < ApplicationController
     respond_with response
   end
 
+  def get_user_details
+    params[:user_id] = current_user.try(:id)
+
+    response = User.get_user_details(params)
+
+    respond_with response
+  end
+
   def user_params
     params.require(:user).permit(:first_name, :last_name, :email, :phone_number, :role_ids)
   end

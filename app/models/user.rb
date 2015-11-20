@@ -72,6 +72,20 @@ class User < ActiveRecord::Base
     data
   end
 
+  def self.get_user_details(options = {})
+    data = {:errors => false}
+
+    if options[:user_id].present? && options[:user_id].to_i > 0
+      user = User.find(options[:user_id])
+
+      data[:user] = user.get_params
+    else
+      data[:errors] = true
+    end
+
+    data
+  end
+
   # This paginates all of the data for the response of the js.
   def self.pagination_data element_count, current_page, results_per_page
     page  = current_page.to_i
@@ -101,7 +115,8 @@ class User < ActiveRecord::Base
       last_name:    last_name,
       full_name:    full_name,
       email:        email,
-      phone_number: phone_number
+      phone_number: phone_number,
+      friends:      friends.map{ |friend| friend.get_params }
     }
   end
 end
