@@ -49,13 +49,13 @@
                         %table.table.table-striped.table-bordered.table-hover
                           %thead
                             %tr
-                              %th.text-center
+                              %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"}
                                 %strong Name
-                              %th.text-center
-                                %strong Campaign Name
-                              %th.text-center
+                              %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"}
+                                %strong Email
+                              %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"}
                                 %strong Phone Number
-                              %th.text-center
+                              %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"}
 
                           %tbody
                             %tr{'ng-repeat' => 'user in requestControl.users'}
@@ -69,8 +69,8 @@
                                 %button.btn.btn-link.make-black
                                   {{user.phone_number}}
                               %td.text-center
-                                %button.btn.btn-sm.btn-info
-                                  Edit
+                                %button.btn.btn-xs.btn-info
+                                  Details
 
                         .span
                           .pull-right
