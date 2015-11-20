@@ -7,7 +7,7 @@ class AddFieldsToUser2 < ActiveRecord::Migration
   		t.integer :damage
   		t.integer :ammo
 
-  	end
   		t.timestamps
+  	end
   end
 end
