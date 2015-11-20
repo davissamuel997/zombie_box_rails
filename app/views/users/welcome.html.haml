@@ -3,10 +3,16 @@
   .content-wrapper
     %h3
       .pull-right.text-center>
-        .text-sm.mb-sm 500 ratings
-        .inlinesparkline{"data-bar-color" => "#cfdbe2", "data-bar-spacing" => "2", "data-bar-width" => "3", "data-height" => "18"} 2,3,4,7,5,7,8,9,5,7,8,4,7
+        / %ol.breadcrumb.page-breadcrumb.hidden-xs
+        /   %li
+        /     %i.icon-home>
+        /     \&nbsp;
+        /     %a{:href => "/"}> Dashboard
+        /     \&nbsp;&nbsp;
+        /     %i.fa.fa-angle-right>
+        /     \&nbsp;&nbsp;
+        /   %li.active Phone Numbers
       Dashboard
-      %small Hi, User. Welcome back!
     .row
       / START dashboard main content
       %section.col-md-7
