@@ -58,3 +58,19 @@ namespace :id_fixup do
 	  end
 	end
 end
+
+namespace :total_fixup do
+	task make_zero: :environment do
+	  User.all.each do |u|
+	  	p 'Starting user'
+
+	  	if u.total_kills.nil?
+	  		u.update(total_kills: 0)
+	  	end
+
+	  	if u.total_points.nil?
+	  		u.update(total_points: 0)
+	  	end
+	  end
+	end
+end
