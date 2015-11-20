@@ -23,13 +23,7 @@ class UsersController < ApplicationController
     response = {:errors => false}
 
     if current_user.present? && current_user.is_a?(User)
-      response[:user] = {
-        user_id:      current_user.id,
-        first_name:   current_user.first_name,
-        last_name:    current_user.last_name,
-        email:        current_user.email,
-        phone_number: current_user.phone_number
-      }
+      response[:user] = current_user.get_params
     else
       response[:errors] = true
     end

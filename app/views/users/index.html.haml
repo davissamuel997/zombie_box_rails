@@ -42,50 +42,35 @@
                                     %button.btn.btn-sm.btn-success{'ng-click' => 'requestControl.getPhoneNumberReportData()'} Search
 
               .panel
-                .panel-heading
-                  %h4.panel-title
-                    %span.badge.badge-info Stats: {{requestControl.dateRange}}
                 .panel-body
                   .viewcode-example
                     .table-responsive
-                      %div{'ng-if' => 'requestControl.phoneNumbers.length > 0 && loaderControl.isLoading === false'}
+                      %div{'ng-if' => 'requestControl.users.length > 0 && requestControl.isLoading === false'}
                         %table.table.table-striped.table-bordered.table-hover
                           %thead
                             %tr
                               %th.text-center
-                                %strong Number Name
+                                %strong Name
                               %th.text-center
                                 %strong Campaign Name
                               %th.text-center
                                 %strong Phone Number
                               %th.text-center
-                                %strong Redirect Number
-                              %th.text-center
-                                %strong Call Count
-                              %th.text-center
 
                           %tbody
-                            %tr{'ng-repeat' => 'phone_number in requestControl.phoneNumbers'}
+                            %tr{'ng-repeat' => 'user in requestControl.users'}
                               %td.text-center
                                 %button.btn.btn-link.make-black
-                                  {{phone_number.name}}
+                                  {{user.full_name}}
                               %td.text-center
                                 %button.btn.btn-link.make-black
-                                  {{phone_number.campaign_name}}
+                                  {{user.email}}
                               %td.text-center
                                 %button.btn.btn-link.make-black
-                                  {{phone_number.phone_number}}
+                                  {{user.phone_number}}
                               %td.text-center
-                                %button.btn.btn-link.make-black
-                                  {{phone_number.redirect_number}}
-                              %td.text-center
-                                %button.btn.btn-link.make-black
-                                  {{phone_number.call_count}}
-                              %td.text-center
-                                %button.btn.btn-link{type: "button", 'data-toggle' => 'modal', href: "#phone-number-calls", 'ng-if' => 'phone_number.call_count > 0', 'ng-click' => 'requestControl.setCallsModal(phone_number)'}
-                                  View Calls
-                                %button.btn.btn-link.make-black{'ng-if' => 'phone_number.call_count === 0'}
-                                  View Calls
+                                %button.btn.btn-sm.btn-info
+                                  Edit
 
                         .span
                           .pull-right
@@ -100,15 +85,15 @@
                                     {{ page }}
                                   %a.btn{ 'ng-show' => '$last && requestControl.current_page!=page', 'ng-click' => "requestControl.changePage(page)" } &gt;&gt;
 
-                      %div{'ng-if' => 'requestControl.phoneNumbers.length === 0 && loaderControl.isLoading === false'}
+                      %div{'ng-if' => 'requestControl.users.length === 0 && requestControl.isLoading === false'}
                         %h4 Currently, there are no phone numbers based on the parameters. Please refine your search.
 
-                      %div{'ng-if' => 'loaderControl.isLoading === true'}
+                      %div{'ng-if' => 'requestControl.isLoading === true'}
                         .loader-css
                           .load-container.load8
                             .loader
                               Loading...
-                          %h5 Fetching Phone Numbers...
+                          %h5 Fetching Users...
 
                     %a.btn-view-code{:href => "javascript:;", :style => "display: none;"}
                       %i.fa.fa-code
