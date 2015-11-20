@@ -72,7 +72,7 @@ class UsersController < ApplicationController
   def verify_user_login
     response = User.verify_user_login(params)
 
-    respond_with response
+    render :json => response
   end
 
   def user_params
