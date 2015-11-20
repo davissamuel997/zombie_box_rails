@@ -129,6 +129,24 @@ class User < ActiveRecord::Base
     friends
   end
 
+  def self.verify_user_login(options = {})
+    data = {:errors => false}
+
+    if options[:email].present? && options[:email].size > 0 && options[:password].present? && options[:password].size > 0
+      user = User.find_by_email(options[:email])
+
+      if user.present? && user.is_a?(User) && user.valid_password?(options[:password])
+        data[:user] = user.get_params
+      else
+        data[:errors] = true
+      end
+    else
+      data[:errors] = true
+    end
+
+    data
+  end
+
   # This paginates all of the data for the response of the js.
   def self.pagination_data element_count, current_page, results_per_page
     page  = current_page.to_i
