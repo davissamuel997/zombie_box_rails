@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151120145642) do
+ActiveRecord::Schema.define(version: 20151120153815) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,20 @@ ActiveRecord::Schema.define(version: 20151120145642) do
   end
 
   add_index "events", ["event_type_id"], name: "index_events_on_event_type_id", using: :btree
+
+  create_table "friends", force: :cascade do |t|
+    t.integer  "user_id"
+    t.boolean  "is_pending"
+    t.date     "friend_date"
+    t.integer  "friendable_id"
+    t.string   "friendable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "friends", ["friendable_id"], name: "index_friends_on_friendable_id", using: :btree
+  add_index "friends", ["friendable_type"], name: "index_friends_on_friendable_type", using: :btree
+  add_index "friends", ["user_id"], name: "index_friends_on_user_id", using: :btree
 
   create_table "likes", force: :cascade do |t|
     t.integer  "user_id"

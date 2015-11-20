@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
 
   has_many :posts
   has_many :likes
+  has_many :friends, as: :friendable
 
   def set_full_name
     self.full_name = "#{self.first_name} #{self.last_name}"
