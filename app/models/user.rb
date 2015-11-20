@@ -189,8 +189,8 @@ class User < ActiveRecord::Base
       user = User.find(user_params["user_id"])
 
       if user.present? && user.is_a?(User)
-        total_points = user_params["total_points"].present? ? user_params["total_points"] : user.try(:total_points)
-        total_kills  = user_params["total_kills"].present? ? user_params["total_kills"] : user.try(:total_kills)
+        total_points = user_params["total_points"].present? ? user_params["total_points"].to_i > 0 : user.try(:total_points)
+        total_kills  = user_params["total_kills"].present? ? user_params["total_kills"].to_i > 0 : user.try(:total_kills)
 
         if user.update(total_points: total_points, total_kills: total_kills)
         
