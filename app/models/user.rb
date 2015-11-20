@@ -211,6 +211,7 @@ class User < ActiveRecord::Base
       phone_number: phone_number,
       friends:      friends.map{ |friend| friend.get_params },
       is_friend:    current_user.present? && current_user.is_a?(User) ? current_user.friends.any?{ |friend| friend.user_id == id } : nil,
+      total_points: total_points,
       total_kills:  total_kills,
       weapons:      weapons.order('name ASC').map{ |weapon| weapon.get_params },
       skins:        skins.order('name ASC').map{ |skin| skin.get_params }
