@@ -16,37 +16,6 @@
     .row
       / START dashboard main content
       %section.col-md-7
-        / START chart
-        .row
-          .col-lg-12
-            / START widget
-            .panel.widget.bg-inverse
-              .row
-                .col-sm-2.text-right
-                  .row
-                    .col-sm-12.col-xs-4
-                      .ph
-                        %p.h3.mb0 11200
-                        %p.m0.text-muted Visits
-                    .col-sm-12.col-xs-4
-                      .ph
-                        %p.h3.mb0 2000
-                        %p.m0.text-muted Likes
-                    .col-sm-12.col-xs-4
-                      .ph
-                        %p.h3.mb0 3500
-                        %p.text-muted Subscriptions
-                .col-sm-10.bg-primary
-                  .p-lg
-                    .h5.mt0 Latest stadistics
-                    / Line chart
-                    .inlinesparkline.sparkline{"data-fill-color" => "", "data-height" => "100", "data-highlight-line-color" => "#fff", "data-line-color" => "#dddddd", "data-line-width" => "2", "data-resize" => "true", "data-spot-color" => "#bbbbbb", "data-spot-radius" => "3", "data-type" => "line", "data-width" => "100%"}
-                      / 1,5,3,6,5,11,2,4,5,7,9,6,4
-                    / Bar chart
-                    .text-center
-                      .inlinesparkline.inline{"data-bar-color" => "#fff", "data-bar-spacing" => "6", "data-bar-width" => "8", "data-height" => "60"} 1,5,3,6,5,8,2,4,5,7,9,6,4,3,6,5,9,2
-            / END widget
-        / END chart
         .row
           .col-md-4
             / START widget
@@ -54,10 +23,10 @@
               .panel-body.bg-primary
                 .row.row-table.row-flush
                   .col-xs-8
-                    %p.mb0 New connections
+                    %p.mb0 Friends
                     %h3.m0 150
                   .col-xs-4.text-right
-                    %em.fa.fa-share-alt.fa-2x
+                    %em.fa.fa-users.fa-2x
               .panel-body
                 / Bar chart
                 .text-center
@@ -68,10 +37,10 @@
               .panel-body.bg-success
                 .row.row-table.row-flush
                   .col-xs-8
-                    %p.mb0 Uploads
+                    %p.mb0 Time Played
                     %h3.m0 540
                   .col-xs-4.text-right
-                    %em.fa.fa-cloud-upload.fa-2x
+                    %em.fa.fa-clock-o.fa-2x
               .panel-body
                 / Bar chart
                 .text-center
@@ -82,10 +51,10 @@
               .panel-body.bg-danger
                 .row.row-table.row-flush
                   .col-xs-8
-                    %p.mb0 Ratings received
+                    %p.mb0 Headshots
                     %h3.m0 7000
                   .col-xs-4.text-right
-                    %em.fa.fa-star.fa-2x
+                    %em.fa.fa-bullseye.fa-2x
               .panel-body
                 / Bar chart
                 .text-center
