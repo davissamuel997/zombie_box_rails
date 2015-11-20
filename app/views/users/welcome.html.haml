@@ -258,17 +258,33 @@
         / END messages and activity
       / END dashboard main content
       / START dashboard sidebar
-      %aside.col-md-5
-        / START widget
-        .panel.widget
-          .panel-body.bg-success.text-center
-            .row.row-table.row-flush
-              .col-xs-8
-                %p.mb0 News Feed
-                %h3 540
-              .col-xs-4.text-right
-                %em.fa.fa-cloud-upload.fa-2x
-          .panel-body
+      %aside.col-md-5{'ng-controller' => 'PostsController'}
+        / START chart
+        .row
+          .panel.panel-default
+            .panel-heading
+              .panel-title News feed
+            .list-group
+              .list-group-item
+                .media
+                  %p.m0.media-body.clearfix{:style => 'padding-left: 45px;'}
+                    %small Tells us what's new
+                  .pull-left
+                    %span.fa-stack.fa-lg
+                      %em.fa.fa-circle.fa-stack-2x.text-purple
+                      %em.fa.fa-pencil-square-o.fa-stack-1x.fa-inverse.text-white
+                  .media-body.clearfix
+                    %p
+                      %input.form-control.input-sm{:placeholder => "Enter title..", 'ng-model' => 'requestControl.post_params.title'}
+                    %p
+                      %textarea.form-control.input-sm{:placeholder => "Enter text..", 'ng-model' => 'requestControl.post_params.text'}
+                    %p
+                      .form-actions
+                        %button.btn.btn-xs.btn-success.pull-right{'ng-click' => 'requestControl.createPost()'} Post
+
+        .row{'ng-repeat' => 'post in requestControl.posts'}
+          .panel.panel-default
+            / START list group
             .list-group
               / START list group item
               .list-group-item
@@ -278,28 +294,47 @@
                       %em.fa.fa-circle.fa-stack-2x.text-purple
                       %em.fa.fa-cloud-upload.fa-stack-1x.fa-inverse.text-white
                   .media-body.clearfix
-                    .media-heading.text-purple.m0 NEW FILE
-                    %small.text-muted.pull-right 15 minutes ago
+                    .media-heading.text-purple.m0 {{post.title}}
+                    %small.text-muted.pull-right {{post.post_time}}
                     %p.m0
                       %small
-                        A new uploaded file
-                        %a{:href => "#"} Bootstrap.xls
-                        is now on the cloud
-              / END list group item
-              / START list group item
-              .list-group-item
-                .media
-                  .pull-left
-                    %span.fa-stack.fa-lg
-                      %em.fa.fa-circle.fa-stack-2x.text-info
-                      %em.fa.fa-file-text-o.fa-stack-1x.fa-inverse.text-white
-                  .media-body.clearfix
-                    .media-heading.text-info.m0 NEW DOCUMENT
-                    %small.text-muted.pull-right 2 hours ago
-                    %p.m0
-                      %small
-                        New document
-                        %a{:href => "#"} Bootstrap.doc
-                        created
+                        {{post.text}}
+              .list-group-item{'ng-if' => 'post.like_count > 0'}
+                %p
+                  %small {{post.like_text}}
+
+            .panel-footer.clearfix
+              %a.pull-left.make-black{:href => "#", 'ng-if' => 'post.user_likes_post === false', 'ng-click' => 'requestControl.likePost($index)'}
+                %em.fa.fa-thumbs-o-up
+                %small Like
+              %a.pull-left{:href => "#", 'ng-if' => 'post.user_likes_post === true', 'ng-click' => 'requestControl.unLikePost($index)'}
+                %em.fa.fa-thumbs-o-up
+                %small Like      
+              #accordian
+                %a.pull-left.collapsed{:style => 'margin-left: 15px;', "data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#collapse_{{post.post_id}}"}
+                  %em.fa.fa-comment-o
+                  %small{'ng-if' => 'post.comments.length === 0'} Comment
+                  %small{'ng-if' => 'post.comments.length > 0'} Comment ({{post.comments.length}})
+            #collapse.panel-collapse.collapse{:style => "height: 0px;", :id => "{{post.post_id}}"}
+              .panel-footer.clearfix
+                .list-group
+                  .list-group-item{'ng-repeat' => 'comment in post.comments'}
+                    .media
+                      .pull-left
+                        %span.fa-stack.fa-lg
+                          %em.fa.fa-circle.fa-stack-2x.text-purple
+                          %em.fa.fa-cloud-upload.fa-stack-1x.fa-inverse.text-white
+                      .media-body.clearfix
+                        %p.m0
+                          %small
+                            {{comment.text}}                       
+                        / .media-heading.text-purple.m0 {{comment.text}}
+                        %small.text-muted.pull-right {{comment.post_time}}
+                %form
+                  .form-group
+                    %p
+                      %input.form-control.input-sm{:placeholder => "Enter a comment...", 'ng-model' => 'post.newComment', 'ng-keypress' => 'requestControl.eventKeypress($event, $index)'}
+
+
 
 
