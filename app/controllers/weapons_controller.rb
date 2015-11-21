@@ -8,5 +8,5 @@ class WeaponsController < ApplicationController
     params.require(:weapon).permit(:name, :damage, :ammo, :user_id, :kill_count)
   end
 
-  private :uweapon_params
+  private :weapon_params
 end
