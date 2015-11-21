@@ -195,29 +195,33 @@ class User < ActiveRecord::Base
 
         if user.update(total_points: total_points, total_kills: total_kills)
         
-          user_params["weapons"].each do |weapon_hash|
-            if weapon_hash["weapon_id"].present? && weapon_hash["weapon_id"].to_i > 0
-              weapon = Weapon.find(weapon_hash["weapon_id"])
+          if user_params["weapons"].present? && user_params["weapons"].count > 0
+            user_params["weapons"].each do |weapon_hash|
+              if weapon_hash["weapon_id"].present? && weapon_hash["weapon_id"].to_i > 0
+                weapon = Weapon.find(weapon_hash["weapon_id"])
 
-              kill_count = weapon_hash["kill_count"].present? && weapon_hash["kill_count"].to_i > 0 ? weapon_hash["kill_count"].to_i : weapon.try(:kill_count)
-              damage = weapon_hash["damage"].present? && weapon_hash["damage"].to_i > 0 ? weapon_hash["damage"].to_i : weapon_hash.try(:damage)
-              ammo = weapon_hash["ammo"].present? && weapon_hash["ammo"].to_i > 0 ? weapon_hash["ammo"].to_i : weapon_hash.try(:ammo)
+                kill_count = weapon_hash["kill_count"].present? && weapon_hash["kill_count"].to_i > 0 ? weapon_hash["kill_count"].to_i : weapon.try(:kill_count)
+                damage = weapon_hash["damage"].present? && weapon_hash["damage"].to_i > 0 ? weapon_hash["damage"].to_i : weapon_hash.try(:damage)
+                ammo = weapon_hash["ammo"].present? && weapon_hash["ammo"].to_i > 0 ? weapon_hash["ammo"].to_i : weapon_hash.try(:ammo)
 
-              unless weapon.present? && weapon.is_a?(Weapon) && weapon.update(kill_count: kill_count, damage: damage,
-                                                                              ammo: ammo)
-                data[:errors] = true
+                unless weapon.present? && weapon.is_a?(Weapon) && weapon.update(kill_count: kill_count, damage: damage,
+                                                                                ammo: ammo)
+                  data[:errors] = true
+                end
               end
             end
           end
 
-          user_params["skins"].each do |skin_hash|
-            if skin_hash["skin_id"].present? && skin_hash["skin_id"].to_i > 0
-              skin = Skin.find(skin_hash["skin_id"])
+          if user_params["skins"].present? && user_params["skins"].count > 0
+            user_params["skins"].each do |skin_hash|
+              if skin_hash["skin_id"].present? && skin_hash["skin_id"].to_i > 0
+                skin = Skin.find(skin_hash["skin_id"])
 
-              kill_count = skin_hash["kill_count"].present? && skin_hash["kill_count"].to_i > 0 ? skin_hash["kill_count"].to_i : skin.try(:kill_count)
+                kill_count = skin_hash["kill_count"].present? && skin_hash["kill_count"].to_i > 0 ? skin_hash["kill_count"].to_i : skin.try(:kill_count)
 
-              unless skin.present? && skin.is_a?(Skin) && skin.update!(kill_count: kill_count)
-                data[:errors] = true
+                unless skin.present? && skin.is_a?(Skin) && skin.update!(kill_count: kill_count)
+                  data[:errors] = true
+                end
               end
             end
           end
