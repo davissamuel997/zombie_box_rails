@@ -34,7 +34,9 @@ zombieBox.controller 'CurrentUserController', ['$scope', '$http', 'CurrentUserSe
       )
 
     makeTestRequest: ->
-      user = { user_id: 1, total_points: 104, total_kills: 299, weapons: [{ weapon_id: 30, kill_count: 15, damage: 65, ammo: 99 }, { weapon_id: 32, kill_count: 15, damage: 100 }], skins: [{ skin_id: 64, kill_count: 345 }, { skin_id: 72, kill_count: 425 }] }
+      # user = { user_id: 1, total_points: 104, total_kills: 299, weapons: [{ weapon_id: 30, kill_count: 15, damage: 65, ammo: 99 }, { weapon_id: 32, kill_count: 15, damage: 100 }], skins: [{ skin_id: 64, kill_count: 345 }, { skin_id: 72, kill_count: 425 }] }
+
+      user = {user_id: 1, total_points: 1000, total_kills:3000, weapons: [{ weapon_id: 30, kill_count: 15, damage: 65, ammo: 99 }], skins: [{ skin_id: 64, kill_count: 345 }]}
 
       CurrentUserService.makeTestRequest.query({ user_params: user }, (responseData) ->
         debugger
