@@ -57,6 +57,7 @@ class User < ActiveRecord::Base
       user = User.find(options[:user_id])
 
       # Do stuff
+      data[:user] = user.get_params
     else
       data[:errors] = true
     end   
