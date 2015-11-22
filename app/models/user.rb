@@ -198,6 +198,11 @@ class User < ActiveRecord::Base
   def self.update_all_user_details(options = {})
     data = {:errors => false}
 
+    p 'hello world'
+    p options
+
+    p 'here are the parameters'
+
     user_params = options[:user_params]
 
     if user_params.present? && user_params["user_id"].present? && user_params["user_id"].to_i > 0
