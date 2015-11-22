@@ -23,9 +23,19 @@
                               %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"}
                                 %strong Name
                               %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"}
-                                %strong Kill Count
+                                %strong
+                                  %a.make-white{'ng-click' => 'sortableControl.sortTotalKills()', href: ''} Kill Count
+                                  %a.make-white{'ng-if' => "sortableControl.total_kills === 'ASC' && sortableControl.sortedBy === 'total_kills'"}
+                                    %i.fa.fa-angle-up
+                                  %a.make-white{'ng-if' => "sortableControl.total_kills === 'DESC' && sortableControl.sortedBy === 'total_kills'"}
+                                    %i.fa.fa-angle-down
                               %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"}
-                                %strong Point Count
+                                %strong
+                                  %a.make-white{'ng-click' => 'sortableControl.sortHighestRoundReached()', href: ''} Highest Round Reached
+                                  %a.make-white{'ng-if' => "sortableControl.highest_round_reached === 'ASC' && sortableControl.sortedBy === 'highest_round_reached'"}
+                                    %i.fa.fa-angle-up
+                                  %a.make-white{'ng-if' => "sortableControl.highest_round_reached === 'DESC' && sortableControl.sortedBy === 'highest_round_reached'"}
+                                    %i.fa.fa-angle-down
 
                           %tbody
                             %tr{'ng-repeat' => 'user in requestControl.users'}
@@ -40,7 +50,7 @@
                                   {{user.total_kills}}
                               %td.text-center
                                 %button.btn.btn-link.make-black
-                                  {{user.total_points}}
+                                  {{user.highest_round_reached}}
                         .span
                           .pull-right
                             .pagination-wrapper

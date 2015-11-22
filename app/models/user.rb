@@ -36,6 +36,9 @@ class User < ActiveRecord::Base
 
     self.weapons.create(name: "Crowbar", damage: 50,
                         kill_count: 0, user_id: self.id)
+    self.weapons.create(name: "Turret", damage: 1,
+                        kill_count: 0, user_id: self.id,
+                        fire_rate: 5.0)
   end
 
   def set_up_skins
@@ -256,11 +259,15 @@ class User < ActiveRecord::Base
   def self.get_leaderboard_data(options = {})
     data = {:errors => false}
 
-    page_num = (options[:page] || 1).to_i
-    per_page = 25
+    page_num           = (options[:page] || 1).to_i
+    per_page           = 25
+    sort_by            = options[:sort_by].present? && options[:sort_by].size > 0 ? options[:sort_by] : 'total_kills'
+    sortable_direction = options[:sortable_direction].present? && options[:sortable_direction].size > 0 ? options[:sortable_direction] : 'DESC'
 
-    data[:users]      = User.all.order('total_kills DESC NULLS LAST').page(page_num).per(per_page).map{ |user| user.get_params }
-    data[:pagination] = User.all.count, page_num, per_page
+    data[:total_users] = User.all.count
+    data[:users]       = User.all.order("#{sort_by} #{sortable_direction} NULLS LAST").page(page_num).per(per_page).map{ |user| user.get_params }
+    # data[:users]      = User.all.order('total_kills DESC NULLS LAST').page(page_num).per(per_page).map{ |user| user.get_params }
+    data[:pagination]  = User.all.count, page_num, per_page
 
     data
   end
