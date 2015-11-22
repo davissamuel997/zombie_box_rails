@@ -35,6 +35,19 @@
               / Button to show/hide the sidebar on mobile. Visible on mobile only.
               %a.visible-xs{"data-toggle-state" => "aside-toggled", :href => "#"}
                 %em.fa.fa-navicon
+            / START User avatar toggle
+            %li
+              / Button used to collapse the left sidebar. Only visible on tablet and desktops
+              %a{"data-toggle-state" => "aside-user", :href => "#"}
+                %em.fa.fa-user
+            / END User avatar toggle
+          / END Left navbar
+          / START Right Navbar
+          %ul.nav.navbar-nav.navbar-right
+            / Search icon
+            %li
+              %a{"data-toggle" => "navbar-search", :href => "#"}
+                %em.fa.fa-search
             / START Messages menu (dropdown-list)
             %li.dropdown.dropdown-list
               %a.dropdown-toggle{"data-play" => "flipInX", "data-toggle" => "dropdown", :href => "#"}
@@ -62,76 +75,15 @@
                 / END dropdown footer
               / END Dropdown menu
             / END Messages menu (dropdown-list)
-            / START User avatar toggle
-            %li
-              / Button used to collapse the left sidebar. Only visible on tablet and desktops
-              %a{"data-toggle-state" => "aside-user", :href => "#"}
-                %em.fa.fa-user
-            %li
-              %a.main-link{:href => '/users/sign_out', :tabindex => "-1"}
-                %i.fa.fa-power-off.fa-lg
-                Log out
-            / END User avatar toggle
-          / END Left navbar
-          / START Right Navbar
-          %ul.nav.navbar-nav.navbar-right
-            / Search icon
-            %li
-              %a{"data-toggle" => "navbar-search", :href => "#"}
-                %em.fa.fa-search
-            / Fullscreen
-            %li
-              %a{"data-toggle" => "fullscreen", :href => "#"}
-                %em.fa.fa-expand
-            / START Alert menu
-            %li.dropdown.dropdown-list
-              %a.dropdown-toggle{"data-play" => "flipInX", "data-toggle" => "dropdown", :href => "#"}
-                %em.fa.fa-bell
-                .label.label-danger 11
-              / START Dropdown menu
-              %ul.dropdown-menu
-                %li
-                  / START list group
-                  .list-group
-                    / list item
-                    %a.list-group-item{:href => "#"}
-                      .media
-                        .pull-left
-                          %em.fa.fa-twitter.fa-2x.text-info
-                        .media-body.clearfix
-                          %p.m0 New followers
-                          %p.m0.text-muted
-                            %small 1 new follower
-                    / list item
-                    %a.list-group-item{:href => "#"}
-                      .media
-                        .pull-left
-                          %em.fa.fa-envelope.fa-2x.text-warning
-                        .media-body.clearfix
-                          %p.m0 New e-mails
-                          %p.m0.text-muted
-                            %small You have 10 new emails
-                    / list item
-                    %a.list-group-item{:href => "#"}
-                      .media
-                        .pull-left
-                          %em.fa.fa-tasks.fa-2x.text-success
-                        .media-body.clearfix
-                          %p.m0 Pending Tasks
-                          %p.m0.text-muted
-                            %small 11 pending task
-                    / last list item
-                    %a.list-group-item{:href => "#"}
-                      %small More notifications
-                      %span.label.label-danger.pull-right 14
-                  / END list group
-              / END Dropdown menu
-            / END Alert menu
             / START Contacts button
             %li
               %a{"data-toggle-state" => "offsidebar-open", :href => "#"}
                 %em.fa.fa-group
             / END Contacts menu
+            / Start log off button
+            %li
+              %a.main-link{:href => '/users/sign_out', :tabindex => "-1"}
+                %i.fa.fa-power-off.fa-lg
           / END Right Navbar
         / END Nav wrapper
         / START Search form
