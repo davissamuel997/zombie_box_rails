@@ -15,6 +15,9 @@ class UsersController < ApplicationController
   def edit
   end
 
+  def leaderboards
+  end
+
   def update
     if @user.present? && @user.is_a?(User) && @user.update(user_params)
       redirect_to root_path
@@ -79,6 +82,12 @@ class UsersController < ApplicationController
     response = User.update_all_user_details(params)
 
     render :json => response
+  end
+
+  def get_leaderboard_data
+    response = User.get_leaderboard_data(params)
+
+    respond_with response
   end
 
   def user_params

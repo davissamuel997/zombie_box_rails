@@ -118,14 +118,7 @@ class Post < ActiveRecord::Base
       new_comment = post.comments.new(user_id: options[:user_id], text: options[:comment_text])
 
       if new_comment.save
-        data[:comments] = post.comments.order('created_at ASC').map{ |comment| {
-            comment_id: comment.id,
-            user:       comment.get_user,
-            text:       comment.text,
-            post_date:  comment.post_date,
-            post_time:  comment.get_post_time
-          } 
-        }
+        data[:comments] = post.comments.order('created_at ASC').map{ |comment| comment.get_params }
       else
         data[:errors] = true
       end

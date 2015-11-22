@@ -242,6 +242,18 @@ class User < ActiveRecord::Base
     data
   end
 
+  def self.get_leaderboard_data(options = {})
+    data = {:errors => false}
+
+    page_num = (options[:page] || 1).to_i
+    per_page = 25
+
+    data[:users]      = User.all.order('total_kills DESC NULLS LAST').page(page_num).per(per_page).map{ |user| user.get_params }
+    data[:pagination] = User.all.count, page_num, per_page
+
+    data
+  end
+
   # This paginates all of the data for the response of the js.
   def self.pagination_data element_count, current_page, results_per_page
     page  = current_page.to_i

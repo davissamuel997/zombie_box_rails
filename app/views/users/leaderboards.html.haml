@@ -1,0 +1,80 @@
+%section{'ng-controller' => 'LeaderboardsController'}
+  / START Page content
+  .content-wrapper
+    %h3
+      Leaderboards
+    .row
+      / START dashboard main content
+      %section.col-md-12
+        / START chart
+        .row
+          .content
+            .col-md-12
+              .panel
+                .panel-body
+                  .viewcode-example
+                    .table-responsive
+                      %div{'ng-if' => 'requestControl.users.length > 0 && requestControl.isLoading === false'}
+                        %table.table.table-striped.table-bordered.table-hover
+                          %thead
+                            %tr
+                              %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"}
+                                %strong Rank
+                              %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"}
+                                %strong Name
+                              %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"}
+                                %strong Kill Count
+                              %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"}
+                                %strong Point Count
+                              %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"}
+
+                          %tbody
+                            %tr{'ng-repeat' => 'user in requestControl.users'}
+                              %td.text-center
+                                %button.btn.btn-link.make-black
+                                  {{user.rank}}
+                              %td.text-center
+                                %button.btn.btn-link.make-black
+                                  {{user.full_name}}
+                              %td.text-center
+                                %button.btn.btn-link.make-black
+                                  {{user.total_kills}}
+                              %td.text-center
+                                %button.btn.btn-link.make-black
+                                  {{user.total_points}}
+                              %td.text-center
+                                .btn-group
+                                  %button.btn.btn-xs.btn-info
+                                    Details
+                                  %button.btn.btn-xs.btn-success{'ng-if' => 'user.is_friend === false'}
+                                    Request Friend
+                                  %button.btn.btn-xs.btn-danger{'ng-if' => 'user.is_friend === true'}
+                                    Remove Friend
+
+                        .span
+                          .pull-right
+                            .pagination-wrapper
+                              %ul.pagination
+                                %li{ 'ng-repeat' => 'page in requestControl.pagination.relevant_pages', 'ng-class' => "{active: page == requestControl.current_page}" }
+                                  %a.btn{ 'ng-show' => '$first && requestControl.current_page != page', 'ng-click' => "requestControl.changePage(page)" } &lt;&lt;
+
+                                  %a.btn.disabled{ 'ng-show' => '$index > 0 && (page - requestControl.pagination.relevant_pages[$index-1]) > 1' } ...
+
+                                  %a.btn{ 'ng-click' => "requestControl.changePage(page)" }
+                                    {{ page }}
+                                  %a.btn{ 'ng-show' => '$last && requestControl.current_page!=page', 'ng-click' => "requestControl.changePage(page)" } &gt;&gt;
+
+                      %div{'ng-if' => 'requestControl.users.length === 0 && requestControl.isLoading === false'}
+                        %h4 Currently, there are no phone numbers based on the parameters. Please refine your search.
+
+                      %div{'ng-if' => 'requestControl.isLoading === true'}
+                        .loader-css
+                          .load-container.load8
+                            .loader
+                              Loading...
+                          %h5 Fetching Users...
+
+                    %a.btn-view-code{:href => "javascript:;", :style => "display: none;"}
+                      %i.fa.fa-code
+
+

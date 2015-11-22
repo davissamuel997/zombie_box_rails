@@ -72,6 +72,9 @@ Rails.application.routes.draw do
   get 'verify_user_login' => 'users#verify_user_login'
   post 'update_all_user_details' => 'users#update_all_user_details'
 
+  get 'leaderboards' => 'users#leaderboards'
+  get 'get_leaderboard_data' => 'users#get_leaderboard_data'
+
   root :to => 'users#welcome'
 
 end
