@@ -7,6 +7,14 @@
       .panel-body
         = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
           .form-group.has-feedback
+            %label.text-muted{:for => "signupInputEmail1"} First Name
+            = f.input_field :first_name, :required => true, :class => 'form-control', :placeholder => 'Enter first name'
+            %span.fa.fa-user.form-control-feedback.text-muted
+          .form-group.has-feedback
+            %label.text-muted{:for => "signupInputEmail1"} Last Name
+            = f.input_field :last_name, :required => true, :class => 'form-control', :placeholder => 'Enter last name'
+            %span.fa.fa-user.form-control-feedback.text-muted
+          .form-group.has-feedback
             %label.text-muted{:for => "signupInputEmail1"} Email
             = f.input_field :email, :required => true, :class => 'form-control', :placeholder => 'Enter email'
             %span.fa.fa-envelope.form-control-feedback.text-muted
