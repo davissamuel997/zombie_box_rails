@@ -10,6 +10,7 @@ class Weapon < ActiveRecord::Base
       damage:          damage,
       ammo:            ammo,
       name:            name,
+      fire_rate:       fire_rate,
       kill_count:      kill_count,
       weaponable_id:   weaponable_id,
       weaponable_type: weaponable_type

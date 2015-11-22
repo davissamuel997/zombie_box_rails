@@ -289,18 +289,19 @@ class User < ActiveRecord::Base
 
   def get_params(current_user = nil)
     {
-      user_id:      id,
-      first_name:   first_name,
-      last_name:    last_name,
-      full_name:    full_name,
-      email:        email,
-      phone_number: phone_number,
-      friends:      friends.map{ |friend| friend.get_params },
-      is_friend:    current_user.present? && current_user.is_a?(User) ? current_user.friends.any?{ |friend| friend.user_id == id } : nil,
-      total_points: total_points,
-      total_kills:  total_kills,
-      weapons:      weapons.order('name ASC').map{ |weapon| weapon.get_params },
-      skins:        skins.order('name ASC').map{ |skin| skin.get_params }
+      user_id:               id,
+      first_name:            first_name,
+      last_name:             last_name,
+      full_name:             full_name,
+      email:                 email,
+      phone_number:          phone_number,
+      friends:               friends.map{ |friend| friend.get_params },
+      is_friend:             current_user.present? && current_user.is_a?(User) ? current_user.friends.any?{ |friend| friend.user_id == id } : nil,
+      total_points:          total_points,
+      total_kills:           total_kills,
+      highest_round_reached: highest_round_reached,
+      weapons:               weapons.order('name ASC').map{ |weapon| weapon.get_params },
+      skins:                 skins.order('name ASC').map{ |skin| skin.get_params }
     }
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151120201619) do
+ActiveRecord::Schema.define(version: 20151122174212) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -184,6 +184,7 @@ ActiveRecord::Schema.define(version: 20151120201619) do
     t.string   "phone_number"
     t.integer  "total_points",           default: 0
     t.integer  "total_kills",            default: 0
+    t.integer  "highest_round_reached"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -206,6 +207,7 @@ ActiveRecord::Schema.define(version: 20151120201619) do
     t.datetime "updated_at"
     t.integer  "weaponable_id"
     t.string   "weaponable_type"
+    t.float    "fire_rate"
   end
 
   add_index "weapons", ["user_id"], name: "index_weapons_on_user_id", using: :btree
