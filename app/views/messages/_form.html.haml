@@ -1,10 +1,23 @@
-.padding-md.clearfix
-  .panel.panel-default
-    .panel-body.no-padding
-      - if current_user
-        - if current_user.has_role?(:super_admin) || current_user.has_role?(:manager)
-          = render 'manager_super_form'
-        - elsif current_user.has_role?(:agent)
-          = render 'agent_form'
-        - else
-          = render
+.row
+  .content
+    .col-md-12
+      .panel
+        .panel-body
+          .viewcode-example
+            = simple_form_for :message, url: :messages do |f|
+              .span.col-md-12
+                %p
+                .form-inputs
+                  %p
+                    = f.label "Recipient"
+                    = select_tag "recipients", options_for_select(@recipients), include_blank: true, :data => { :placeholder => " " }, :class => 'form-control input-sm chosen-select'          
+                  %p
+                    = f.label "Subject:"
+                    = f.text_field :subject, label: "Subject:", :class => 'form-control input-sm'
+                  %p
+                    = f.label "Body:"
+                    = f.text_area :body, as: :text, label: "Body:", :class => 'form-control input-sm', :style => "height: 200px;"
+                  %p
+                .form-actions
+                  %p
+                    = f.submit "Send Message", class: 'btn btn-success btn-sm'

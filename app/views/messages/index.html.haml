@@ -1,19 +1,28 @@
-.padding-xs.clearfix
-  .panel.panel-default.table-responsive
-    .panel-heading
-      - if @box == "outbox"
-        %h4 Sentbox
-      - elsif @box == "trash"
-        %h4 Trash
-      - else
-        %h4 Inbox
-    .padding-md.clearfix
-      .span{:style => "float: right;"}
-        = link_to 'Compose New Message', new_message_path, :class => 'btn btn-success'
-        - if @box == "trash"
-          = link_to 'Delete Checked Message(s)', message_safe_destroy_path, :class => 'btn btn-warning destroy_checked_messages'
-        - else
-          = link_to 'Move Checked to Trash', move_checked_to_trash_path, :class => 'btn btn-warning move-checked-to-trash'
-      %br
-      %br
-      = render 'messages'  
+/ START Page content
+.content-wrapper
+  %h3
+    - if @box == "outbox"
+      Sentbox
+    - elsif @box == "trash"
+      Trash
+    - else
+      Inbox
+  .row
+    / START dashboard main content
+    %section.col-md-12
+      / START chart
+      .row
+        .content
+          .col-md-12
+            .panel.panel-default.table-responsive
+              .panel-heading
+                .pull-right
+                  = link_to 'Compose New Message', new_message_path, :class => 'btn btn-success'
+                  - if @box == "trash"
+                    = link_to 'Delete Checked Message(s)', message_safe_destroy_path, :class => 'btn btn-warning destroy_checked_messages'
+                  - else
+                    = link_to 'Move Checked to Trash', move_checked_to_trash_path, :class => 'btn btn-warning move-checked-to-trash'
+              .panel-body
+                %br
+                %br
+                = render 'messages'  

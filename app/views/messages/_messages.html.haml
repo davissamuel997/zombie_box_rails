@@ -4,8 +4,6 @@
       %thead
         %tr
           %td Trash?
-          %td Read?
-          %td Confirmation?
           - if @box != "outbox"
             %td Sender
           - else
@@ -19,22 +17,7 @@
           - i = 0
           - @messages.each do |message|
             %tr{class: "messages"}
-              %td= check_box_tag "move_to_trash", "#{message.id}", false, { :class => 'form-control input-sm move-to-trash' }
-              - if @box != "outbox"
-                - unless message && message.is_read?(@user)
-                  %td{class: "message", id: "#{message.id}"}
-                    %i.fa.fa-envelope
-                  - if !message.receipts.where(receiver_id: message.sender.id).first.is_read
-                    %td{class: "confirm", type: "button", "data-toggle" => "modal", href: "#confirm_#{message.id}", id: "#{message.id}"}
-                      %i.fa.fa-flag
-                  - else
-                    %td
-                - else
-                  %td
-                  %td   
-              - else
-                %td
-                %td           
+              %td= check_box_tag "move_to_trash", "#{message.id}", false, { :class => 'form-control input-sm move-to-trash' }           
               - if message.sender.email == @user.email
                 - recipients = get_message_recipients(message)
                 - if recipients.length > 50
