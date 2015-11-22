@@ -200,7 +200,6 @@ class User < ActiveRecord::Base
 
     p 'hello world'
     p options
-    p JSON.parse(options)
 
     if options.present? && options.first.present? && options.first.first.present?
       user_params = JSON.parse(options.first.first)["user_params"]
