@@ -26,7 +26,6 @@
                                 %strong Kill Count
                               %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"}
                                 %strong Point Count
-                              %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"}
 
                           %tbody
                             %tr{'ng-repeat' => 'user in requestControl.users'}
@@ -42,15 +41,6 @@
                               %td.text-center
                                 %button.btn.btn-link.make-black
                                   {{user.total_points}}
-                              %td.text-center
-                                .btn-group
-                                  %button.btn.btn-xs.btn-info
-                                    Details
-                                  %button.btn.btn-xs.btn-success{'ng-if' => 'user.is_friend === false'}
-                                    Request Friend
-                                  %button.btn.btn-xs.btn-danger{'ng-if' => 'user.is_friend === true'}
-                                    Remove Friend
-
                         .span
                           .pull-right
                             .pagination-wrapper
