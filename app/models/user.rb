@@ -200,6 +200,7 @@ class User < ActiveRecord::Base
 
     p 'hello world'
     p options
+    p JSON.parse(options)
 
     if options[:user_params].present?
       user_params = JSON.parse(options[:user_params])
