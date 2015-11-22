@@ -215,11 +215,12 @@ class User < ActiveRecord::Base
                 weapon = Weapon.find(weapon_hash["weapon_id"])
 
                 kill_count = weapon_hash["kill_count"].present? && weapon_hash["kill_count"].to_i > 0 ? weapon_hash["kill_count"].to_i : weapon.try(:kill_count)
-                damage = weapon_hash["damage"].present? && weapon_hash["damage"].to_i > 0 ? weapon_hash["damage"].to_i : weapon_hash.try(:damage)
-                ammo = weapon_hash["ammo"].present? && weapon_hash["ammo"].to_i > 0 ? weapon_hash["ammo"].to_i : weapon_hash.try(:ammo)
+                damage     = weapon_hash["damage"].present? && weapon_hash["damage"].to_i > 0 ? weapon_hash["damage"].to_i : weapon.try(:damage)
+                ammo       = weapon_hash["ammo"].present? && weapon_hash["ammo"].to_i > 0 ? weapon_hash["ammo"].to_i : weapon.try(:ammo)
+                fire_rate  = weapon_hash["fire_rate"].present? && weapon_hash["fire_rate"].to_f >= 0 ? weapon_hash["fire_rate"].to_f : weapon.try(:fire_rate)
 
                 unless weapon.present? && weapon.is_a?(Weapon) && weapon.update(kill_count: kill_count, damage: damage,
-                                                                                ammo: ammo)
+                                                                                ammo: ammo, fire_rate: fire_rate)
                   data[:errors] = true
                 end
               end
