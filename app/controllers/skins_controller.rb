@@ -1,6 +1,5 @@
 class SkinsController < ApplicationController
 
-  skip_before_filter :authenticate_user!, only: [:update_skin_stats]
   skip_before_filter :verify_authenticity_token, only: [:update_skin_stats]
 
   respond_to :json, :html
