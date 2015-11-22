@@ -6,7 +6,9 @@ class ApplicationController < ActionController::Base
 
   INCOMING_REQUESTS = [
     :verify_user_login,
-    :update_all_user_details
+    :update_all_user_details,
+    :update_weapon_stats,
+    :update_skin_stats
   ]
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
