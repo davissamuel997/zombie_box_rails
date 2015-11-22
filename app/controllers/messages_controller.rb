@@ -23,9 +23,9 @@ class MessagesController < ApplicationController
   # GET /messages/new.xml
   def new
     @message = Mailboxer::Message.new
-    @recipients = User.get_recipient_list(@user.id).map do |user|
-      ["#{user.first_name} #{user.last_name}", user.id]
-    end
+    p User.get_recipient_list(@user.id)
+    p 'hola world'
+    @recipients = User.get_recipient_list(@user.id)
   end
 
   # GET /messages/1/edit
@@ -42,9 +42,6 @@ class MessagesController < ApplicationController
     if (@receipt.errors.blank?)
       if params[:confirm_message]
         @receipt.mark_as_unread
-      end
-      recipients.each do |recipient|
-        GeneralUtils.push_message_notification_to_user(recipient.id)
       end
       redirect_to messages_path(box: "outbox")
     else

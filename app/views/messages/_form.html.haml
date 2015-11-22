@@ -10,7 +10,7 @@
                 .form-inputs
                   %p
                     = f.label "Recipient"
-                    = select_tag "recipients", options_for_select(@recipients), include_blank: true, :data => { :placeholder => " " }, :class => 'form-control input-sm chosen-select'          
+                    = select_tag "recipients", options_for_select(@recipients), include_blank: true, :data => { :placeholder => "Select a friend" }, :class => 'form-control input-sm chosen-select'          
                   %p
                     = f.label "Subject:"
                     = f.text_field :subject, label: "Subject:", :class => 'form-control input-sm'

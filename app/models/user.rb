@@ -50,6 +50,17 @@ class User < ActiveRecord::Base
     self.skins.create(name: '08', kill_count: 0, user_id: self.id)
   end
 
+  #Returning any kind of identification you want for the model
+  def mailboxer_name
+    "#{self.first_name} #{self.last_name}"
+  end
+
+  #Returning the email address of the model if an email should be sent for this object (Message or Notification).
+  #If no mail has to be sent, return nil.
+  def mailboxer_email(object)
+    self.email
+  end
+
   def self.get_user_stats(options = {})
     data = {:errors => false}
 
@@ -155,7 +166,7 @@ class User < ActiveRecord::Base
 
       user = User.find(current_user_id)
 
-      user.friends.where(is_pending: false).map{ |friend| friend.user }.sort_by{ |user| user.full_name }
+      friends = user.friends.where(is_pending: false).map{ |friend| friend.user }.sort_by{ |user| user.full_name }.map{ |user| [user.full_name, user.id] } 
 
     end
 

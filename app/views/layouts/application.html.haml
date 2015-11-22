@@ -60,15 +60,15 @@
                     %i.fa.fa-inbox.fa-sm
                     %small.text-primary Inbox
                 %li.p
-                  %a.text-left{:href => messages_path}
+                  %a.text-left{:href => '/messages?box=outbox'}
                     %i.fa.fa-arrow-up.fa-sm
                     %small.text-primary Outbox
                 %li.p
-                  %a.text-left{:href => messages_path}
+                  %a.text-left{:href => '/messages?box=trash'}
                     %i.fa.fa-trash-o.fa-sm
                     %small.text-primary Trash
                 %li.p
-                  %a.text-left{:href => messages_path}
+                  %a.text-left{:href => new_message_path}
                     %i.fa.fa-envelope.fa-sm
                     %small.text-primary New Message
                     
