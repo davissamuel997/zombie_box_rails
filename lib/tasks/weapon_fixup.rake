@@ -15,7 +15,7 @@ namespace :weapon_fixup do
   task create_turret: :environment do
 
   	User.all.each do |u|
-  		self.weapons.where(name: "Turret", user_id: u.id).first_or_create(damage: 1, kill_count: 0, fire_rate: 5.0)
+  		u.weapons.where(name: "Turret", user_id: u.id).first_or_create(damage: 1, kill_count: 0, fire_rate: 5.0)
   	end
 
   end
