@@ -79,7 +79,6 @@ Rails.application.routes.draw do
 
   get 'request_friend' => 'users#request_friend'
   get 'remove_friend' => 'users#remove_friend'
-  get 'search_users' => 'users#search_users'
 
   root :to => 'users#welcome'
 

@@ -32,15 +32,15 @@
                           %tbody
                             %tr
                               %td{:style => 'width: 25%;'}
-                                %input.form-control.input-sm
+                                %input.form-control.input-sm{'ng-model' => 'searchInput.full_name', :placeholder => "Search by full name..."}
                               %td{:style => 'width: 25%;'}
-                                %input.form-control.input-sm
+                                %input.form-control.input-sm{'ng-model' => 'searchInput.email', :placeholder => "Search by email..."}
                               %td{:style => 'width: 25%;'}
-                                %input.form-control.input-sm
+                                %input.form-control.input-sm{'ng-model' => 'searchInput.phone_number', :placeholder => "Search by phone number..."}
                               %td{:style => 'width: 25%;'}
                                 .pull-right
                                   .input-group-btn
-                                    %button.btn.btn-sm.btn-default{'ng-click' => 'requestControl.resetSearchParams()'} Reset
+                                    %button.btn.btn-sm.btn-default{'ng-click' => 'requestControl.resetSearch()'} Reset
                                     %button.btn.btn-sm.btn-success{'ng-click' => 'requestControl.searchUsers()'} Search
 
               .panel
