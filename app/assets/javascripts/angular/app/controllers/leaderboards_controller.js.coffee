@@ -77,7 +77,7 @@ zombieBox.controller 'LeaderboardsController', ['$scope', '$http', 'UsersService
             else
               total_pages = $scope.requestControl.pagination[1]
               total_users = $scope.requestControl.users.length
-              rank = (total_pages * 25) - total_users - ((total_pages * 25) % total_users)
+              rank = (total_pages * 25) - ((total_pages * 25) - total_users)
               index = 0
 
               _($scope.requestControl.users.length).times ->
