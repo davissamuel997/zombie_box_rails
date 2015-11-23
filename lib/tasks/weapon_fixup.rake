@@ -70,6 +70,18 @@ namespace :total_fixup do
 	  	if u.highest_round_reached.nil?
 	  		u.update(highest_round_reached: 1)
 	  	end
+
+	  	if u.green.nil?
+	  		u.update(green: 0.0)
+	  	end
+
+	  	if u.red.nil?
+	  		u.update(red: 0.0)
+	  	end
+
+	  	if u.blue.nil?
+	  		u.update(blue: 0.0)
+	  	end
 	  end
 	end
 end
