@@ -39,6 +39,20 @@ zombieBox.controller 'UsersController', ['$scope', '$http', 'UsersService', '$lo
         $scope.requestControl.isLoading = false
       )
 
+    removeFriend: (userId) ->
+      if userId && userId > 0
+        this.isLoading = true
+
+        UsersService.removeFriend.query({ remove_friend_user_id: userId, page: this.current_page }, (responseData) ->
+          if responseData.errors == false
+            $scope.requestControl.users      = responseData.users
+            $scope.requestControl.pagination = responseData.pagination
+
+            gritterAdd("Successfully remove friend.")
+
+          $scope.requestControl.isLoading = false
+        )      
+
     requestFriend: (userId) ->
       if userId && userId > 0
         this.isLoading = true

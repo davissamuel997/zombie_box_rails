@@ -74,7 +74,7 @@
                                     Details
                                   %button.btn.btn-xs.btn-success{'ng-if' => 'user.is_friend === false', 'ng-click' => 'requestControl.requestFriend(user.user_id)'}
                                     Request Friend
-                                  %button.btn.btn-xs.btn-danger{'ng-if' => 'user.is_friend === true'}
+                                  %button.btn.btn-xs.btn-danger{'ng-if' => 'user.is_friend === true', 'ng-click' => 'requestControl.removeFriend(user.user_id)'}
                                     Remove Friend
 
                         .span

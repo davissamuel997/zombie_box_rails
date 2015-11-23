@@ -284,6 +284,31 @@ class User < ActiveRecord::Base
     data
   end
 
+  def self.remove_friend(options = {})
+    data = {:errors => false}
+
+    if options[:user_id].present? && options[:user_id].to_i > 0 && options[:remove_friend_user_id].present? && options[:remove_friend_user_id].to_i > 0
+      user = User.find(options[:user_id])
+
+      friend_user = User.find(options[:remove_friend_user_id])
+
+      if user.present? && user.is_a?(User) && friend_user.present? && friend_user.is_a?(User) && user.friends.where(user_id: friend_user.id).first && friend_user.friends.where(user_id: user.id).first && user.friends.where(user_id: friend_user.id).first.destroy && friend_user.friends.where(user_id: user.id).first.destroy
+        page_num = (options[:page] || 1).to_i
+        per_page = 10
+
+        data[:users] = User.all.page(page_num).per(per_page).order('full_name ASC NULLS LAST').map{ |u| u.get_params(user) }
+
+        data[:pagination] = User.pagination_data User.all.count, page_num, per_page
+      else
+        data[:errors] = true
+      end
+    else
+      data[:errors] = true
+    end
+
+    data
+  end
+
   # This paginates all of the data for the response of the js.
   def self.pagination_data element_count, current_page, results_per_page
     page  = current_page.to_i

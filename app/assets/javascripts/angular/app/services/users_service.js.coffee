@@ -6,6 +6,8 @@ zombieBox.factory 'UsersService', ['$resource', '$q', '$http', ($resource, $q, $
 
   getUsers: $resource "/get_users.json", {}, query: { method: 'GET', isArray: false }
 
+  removeFriend: $resource "/remove_friend.json", {}, query: { method: 'GET', isArray: false }
+
   requestFriend: $resource "/request_friend.json", {}, query: { method: 'GET', isArray: false }
 
   updateUser: $resource "/update_user.json", {}, query: { method: 'POST', isArray: false }

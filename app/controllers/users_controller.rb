@@ -99,6 +99,14 @@ class UsersController < ApplicationController
     respond_with response
   end
 
+  def remove_friend
+    params[:user_id] = current_user.try(:id)
+
+    response = User.remove_friend(params)
+
+    respond_with response
+  end
+
   def user_params
     params.require(:user).permit(:first_name, :last_name, :email, :phone_number, :role_ids, :total_points, :total_kills)
   end
