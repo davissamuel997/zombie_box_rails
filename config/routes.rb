@@ -77,6 +77,8 @@ Rails.application.routes.draw do
   get 'leaderboards' => 'users#leaderboards'
   get 'get_leaderboard_data' => 'users#get_leaderboard_data'
 
+  get 'request_friend' => 'users#request_friend'
+
   root :to => 'users#welcome'
 
 end
