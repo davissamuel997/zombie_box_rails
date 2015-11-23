@@ -3,33 +3,33 @@
     %table.table.table-hover.table-striped
       %thead
         %tr
-          %td Trash?
+          %td{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"} Trash?
           - if @box != "outbox"
-            %td Sender
+            %td{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"} Sender
           - else
-            %td Recipient(s)
-          %td Subject
-          %td Body
-          %td Date Sent
-          %td Time
+            %td{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"} Recipient(s)
+          %td{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"} Subject
+          %td{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"} Body
+          %td{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"} Date Sent
+          %td{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"} Time
       %tbody
         - if @messages.present? && @messages.count > 0
           - i = 0
           - @messages.each do |message|
             %tr{class: "messages"}
-              %td= check_box_tag "move_to_trash", "#{message.id}", false, { :class => 'form-control input-sm move-to-trash' }           
+              %td.text-center= check_box_tag "move_to_trash", "#{message.id}", false, { :class => 'form-control input-sm move-to-trash' }           
               - if message.sender.email == @user.email
                 - recipients = get_message_recipients(message)
                 - if recipients.length > 50
-                  %td{type: "button", "data-toggle" => "modal", href: "#message_#{message.id}", class: "message", id: "#{@box}"}= "To: #{recipients.first(50)}..."
+                  %td.text-center{type: "button", "data-toggle" => "modal", href: "#message_#{message.id}", class: "message", id: "#{@box}"}= "To: #{recipients.first(50)}..."
                 - else
-                  %td{type: "button", "data-toggle" => "modal", href: "#message_#{message.id}", class: "message", id: "#{@box}"}= "To: #{recipients} "
+                  %td.text-center{type: "button", "data-toggle" => "modal", href: "#message_#{message.id}", class: "message", id: "#{@box}"}= "To: #{recipients} "
               - else
-                %td{type: "button", "data-toggle" => "modal", href: "#message_#{message.id}", class: "message", id: "#{@box}"}= "From: #{get_message_sender(message).first(25)}"
-              %td{type: "button", "data-toggle" => "modal", href: "#message_#{message.id}", class: "message", id: "#{@box}"}= message.subject.first(25)
-              %td{type: "button", "data-toggle" => "modal", href: "#message_#{message.id}", class: "message", id: "#{@box}"}= message.body.first(25)
-              %td{type: "button", "data-toggle" => "modal", href: "#message_#{message.id}", class: "message", id: "#{@box}"}= message.created_at.strftime('%Y-%m-%d')
-              %td{type: "button", "data-toggle" => "modal", href: "#message_#{message.id}", class: "message", id: "#{@box}"}= message.created_at.strftime('%I:%M %p')
+                %td.text-center{type: "button", "data-toggle" => "modal", href: "#message_#{message.id}", class: "message", id: "#{@box}"}= "From: #{get_message_sender(message).first(25)}"
+              %td.text-center{type: "button", "data-toggle" => "modal", href: "#message_#{message.id}", class: "message", id: "#{@box}"}= message.subject.first(25)
+              %td.text-center{type: "button", "data-toggle" => "modal", href: "#message_#{message.id}", class: "message", id: "#{@box}"}= message.body.first(25)
+              %td.text-center{type: "button", "data-toggle" => "modal", href: "#message_#{message.id}", class: "message", id: "#{@box}"}= message.created_at.strftime('%Y-%m-%d')
+              %td.text-center{type: "button", "data-toggle" => "modal", href: "#message_#{message.id}", class: "message", id: "#{@box}"}= message.created_at.strftime('%I:%M %p')
             - break if i > 8
             - i += 1
   - if @messages.present? && @messages.length > 0
