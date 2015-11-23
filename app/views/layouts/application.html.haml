@@ -88,11 +88,11 @@
           / END Right Navbar
         / END Nav wrapper
         / START Search form
-        %form.navbar-form{:action => "search.html", :role => "search"}
+        %form.navbar-form{'ng-controller' => 'UsersController'}
           .form-group.has-feedback
-            %input.form-control{:placeholder => "Type and hit Enter..", :type => "text"}
+            %input.form-control{:placeholder => "Type and hit Enter..", :type => "text", 'ng-keypress' => "requestControl.checkKeypress($event)", 'ng-model' => 'searchInput.full_name'}
               .fa.fa-times.form-control-feedback{"data-toggle" => "navbar-search-dismiss"}
-          %button.hidden.btn.btn-default{:type => "submit"} Submit
+          / %button.hidden.btn.btn-default{:type => "submit"} Submit
         / END Search form
       / END Top Navbar
       / START aside

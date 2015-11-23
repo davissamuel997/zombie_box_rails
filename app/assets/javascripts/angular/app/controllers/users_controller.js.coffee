@@ -4,7 +4,13 @@ zombieBox.controller 'UsersController', ['$scope', '$http', 'UsersService', '$lo
 ############## Initial Page Load / Reset #######################
 
   init = ->
-    $scope.requestControl.getUsers()
+    if window.location.search.split("=") && window.location.search.split("=").length > 1
+      $scope.searchInput.full_name = window.location.search.split("=")[1]
+
+      $scope.requestControl.getUsers()
+
+    else if window.location.pathname == "/users"
+      $scope.requestControl.getUsers()
 
 ################################################################
 ############## Other Initializers ##############################
@@ -45,6 +51,10 @@ zombieBox.controller 'UsersController', ['$scope', '$http', 'UsersService', '$lo
       this.current_page = page_number
 
       this.getUsers()
+
+    checkKeypress: (event) ->
+      if event && event.charCode == 13
+        window.location = '/users?full_name=' + $scope.searchInput.full_name
 
   	getUsers: ->
       this.isLoading = true
