@@ -124,6 +124,8 @@ class User < ActiveRecord::Base
       data[:users] = User.where("id IN (?)", user_ids).page(page_num).per(per_page).order("full_name ASC NULLS LAST").map{ |user| user.get_params(options[:current_user]) }
     end
 
+    data[:current_user] = options[:current_user].try(:get_params)
+
     data[:pagination] = User.pagination_data User.all.count, page_num, per_page
 
     data

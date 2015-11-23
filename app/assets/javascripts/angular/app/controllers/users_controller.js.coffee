@@ -41,6 +41,8 @@ zombieBox.controller 'UsersController', ['$scope', '$http', 'UsersService', '$lo
 
     current_page: 1
 
+    currentUser: null
+
     isLoading: false
 
     pagination: null
@@ -61,8 +63,9 @@ zombieBox.controller 'UsersController', ['$scope', '$http', 'UsersService', '$lo
 
       UsersService.getUsers.query({ page: this.current_page, full_name: $scope.searchControl.filteredFullName(), email: $scope.searchControl.filteredEmail(), phone_number: $scope.searchControl.filteredPhoneNumber() }, (responseData) ->
         if responseData.errors == false
-          $scope.requestControl.users      = responseData.users
-          $scope.requestControl.pagination = responseData.pagination
+          $scope.requestControl.users       = responseData.users
+          $scope.requestControl.pagination  = responseData.pagination
+          $scope.requestControl.currentUser = responseData.current_user
 
         $scope.requestControl.isLoading = false
       )
