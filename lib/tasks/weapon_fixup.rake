@@ -82,6 +82,10 @@ namespace :total_fixup do
 	  	if u.blue.nil?
 	  		u.update(blue: 0.0)
 	  	end
+
+	  	if u.points_available.nil?
+	  		u.update(points_available: 0)
+	  	end
 	  end
 	end
 end
