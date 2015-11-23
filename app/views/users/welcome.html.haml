@@ -59,6 +59,49 @@
                 / Bar chart
                 .text-center
                   .inlinesparkline.inline{"data-bar-color" => "danger", "data-bar-spacing" => "6", "data-bar-width" => "6", "data-height" => "30"} 2,7,5,9,4,2,7,5,7,5,9,6,4
+        .row
+          .col-md-4
+            / START widget
+            .panel.widget{"data-delay" => "100", "data-offset" => "0", "data-play" => "fadeInLeft", "data-toggle" => "play-animation"}
+              .panel-body.bg-success
+                .row.row-table.row-flush
+                  .col-xs-8
+                    %p.mb0 Total Kills
+                    %h3.m0 {{requestControl.user.total_kills}}
+                  .col-xs-4.text-right
+                    %em.fa.fa-users.fa-2x
+              .panel-body
+                / Bar chart
+                .text-center
+                  .inlinesparkline.inline{"data-bar-color" => "primary", "data-bar-spacing" => "6", "data-bar-width" => "6", "data-height" => "30"} 5,3,4,6,5,9,4,4,10,5,9,6,4
+          .col-md-4
+            / START widget
+            .panel.widget{"data-delay" => "100", "data-offset" => "0", "data-play" => "fadeInDown", "data-toggle" => "play-animation"}
+              .panel-body.bg-danger
+                .row.row-table.row-flush
+                  .col-xs-8
+                    %p.mb0 Top Weapon
+                    %h3.m0 {{requestControl.user.top_weapon.name}} - {{requestControl.user.top_weapon.kill_count}}
+                  .col-xs-4.text-right
+                    %em.fa.fa-clock-o.fa-2x
+              .panel-body
+                / Bar chart
+                .text-center
+                  .inlinesparkline.inline{"data-bar-color" => "success", "data-bar-spacing" => "6", "data-bar-width" => "6", "data-height" => "30"} 10,30,40,70,50,90,70,50,90,40,40,60,40
+          .col-md-4
+            / START widget
+            .panel.widget{"data-delay" => "100", "data-offset" => "0", "data-play" => "fadeInRight", "data-toggle" => "play-animation"}
+              .panel-body.bg-warning
+                .row.row-table.row-flush
+                  .col-xs-8
+                    %p.mb0 Top Skin
+                    %h3.m0 {{requestControl.user.top_skin.name}} - {{requestControl.user.top_skin.kill_count}}
+                  .col-xs-4.text-right
+                    %em.fa.fa-bullseye.fa-2x
+              .panel-body
+                / Bar chart
+                .text-center
+                  .inlinesparkline.inline{"data-bar-color" => "danger", "data-bar-spacing" => "6", "data-bar-width" => "6", "data-height" => "30"} 2,7,5,9,4,2,7,5,7,5,9,6,4
         / START messages and activity
         .row
           .col-md-12{'ng-controller' => "EventsController"}

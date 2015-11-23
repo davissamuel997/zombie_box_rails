@@ -293,7 +293,9 @@ class User < ActiveRecord::Base
       points_available:      points_available,
       highest_round_reached: highest_round_reached,
       weapons:               weapons.order('name ASC').map{ |weapon| weapon.get_params },
-      skins:                 skins.order('name ASC').map{ |skin| skin.get_params }
+      skins:                 skins.order('name ASC').map{ |skin| skin.get_params },
+      top_weapon:            weapons.order('kill_count DESC').first.try(:get_params),
+      top_skin:              skins.order('kill_count DESC').first.try(:get_params)
     }
   end
 end
