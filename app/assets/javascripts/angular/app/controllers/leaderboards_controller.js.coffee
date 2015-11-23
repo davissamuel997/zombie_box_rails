@@ -68,11 +68,23 @@ zombieBox.controller 'LeaderboardsController', ['$scope', '$http', 'UsersService
 
           if $scope.requestControl.users && $scope.requestControl.users.length > 0
             index = 0
-            _($scope.requestControl.users.length).times ->
-              rank = ((($scope.requestControl.current_page - 1) * 25) + index + 1)
-              $scope.requestControl.users[index].rank = rank
+            if $scope.sortableControl.requestedSortDirection() == "DESC"
+              _($scope.requestControl.users.length).times ->
+                rank = ((($scope.requestControl.current_page - 1) * 25) + index + 1)
+                $scope.requestControl.users[index].rank = rank
 
-              index += 1
+                index += 1
+            else
+              total_pages = $scope.requestControl.pagination[1]
+              total_users = $scope.requestControl.users.length
+              rank = (total_pages * 25) - total_users - ((total_pages * 25) % total_users)
+              index = 0
+
+              _($scope.requestControl.users.length).times ->
+                $scope.requestControl.users[index].rank = rank
+
+                index += 1
+                rank -= 1
 
           
         $scope.requestControl.isLoading = false
