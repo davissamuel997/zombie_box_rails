@@ -67,6 +67,11 @@ zombieBox.controller 'UsersController', ['$scope', '$http', 'UsersService', '$lo
           $scope.requestControl.isLoading = false
         )
 
+    searchUsers: ->
+      UsersService.searchUsers.query({}, (responseData) ->
+        debugger
+      )
+
   }
 
 ################################################################

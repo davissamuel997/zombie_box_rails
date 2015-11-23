@@ -107,6 +107,12 @@ class UsersController < ApplicationController
     respond_with response
   end
 
+  def search_users
+    response = User.search_users(params)
+
+    respond_with response
+  end
+
   def user_params
     params.require(:user).permit(:first_name, :last_name, :email, :phone_number, :role_ids, :total_points, :total_kills)
   end

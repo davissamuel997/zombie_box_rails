@@ -22,24 +22,26 @@
                       %form
                         %table.table
                           %thead
-                            %th.text-center{:style => 'width: 200px;'}
-                              %strong First Name
-                            %th.text-center
-                              %strong Last Name
-                            %th.text-center
+                            %th.text-center{:style => 'width: 25%;'}
+                              %strong Name
+                            %th.text-center{:style => 'width: 25%;'}
+                              %strong Email
+                            %th.text-center{:style => 'width: 25%;'}
+                              %strong Phone Number
+                            %th.text-center{:style => 'width: 25%;'}
                           %tbody
                             %tr
-                              %td{:style => 'width: 200px;'}
-                                %select.form-control.input-sm{:chosen => '','ng-options' => 'organization.id as organization.name for organization in requestControl.organizations', 'ng-model' => 'requestControl.params.organization_id'}
-                                  %option
-                              %td{:style => 'width: 200px;'}
-                                %select.form-control.input-sm{:chosen => '','ng-options' => 'organization.id as organization.name for organization in requestControl.organizations', 'ng-model' => 'requestControl.params.organization_id'}
-                                  %option
-                              %td
+                              %td{:style => 'width: 25%;'}
+                                %input.form-control.input-sm
+                              %td{:style => 'width: 25%;'}
+                                %input.form-control.input-sm
+                              %td{:style => 'width: 25%;'}
+                                %input.form-control.input-sm
+                              %td{:style => 'width: 25%;'}
                                 .pull-right
                                   .input-group-btn
                                     %button.btn.btn-sm.btn-default{'ng-click' => 'requestControl.resetSearchParams()'} Reset
-                                    %button.btn.btn-sm.btn-success{'ng-click' => 'requestControl.getPhoneNumberReportData()'} Search
+                                    %button.btn.btn-sm.btn-success{'ng-click' => 'requestControl.searchUsers()'} Search
 
               .panel
                 .panel-body

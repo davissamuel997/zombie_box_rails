@@ -111,11 +111,18 @@ class User < ActiveRecord::Base
 
   def self.get_users(options = {})
     data = {:errors => false}
-
     page_num = (options[:page] || 1).to_i
-    per_page = 10
+    per_page = 25
 
-    data[:users] = User.all.page(page_num).per(per_page).order('full_name ASC NULLS LAST').map{ |user| user.get_params(options[:current_user]) }
+    user_ids = User.all.map(&:id)
+
+    final_sql_string = User.search_with_postgres(options, user_ids)
+
+    if final_sql_string.present? && final_sql_string.size > 0
+      data[:users] = User.where("id IN (?) AND (#{final_sql_string})", user_ids).page(page_num).per(per_page).order("full_name ASC NULLS LAST").map{ |user| user.get_params(options[:current_user]) }
+    else
+      data[:users] = User.where("id IN (?)", user_ids).page(page_num).per(per_page).order("full_name ASC NULLS LAST").map{ |user| user.get_params(options[:current_user]) }
+    end
 
     data[:pagination] = User.pagination_data User.all.count, page_num, per_page
 
@@ -307,6 +314,27 @@ class User < ActiveRecord::Base
     end
 
     data
+  end
+
+  def self.search_with_postgres(options = {}, user_ids)
+
+    sql_string = []
+
+    users = []
+
+    if options[:full_name].present? && options[:full_name].size > 0
+      sql_string << "(full_name ILIKE '%#{options[:full_name]}%')"
+    end
+
+    if options[:email].present? && options[:email].size > 0
+      sql_string << "(email ILIKE '%#{options[:email]}%')"
+    end
+
+    if options[:phone_number].present? && options[:phone_number].size > 0
+      sql_string << "(phone_number ILIKE '%#{options[:phone_number]}%')"
+    end
+
+    final_sql_string = sql_string.count > 1 ? sql_string.join(' AND ') : sql_string[0]
   end
 
   # This paginates all of the data for the response of the js.
