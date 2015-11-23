@@ -122,23 +122,23 @@
             - if current_user.present? && current_user.has_role?(:super_admin)
               %li
                 %a.no-submenu{"data-toggle" => "", :href => "/events", :title => "Event"}
-                  %em.fa.fa-file-text-o
+                  %em.fa.fa-group
                   %span.item-text Events
               %li
                 %a.no-submenu{"data-toggle" => "", :href => "/event_types", :title => "Event Type"}
-                  %em.fa.fa-file-text-o
+                  %em.fa.fa-pencil
                   %span.item-text Event Types
             %li
               %a.no-submenu{"data-toggle" => "", :href => "/leaderboards", :title => "Leaderboards"}
-                %em.fa.fa-file-text-o
+                %em.fa.fa-bar-chart-o
                 %span.item-text Leaderboards
             %li
               %a.no-submenu{"data-toggle" => "", :href => "/users/#{current_user.id}/edit", :title => "Profile"}
-                %em.fa.fa-file-text-o
+                %em.fa.fa-user
                 %span.item-text Profile
             %li
               %a.no-submenu{"data-toggle" => "", :href => "/users", :title => "Users"}
-                %em.fa.fa-file-text-o
+                %em.fa.fa-users
                 %span.item-text Users
 
         / END Sidebar (left)
