@@ -8,7 +8,7 @@ namespace :weapon_fixup do
 	    u.weapons.where(name: "Shotgun", user_id: u.id).first_or_create(damage: 75, ammo: 30, kill_count: 0)
 	    u.weapons.where(name: "Knife", user_id: u.id).first_or_create(damage: 100, kill_count: 0)
 	    u.weapons.where(name: "Crowbar", user_id: u.id).first_or_create(damage: 50, kill_count: 0)
-      u.weapons.where(name: "Turret", user_id: u.id).first_or_create(damage: 1, kill_count: 0, fire_rate: 5.0)
+      u.weapons.where(name: "Turret", user_id: u.id).first_or_create(damage: 5, kill_count: 0, fire_rate: 2.0)
 	  end
   end
 

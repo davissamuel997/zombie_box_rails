@@ -36,9 +36,9 @@ class User < ActiveRecord::Base
 
     self.weapons.create(name: "Crowbar", damage: 50,
                         kill_count: 0, user_id: self.id)
-    self.weapons.create(name: "Turret", damage: 1,
+    self.weapons.create(name: "Turret", damage: 5,
                         kill_count: 0, user_id: self.id,
-                        fire_rate: 5.0)
+                        fire_rate: 2.0)
   end
 
   def set_up_skins
