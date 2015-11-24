@@ -18,6 +18,11 @@ class User < ActiveRecord::Base
   has_many :weapons, as: :weaponable
   has_many :skins, as: :skinable
 
+  validates_confirmation_of :password
+  validates_presence_of :password, :on => :create
+  validates_presence_of :email
+  validates_uniqueness_of :email
+
   def set_full_name
     self.full_name = "#{self.first_name} #{self.last_name}"
   end
