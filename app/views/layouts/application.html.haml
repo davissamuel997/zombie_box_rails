@@ -133,7 +133,7 @@
                 %em.fa.fa-bar-chart-o
                 %span.item-text Leaderboards
             %li
-              %a.no-submenu{"data-toggle" => "", :href => "/users/#{current_user.id}/edit", :title => "Profile"}
+              %a.no-submenu{"data-toggle" => "", :href => "/users/#{current_user.try(:id)}/edit", :title => "Profile"}
                 %em.fa.fa-user
                 %span.item-text Profile
             %li
