@@ -224,11 +224,11 @@ class User < ActiveRecord::Base
           red                   = user_params["red"].present? && user_params["red"].to_f >= 0 ? user_params["red"].to_f : user.try(:red)
           blue                  = user_params["blue"].present? && user_params["blue"].to_f >= 0 ? user_params["blue"].to_f : user.try(:blue)
           points_available      = user_params["points_available"].present? && user_params["points_available"].to_i > 0 ? user_params["points_available"].to_i : user.try(:points_available)
-          highest_round_reached = user_params["highest_round_reached"].present? && user_params["highest_round_reached"].to_i > 0 ? user_params["highest_round_reached"].to_i ? user.try(:highest_round_reached)
+          highest_round_reached = user_params["highest_round_reached"].present? && user_params["highest_round_reached"].to_i > 0 ? user_params["highest_round_reached"].to_i : user.try(:highest_round_reached)
 
-          if user.update(total_points:          total_points, total_kills: total_kills,
-                         green:                 green, red: red,
-                         blue:                  blue, points_available: points_available,
+          if user.update(total_points: total_points, total_kills: total_kills,
+                         green:        green, red: red,
+                         blue:         blue, points_available: points_available,
                          highest_round_reached: highest_round_reached)
 
             data[:user] = user.get_params
